@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 定义自已的style为布局main.xml初始化 -->
+<resources>
+	<style name="LinearLayout_Width_Height">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+	<style name="LinearLayout_5_TextView">
+		<item name="android:layout_width">180dp</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">#FFFFFF</item>
+		<item name="android:gravity">center</item>
+		<item name="android:textSize">22dp</item>
+		<item name="android:paddingTop">16dp</item>
+	</style>
+	<style name="TextView_Width_Height_Color_padding_center">
+		<item name="android:layout_width">160dp</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">#000000</item>
+		<item name="android:paddingTop">70dp</item>
+		<item name="android:gravity">center</item>
+	</style>
+	<style name="ImageButton_Width_Height">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:layout_gravity">center</item>
+		<item name="android:layout_weight">1</item>
+	</style>
+	<style name="linearlayout_o_w_h_bg">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:background">#FFFFFF</item>
+		<item name="android:orientation">vertical</item>
+	</style>
+</resources>

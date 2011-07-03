@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页布局文件 -->
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/index_outer_layout"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    <!-- 顶部显示正在播放的歌曲 -->
+    <RelativeLayout
+            android:id="@+id/index_top_bar"
+            android:layout_gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/list_bg">
+        <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="欢迎使用‘阳春白雪’音乐播放器:)"
+                android:layout_centerInParent="true"/>
+        <!-- 暂停播放按钮
+        <Button android:layout_alignParentLeft="true"
+                 android:layout_marginLeft="5dp"
+                android:id="@+id/pause"
+                android:background="@drawable/pause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2.0dip"
+                android:layout_marginRight="6.0dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/> -->
+    </RelativeLayout>
+    <!-- 中间动态加载View -->
+    <LinearLayout
+            android:id="@+id/index_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:layout_weight="1.0"
+            android:orientation="vertical">
+    </LinearLayout>
+    <!-- 底部选项卡 -->
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:background="@drawable/list_bg">
+        <LinearLayout
+                android:id="@+id/index_layout_bottom_music"
+                android:layout_height="fill_parent"
+                android:layout_width="78dip"
+                android:orientation="vertical"
+                android:paddingTop="6.0dip"
+                android:layout_weight="1.0"
+                android:focusable="true"
+                android:clickable="true">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/index_bottom_music"
+                    android:text="[音乐]"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_height="fill_parent"
+                android:layout_width="78dip"
+                android:id="@+id/index_layout_bottom_album"
+                android:orientation="vertical"
+                android:paddingTop="6.0dip"
+                android:layout_weight="1.0"
+                android:focusable="true"
+                android:clickable="true">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/index_bottom_album"
+                    android:text="专辑"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/index_layout_bottom_artist"
+                android:layout_height="fill_parent"
+                android:layout_width="78dip"
+                android:orientation="vertical"
+                android:paddingTop="6.0dip"
+                android:layout_weight="1.0"
+                android:focusable="true"
+                android:clickable="true">
+            <TextView
+                    android:id="@+id/index_bottom_artist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="艺术家"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
