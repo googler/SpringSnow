@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -24,6 +25,7 @@ public class MusicListActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        log("onCreate\n" + this.toString());
         super.onCreate(savedInstanceState);
         listview = getListView();
         this.setListData();
@@ -89,5 +91,10 @@ public class MusicListActivity extends ListActivity {
         public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
             playMusic(position);
         }
+    }
+
+    private void log(String _msg) {
+        String TAG = MusicListActivity.class.getSimpleName();
+        Log.i(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
     }
 }

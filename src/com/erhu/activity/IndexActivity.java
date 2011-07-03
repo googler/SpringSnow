@@ -21,24 +21,37 @@ import com.erhu.util.Constants;
 public class IndexActivity extends ActivityGroup {
     private PopupWindow mPop;
     private LinearLayout container;
-    private View musicView;
     private RelativeLayout topBar;
-    private View albumView;
-    private View artistView;
-    private TextView title;// 当前播放的音乐的名称
     private LinearLayout musicLayout;// 所有音乐
     private LinearLayout albumLayout;// 专辑
     private LinearLayout artistLayout;// 艺术家
+    private View musicView;
+    private View albumView;
+    private View artistView;
+    private TextView title;// 当前播放的音乐的名称
     private TextView music;
     private TextView album;
     private TextView artist;
-
+    /**
+     * 接收 MusicService 发送的广播
+     */
+    private BroadcastReceiver musicReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Constants.DURATION_ACTION)) {
+                title.setText("正在播放: " + intent.getExtras().getString("title"));
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        log("onCrate");
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.index);
+
 
         container = (LinearLayout) findViewById(R.id.index_container);
         title = (TextView) findViewById(R.id.title);
@@ -55,8 +68,6 @@ public class IndexActivity extends ActivityGroup {
                 // startActivity(intent);
             }
         });
-
-
         artistView = getView(ArtistListActivity.class);
         {
             musicView = getView(MusicListActivity.class);
@@ -101,10 +112,18 @@ public class IndexActivity extends ActivityGroup {
                 }
             });
         }
+
+        initPopMenu();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        log("onStart");
+
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.DURATION_ACTION);
         registerReceiver(musicReceiver, filter);
-        initPopMenu();
     }
 
     @Override
@@ -151,29 +170,22 @@ public class IndexActivity extends ActivityGroup {
         return t_view;
     }
 
-    /**
-     * 接收 MusicService 发送的广播
-     */
-    protected BroadcastReceiver musicReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(Constants.DURATION_ACTION)) {
-                title.setText("正在播放: " + intent.getExtras().getString("title"));
-                //log("广播接收器收到歌曲总长度了:" + intent.getExtras().getInt("duration"));
-            } /*else if (action.equals(MUSIC_NEXT)) {
-                log("放下一曲");
-            } else if (action.equals(MUSIC_UPDATE)) {
-                position = intent.getExtras().getInt("position");
-                seekBar.setProgress(0);
-                title.setText(_titles[position]);
-                artist.setText(_artists[position]);
-            }*/
-        }
-    };
 
     private void log(String _msg) {
         String TAG = IndexActivity.class.getSimpleName();
-        Log.i(TAG, "(:-----------------------" + TAG + ":)" + _msg);
+        Log.i(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        log("onStop");
+        unregisterReceiver(musicReceiver);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        log("onDestroy");
     }
 }

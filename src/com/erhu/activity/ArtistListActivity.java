@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -16,7 +17,6 @@ import com.erhu.adapter.ArtistListAdapter;
 public class ArtistListActivity extends ListActivity {
     private ListView listview;
     private Cursor cursor;
-
     private String[] _artists;
 
 
@@ -63,5 +63,10 @@ public class ArtistListActivity extends ListActivity {
         public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
             //playMusic(position);
         }
+    }
+
+    private void log(String _msg) {
+        String TAG = IndexActivity.class.getSimpleName();
+        Log.i(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
     }
 }

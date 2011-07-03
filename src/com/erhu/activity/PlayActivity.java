@@ -38,6 +38,7 @@ public class PlayActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        log("onCreate" + this.toString());
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -229,18 +230,23 @@ public class PlayActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        log("destroy");
-        unregisterReceiver(musicReceiver);
-
+        log("onDestroy");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        log("pause");
+        log("onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();    //To change body of overridden methods use File | Settings | File Templates.
+        log("onStop");
+        unregisterReceiver(musicReceiver);
     }
 
     private void log(String _msg) {
-        Log.i(TAG, "(:-----------------------" + TAG + ":)" + _msg);
+        Log.i(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
     }
 }
