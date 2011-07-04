@@ -21,14 +21,16 @@ import com.erhu.util.Constants;
 public class IndexActivity extends ActivityGroup {
     private PopupWindow mPop;
     private LinearLayout container;
-    private RelativeLayout topBar;
+    private LinearLayout topBar;
     private LinearLayout musicLayout;// 所有音乐
     private LinearLayout albumLayout;// 专辑
     private LinearLayout artistLayout;// 艺术家
     private View musicView;
     private View albumView;
     private View artistView;
+    private View currentView;
     private TextView title;// 当前播放的音乐的名称
+    private Button pauseButton;
     private TextView music;
     private TextView album;
     private TextView artist;
@@ -39,9 +41,8 @@ public class IndexActivity extends ActivityGroup {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(Constants.DURATION_ACTION)) {
-                title.setText("正在播放: " + intent.getExtras().getString("title"));
-            }
+            if (action.equals(Constants.DURATION_ACTION))
+                title.setText(intent.getExtras().getString("title"));
         }
     };
 
@@ -51,76 +52,68 @@ public class IndexActivity extends ActivityGroup {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.index);
-
-
-        container = (LinearLayout) findViewById(R.id.index_container);
-        title = (TextView) findViewById(R.id.title);
-        music = (TextView) findViewById(R.id.index_bottom_music);
-        album = (TextView) findViewById(R.id.index_bottom_album);
-        artist = (TextView) findViewById(R.id.index_bottom_artist);
-        topBar = (RelativeLayout) findViewById(R.id.index_top_bar);
-        topBar.getBackground().setAlpha(0x88);
-        topBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Intent intent = new Intent();
-                //intent.setClass(IndexActivity.this, PlayActivity.class);
-                // startActivity(intent);
-            }
-        });
-        artistView = getView(ArtistListActivity.class);
-        {
-            musicView = getView(MusicListActivity.class);
-            container.removeAllViewsInLayout();
-            container.addView(musicView);
-
-            musicLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_music);
-            musicLayout.setOnClickListener(new android.view.View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    music.setText("[音乐]");
-                    album.setText("专辑");
-                    artist.setText("艺术家");
-                    container.removeAllViewsInLayout();
-                    container.addView(musicView);
-                }
-            });
-            albumLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_album);
-            albumLayout.setOnClickListener(new android.view.View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (albumView == null)
-                        albumView = getView(AlbumListActivity.class);
-                    music.setText("音乐");
-                    album.setText("[专辑]");
-                    artist.setText("艺术家");
-                    container.removeAllViewsInLayout();
-                    container.addView(albumView);
-                }
-            });
-            artistLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_artist);
-            artistLayout.setOnClickListener(new android.view.View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (artistView == null)
-                        artistView = getView(AlbumListActivity.class);
-                    music.setText("音乐");
-                    album.setText("专辑");
-                    artist.setText("[艺术家]");
-                    container.removeAllViewsInLayout();
-                    container.addView(artistView);
-                }
-            });
-        }
-
+        initUI();
         initPopMenu();
     }
+
+    /**
+     * Nothing could hold a man back from his future!!!
+     */
+    private void initUI() {
+        {
+            pauseButton = (Button) findViewById(R.id.index_top_btn);
+            title = (TextView) findViewById(R.id.index_top_title);
+            music = (TextView) findViewById(R.id.index_bottom_music);
+            album = (TextView) findViewById(R.id.index_bottom_album);
+            artist = (TextView) findViewById(R.id.index_bottom_artist);
+            topBar = (LinearLayout) findViewById(R.id.index_top_bar);
+            topBar.getBackground().setAlpha(0x88);
+            musicLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_music);
+            albumLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_album);
+            artistLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_artist);
+            musicLayout.setOnClickListener(itemClickListener);
+            albumLayout.setOnClickListener(itemClickListener);
+            artistLayout.setOnClickListener(itemClickListener);
+        }
+        musicView = getView(MusicListActivity.class);
+        artistView = getView(ArtistListActivity.class);
+        albumView = getView(AlbumListActivity.class);
+        {
+            currentView = musicView;
+            container = (LinearLayout) findViewById(R.id.index_container);
+            container.removeAllViewsInLayout();
+            container.addView(currentView);
+        }
+    }
+
+    View.OnClickListener itemClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            container.removeAllViewsInLayout();
+            if (v == artistLayout) {
+                music.setText("音乐");//TODO:以后考虑使用selector实现
+                album.setText("专辑");
+                artist.setText("[艺术家]");
+                currentView = artistView;
+            } else if (v == musicLayout) {
+                music.setText("[音乐]");
+                album.setText("专辑");
+                artist.setText("艺术家");
+                currentView = musicView;
+            } else if (v == albumLayout) {
+                music.setText("音乐");
+                album.setText("[专辑]");
+                artist.setText("艺术家");
+                currentView = albumView;
+            }
+            container.addView(currentView);
+        }
+    };
 
     @Override
     protected void onStart() {
         super.onStart();
         log("onStart");
-
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.DURATION_ACTION);
         registerReceiver(musicReceiver, filter);
@@ -132,13 +125,6 @@ public class IndexActivity extends ActivityGroup {
         return super.onCreateOptionsMenu(menu);
     }
 
-    /**
-     * 点击菜单键
-     *
-     * @param featureId
-     * @param menu
-     * @return
-     */
     @Override
     public boolean onMenuOpened(int featureId, Menu menu) {
         if (mPop != null) {
@@ -170,12 +156,6 @@ public class IndexActivity extends ActivityGroup {
         return t_view;
     }
 
-
-    private void log(String _msg) {
-        String TAG = IndexActivity.class.getSimpleName();
-        Log.i(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
-    }
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -187,5 +167,10 @@ public class IndexActivity extends ActivityGroup {
     protected void onDestroy() {
         super.onDestroy();
         log("onDestroy");
+    }
+
+    private void log(String _msg) {
+        String TAG = IndexActivity.class.getSimpleName();
+        Log.i(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
     }
 }

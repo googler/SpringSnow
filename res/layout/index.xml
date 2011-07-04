@@ -7,30 +7,29 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
     <!-- 顶部显示正在播放的歌曲 -->
-    <RelativeLayout
+    <LinearLayout
             android:id="@+id/index_top_bar"
             android:layout_gravity="center"
             android:layout_width="fill_parent"
             android:layout_height="35dp"
             android:background="@drawable/list_bg">
-        <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="欢迎使用‘阳春白雪’音乐播放器:)"
-                android:layout_centerInParent="true"/>
-        <!-- 暂停播放按钮
-        <Button android:layout_alignParentLeft="true"
-                 android:layout_marginLeft="5dp"
-                android:id="@+id/pause"
-                android:background="@drawable/pause"
+        <!-- 暂停播放按钮 -->
+        <Button
+                android:id="@+id/index_top_btn"
+                android:background="@drawable/index_topbar_pause"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2.0dip"
-                android:layout_marginRight="6.0dip"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/> -->
-    </RelativeLayout>
+                android:layout_marginLeft="6.0dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+        <TextView
+                android:id="@+id/index_top_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="欢迎使用‘阳春白雪’音乐播放器:)"/>
+
+    </LinearLayout>
     <!-- 中间动态加载View -->
     <LinearLayout
             android:id="@+id/index_container"

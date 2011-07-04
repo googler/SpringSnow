@@ -25,17 +25,15 @@ public class MusicListActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        log("onCreate\n" + this.toString());
+        log("onCreate");
         super.onCreate(savedInstanceState);
         listview = getListView();
-        this.setListData();
-        // 消除listview的线
         listview.setDivider(null);
-        // 消除listview的全选黑线
         listview.setScrollingCacheEnabled(false);
         listview.setFadingEdgeLength(0);
         listview.setBackgroundResource(R.drawable.list_bg);
         listview.setOnItemClickListener(new ListItemClickListener());
+        this.setListData();
     }
 
     /**
@@ -95,6 +93,6 @@ public class MusicListActivity extends ListActivity {
 
     private void log(String _msg) {
         String TAG = MusicListActivity.class.getSimpleName();
-        Log.i(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
+        Log.i(TAG, "log@" + TAG + ":" + this.toString() + " : " + _msg);
     }
 }

@@ -2,6 +2,7 @@ package com.erhu.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.erhu.R;
 import com.erhu.util.Tools;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * life is good:-)
@@ -42,42 +45,26 @@ public class MusicListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(context).inflate(R.layout.music_list_item, null);
+        TextView title = (TextView) convertView.findViewById(R.id.music_list_item_title);
+        TextView singer = (TextView) convertView.findViewById(R.id.artist);
+        TextView time = (TextView) convertView.findViewById(R.id.music_list_item_time);
+        ImageView img = (ImageView) convertView.findViewById(R.id.music_list_item_img);
+
         cursor.moveToPosition(position);
-        TextView tv_music = (TextView) convertView.findViewById(R.id.music);
+        title.setText(bSubstring(cursor.getString(0).trim(), 24));
+        time.setText(Tools.toTime(cursor.getInt(1)));
 
-        if (cursor.getString(0).length() > 24) {
-            try {
-                String musicTitle = bSubstring(cursor.getString(0).trim(), 24);
-                tv_music.setText(musicTitle);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            String str = cursor.getString(0);
-            tv_music.setText(str.trim());
-        }
-
-        TextView tv_singer = (TextView) convertView.findViewById(R.id.artist);
-        if (cursor.getString(2).equals("<unknown>"))
-            tv_singer.setText("悲剧的艺术家");
+        if (cursor.getString(2).equals(MediaStore.UNKNOWN_STRING))
+            singer.setText("悲剧的艺术家");
         else
-            tv_singer.setText(cursor.getString(2));
+            singer.setText(cursor.getString(2));
 
-        TextView tv_time = (TextView) convertView.findViewById(R.id.time);
-        tv_time.setText(Tools.toTime(cursor.getInt(1)));
-
-        ImageView img = (ImageView) convertView.findViewById(R.id.listitem);
         if (position == pos)
             img.setImageResource(R.drawable.isplaying);
         else
             img.setImageResource(R.drawable.folder_item_img);
         return convertView;
     }
-
-    public void setItemIcon(int position) {
-        pos = position;
-    }
-
 
     /**
      * 字符串裁剪
@@ -87,8 +74,13 @@ public class MusicListAdapter extends BaseAdapter {
      * @return
      * @throws Exception
      */
-    public static String bSubstring(String s, int length) throws Exception {
-        byte[] bytes = s.getBytes("Unicode");
+    public static String bSubstring(String s, int length) {
+        byte[] bytes = new byte[0];
+        try {
+            bytes = s.getBytes("Unicode");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         int n = 0; // 表示当前的字节数
         int i = 2; // 要截取的字节数，从第3个字节开始
         for (; i < bytes.length && n < length; i++) {
@@ -111,6 +103,11 @@ public class MusicListAdapter extends BaseAdapter {
             else
                 i = i + 1;
         }
-        return new String(bytes, 0, i, "Unicode");
+        try {
+            return new String(bytes, 0, i, "Unicode");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }
