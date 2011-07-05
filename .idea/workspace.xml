@@ -5,33 +5,25 @@
     <option name="TOOL_WINDOW_LOG_LEVEL" value="WARN" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35d73c42-d21e-43e7-bcd6-34a86226b71a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/erhu/activity/Mp3ProfileActivity.java" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\a.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\a1.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\a2.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\a3.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\a4.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\a5.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\a6.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\backgrounda.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\beijing.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\beijinga.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\c.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\header_bg.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\player_common.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\top_btnimage_01.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\top_btnimage_02.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\top_music.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/playlist.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/playlist.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Erhu.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Erhu.xml" />
+    <list default="true" id="35d73c42-d21e-43e7-bcd6-34a86226b71a" name="Default" comment="[UI_update_v2]">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/juk2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/juk3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/k3b3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/kbemusedsrv.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/knotify.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/knotify2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/knotify3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/multimediaaudio.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/rhythmbox4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/strigi.png" />
+      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-hdpi\icon.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-hdpi\mozilla.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-hdpi\sound_juicer.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-hdpi\tuxguitar.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-hdpi\xmms.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/sonata.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/sonata.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/index.xml" afterPath="$PROJECT_DIR$/res/layout/index.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/play.xml" afterPath="$PROJECT_DIR$/res/layout/play.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java" />
     </list>
     <ignored path="SpringSnow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -95,58 +87,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PlayActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="30" selection-start="778" selection-end="778" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Mp3ProfileActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/Mp3ProfileActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="5" selection-start="557" selection-end="557" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MusicListActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="24" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="play.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/play.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="294" selection-end="294" vertical-scroll-proportion="-4.827586">
-              <folding>
-                <element signature="tag#ImageView#0;tag#RelativeLayout#0;tag#LinearLayout#0;tag#LinearLayout#0" expanded="false" />
-                <element signature="tag#LinearLayout#0;tag#RelativeLayout#0;tag#LinearLayout#0;tag#LinearLayout#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IndexActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="130" column="5" selection-start="4781" selection-end="4781" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/res/layout/index.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="43" selection-start="866" selection-end="866" vertical-scroll-proportion="0.5070422">
+            <state line="7" column="40" selection-start="267" selection-end="267" vertical-scroll-proportion="0.3943662">
               <folding />
             </state>
           </provider>
@@ -175,13 +119,13 @@
         <option value="$PROJECT_DIR$/src/com/erhu/util/Tools.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/Mp3Test.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/adapter/MusicListAdapter.java" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/Mp3ProfileActivity.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/play.xml" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/index.xml" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -359,7 +303,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
+              <option name="myItemId" value="drawable-hdpi" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -738,7 +682,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="[update]从首页返回时停掉MusicService;" />
+    <option name="LAST_COMMIT_MESSAGE" value="[UI_update_v2]" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -757,6 +701,7 @@
     <MESSAGE value="[update]新建SSApplication类存储全局变量，简化Actiivty、Service之间传递的数据；" />
     <MESSAGE value="[add]点击首页的音乐标题，可进入播放器界面；" />
     <MESSAGE value="[update]从首页返回时停掉MusicService;" />
+    <MESSAGE value="[UI_update_v2]" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -805,11 +750,6 @@
         <state line="235" column="21" selection-start="6548" selection-end="6548" vertical-scroll-proportion="-0.34157303" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="100" selection-start="1251" selection-end="1251" vertical-scroll-proportion="0.32692307" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable-mdpi/list_bg.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -855,7 +795,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/index.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="43" selection-start="866" selection-end="866" vertical-scroll-proportion="0.5070422">
+        <state line="31" column="19" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.5633803">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="40" selection-start="267" selection-end="267" vertical-scroll-proportion="0.3943662">
           <folding />
         </state>
       </provider>

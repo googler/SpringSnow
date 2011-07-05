@@ -5,7 +5,7 @@
         android:versionCode="1"
         android:versionName="1.0">
     <application
-            android:icon="@drawable/sonata"
+            android:icon="@drawable/juk3"
             android:label="@string/app_name"
             android:name=".activity.SSApplication">
 
