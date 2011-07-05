@@ -10,6 +10,6 @@ public class AlbumListActivity extends Activity {
 
     private void log(String _msg) {
         String TAG = IndexActivity.class.getSimpleName();
-        Log.i(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
+        Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
     }
 }

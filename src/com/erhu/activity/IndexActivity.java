@@ -34,6 +34,7 @@ public class IndexActivity extends ActivityGroup {
     private TextView music;
     private TextView album;
     private TextView artist;
+
     /**
      * 接收 MusicService 发送的广播
      */
@@ -42,8 +43,8 @@ public class IndexActivity extends ActivityGroup {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(Constants.DURATION_ACTION)) {
-                int pos = intent.getExtras().getInt("position");
-                title.setText(SSApplication.titles[pos]);
+                int position = intent.getExtras().getInt("position");
+                title.setText(SSApplication.titles[position]);
                 pauseButton.setBackgroundResource(R.drawable.index_topbar_pause);
             }
         }
@@ -81,6 +82,7 @@ public class IndexActivity extends ActivityGroup {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.index);
+
         initUI();
         initMenu();
     }
@@ -118,26 +120,27 @@ public class IndexActivity extends ActivityGroup {
             public void onClick(View v) {
                 log("top title clicked");
                 Intent intent = new Intent();
+                intent.putExtra("position", SSApplication.position);
+                intent.putExtra("op", "justLook");
                 intent.setClass(IndexActivity.this, PlayActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
         log("onStart");
+        if (-1 != SSApplication.position)
+            title.setText(SSApplication.titles[SSApplication.position]);
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.DURATION_ACTION);
         registerReceiver(musicReceiver, filter);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("menu");
         return super.onCreateOptionsMenu(menu);
     }
 

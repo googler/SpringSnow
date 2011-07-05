@@ -15,10 +15,8 @@ import com.erhu.R;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
 
-import static com.erhu.activity.SSApplication.artists;
-import static com.erhu.activity.SSApplication.titles;
-import static com.erhu.activity.SSApplication.ids;
-import static com.erhu.activity.SSApplication.durations;
+import static com.erhu.activity.SSApplication.*;
+
 public class PlayActivity extends Activity {
     private static final String TAG = PlayActivity.class.getSimpleName();
     // UI
@@ -38,7 +36,7 @@ public class PlayActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        log("onCreate" + this.toString());
+        log("onCreate");
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -80,9 +78,7 @@ public class PlayActivity extends Activity {
         playBtn = (Button) this.findViewById(R.id.btnPause);
         // 获取从音乐列表传递来的数据(所有音乐信息)
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            position = bundle.getInt("position");
-        }
+        position = bundle.getInt("position");
     }
 
     @Override
@@ -91,12 +87,16 @@ public class PlayActivity extends Activity {
         log("onStart");
         regReceiver();
         // 一首全新的歌曲，而非查看正在播放的歌曲
-        if (getIntent().getExtras() != null) {
+        Intent intent = getIntent();
+        if (intent != null && intent.getExtras().get("op") != null) {
+            duration = SSApplication.durations[position];
+            seekBar.setMax(duration);
+        } else {
             seekBar.setProgress(0);
-            title.setText(titles[position]);
-            artist.setText(artists[position]);
             play(position);
         }
+        title.setText(titles[position]);
+        artist.setText(artists[position]);
     }
 
     /**
@@ -220,6 +220,6 @@ public class PlayActivity extends Activity {
     }
 
     private void log(String _msg) {
-        Log.i(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
+        Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
     }
 }

@@ -26,8 +26,7 @@ public class Constants {
     public final static int CONTINUE_OP = 6;
     public final static int PROCESS_CHANGE_OP = 7;
 
-
-    public static final String CURRENT_ACTION = "com.alex.currentTime";
-    public static final String DURATION_ACTION = "com.alex.duration";
-    public static final String CONTINUE_ACTION = "com.alex.continue";
+    public static final String CURRENT_ACTION = "me.erhu.currentTime";
+    public static final String DURATION_ACTION = "me.alex.duration";
+    public static final String CONTINUE_ACTION = "me.alex.continue";
 }

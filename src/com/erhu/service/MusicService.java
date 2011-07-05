@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
+import com.erhu.activity.SSApplication;
 import com.erhu.util.Constants;
 
 import java.io.IOException;
@@ -88,6 +89,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                     handler.sendEmptyMessage(1);
                 }
             });
+            SSApplication.position = position;
             // 获取歌曲总时长
             final Intent intent = new Intent();
             intent.setAction(Constants.DURATION_ACTION);
@@ -180,6 +182,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     private void log(String _msg) {
-        Log.i(TAG, "(:-----------------------" + TAG + ":)" + _msg);
+        Log.w(TAG, "(:-----------------------" + TAG + ":)" + _msg);
     }
 }

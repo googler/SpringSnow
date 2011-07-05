@@ -2,22 +2,19 @@
 <project version="4">
   <component name="AndroidLogFilters">
     <option name="TAB_LOG_LEVEL" value="WARN" />
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="INFO" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="WARN" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35d73c42-d21e-43e7-bcd6-34a86226b71a" name="Default" comment="[update]删除标题处理函数bSubString;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/index_popup_menu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\layout\popupmenu.xml" afterPath="" />
+    <list default="true" id="35d73c42-d21e-43e7-bcd6-34a86226b71a" name="Default" comment="[update]新建SSApplication类存储全局变量，简化Actiivty、Service之间传递的数据；">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Erhu.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Erhu.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/index.xml" afterPath="$PROJECT_DIR$/res/layout/index.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/AlbumListActivity.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/AlbumListActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/ArtistListActivity.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/ArtistListActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/adapter/MusicListAdapter.java" afterPath="$PROJECT_DIR$/src/com/erhu/adapter/MusicListAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/service/MusicService.java" afterPath="$PROJECT_DIR$/src/com/erhu/service/MusicService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/util/Constants.java" afterPath="$PROJECT_DIR$/src/com/erhu/util/Constants.java" />
     </list>
     <ignored path="SpringSnow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,6 +38,21 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <line_breakpoints>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" line="80" class="com.erhu.activity.IndexActivity" package="com.erhu.activity">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -80,92 +92,31 @@
     <favorites_list name="SpringSnow" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.69096434">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="IndexActivity.java" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="51" column="16" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.550813">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="MusicListActivity.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="97" column="70" selection-start="3180" selection-end="3180" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="MusicListAdapter.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/erhu/adapter/MusicListAdapter.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="52" column="5" selection-start="1574" selection-end="1574" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="music_list_item.xml" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/res/layout/music_list_item.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="33" column="28" selection-start="1367" selection-end="1367" vertical-scroll-proportion="-4.37931">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Constants.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/erhu/util/Constants.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="33" column="0" selection-start="1193" selection-end="1193" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SSApplication.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="6" column="3" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="MusicService.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/erhu/service/MusicService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="93" column="46" selection-start="3125" selection-end="3125" vertical-scroll-proportion="0.0">
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="PlayActivity.java" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="188" column="23" selection-start="6110" selection-end="6110" vertical-scroll-proportion="-0.18502203">
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="PlayActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="94" column="33" selection-start="3409" selection-end="3409" vertical-scroll-proportion="0.388102">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IndexActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="132" column="0" selection-start="4738" selection-end="4738" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="class#1666:2483" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -180,21 +131,21 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/src/com/erhu/adapter/ArtistListAdapter.java" />
-        <option value="$PROJECT_DIR$/src/com/erhu/activity/ArtistListActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/erhu/activity/AlbumListActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/music_list_item.xml" />
         <option value="$PROJECT_DIR$/res/layout/index.popup.menu.xml" />
         <option value="$PROJECT_DIR$/res/layout/index_popup_menu.xml" />
-        <option value="$PROJECT_DIR$/src/com/erhu/util/Constants.java" />
         <option value="$PROJECT_DIR$/res/layout/index.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/SSApplicatioin.java" />
-        <option value="$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/adapter/MusicListAdapter.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java" />
+        <option value="$PROJECT_DIR$/src/com/erhu/activity/AlbumListActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/erhu/activity/ArtistListActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/erhu/util/Constants.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/service/MusicService.java" />
-        <option value="$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java" />
       </list>
     </option>
   </component>
@@ -679,16 +630,16 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.328594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="256" y="465" width="1064" height="208" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17746913" sideWeight="0.4730448" order="3" side_tool="false" content_ui="tabs" x="507" y="225" width="698" height="556" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41203704" sideWeight="0.4700076" order="3" side_tool="false" content_ui="tabs" x="507" y="225" width="698" height="556" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.49430525" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.49734244" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2103265" sideWeight="0.3611111" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39939255" sideWeight="0.7211094" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2566439" sideWeight="0.63117284" order="0" side_tool="false" content_ui="tabs" x="1092" y="63" width="242" height="552" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23158693" sideWeight="0.587963" order="0" side_tool="false" content_ui="tabs" x="1092" y="63" width="242" height="552" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32819724" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36882716" sideWeight="0.5208808" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41203704" sideWeight="0.523918" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Android Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32973805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -721,7 +672,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="[update]删除标题处理函数bSubString;" />
+    <option name="LAST_COMMIT_MESSAGE" value="[update]新建SSApplication类存储全局变量，简化Actiivty、Service之间传递的数据；" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -737,6 +688,7 @@
     <MESSAGE value="[debug]修正了广播接收器的注册和注销时机，分别在onCreate和onStop方法中进行:-)" />
     <MESSAGE value="[upate]修改主页顶部样式；" />
     <MESSAGE value="[update]删除标题处理函数bSubString;" />
+    <MESSAGE value="[update]新建SSApplication类存储全局变量，简化Actiivty、Service之间传递的数据；" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -750,33 +702,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/res/layout/index_popup_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="44" selection-start="326" selection-end="326" vertical-scroll-proportion="0.23688664" />
-      </provider>
-    </entry>
-    <entry file="file://D:/AndroidDevelop/文档/sources_2.2/android/widget/ListView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="416" column="16" selection-start="14134" selection-end="14134" vertical-scroll-proportion="0.33211678" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/adapter/ArtistListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="13" selection-start="705" selection-end="705" vertical-scroll-proportion="1.8978102" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable-mdpi/index_topbar_pause.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/index.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="63" selection-start="730" selection-end="730" vertical-scroll-proportion="0.36717427">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/play.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="36" selection-start="1573" selection-end="1573" vertical-scroll-proportion="0.36079547">
@@ -791,30 +716,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/adapter/MusicListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="5" selection-start="1574" selection-end="1574" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/music_list_item.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="28" selection-start="1367" selection-end="1367" vertical-scroll-proportion="-4.37931">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/util/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1193" selection-end="1193" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="70" selection-start="3180" selection-end="3180" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -826,25 +730,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java">
+    <entry file="file://D:/AndroidDevelop/文档/sources_2.2/android/app/Instrumentation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="3" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0">
+        <state line="1048" column="0" selection-start="39539" selection-end="39539" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/service/MusicService.java">
+    <entry file="file://D:/AndroidDevelop/文档/sources_2.2/android/content/Intent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="46" selection-start="3125" selection-end="3125" vertical-scroll-proportion="0.0">
+        <state line="4086" column="18" selection-start="172797" selection-end="172797" vertical-scroll-proportion="1.4464831">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/AlbumListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="13" selection-start="255" selection-end="255" vertical-scroll-proportion="0.56764704">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/ArtistListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="13" selection-start="2068" selection-end="2068" vertical-scroll-proportion="0.47058824">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="0" selection-start="3485" selection-end="3485" vertical-scroll-proportion="0.66573817">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="23" selection-start="6110" selection-end="6110" vertical-scroll-proportion="-0.18502203">
+        <state line="23" column="0" selection-start="613" selection-end="613" vertical-scroll-proportion="0.65317917">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/adapter/ArtistListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="0" selection-start="1296" selection-end="1296" vertical-scroll-proportion="0.66573817">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/adapter/MusicListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="0" selection-start="1577" selection-end="1577" vertical-scroll-proportion="0.65317917">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/util/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="0" selection-start="1189" selection-end="1189" vertical-scroll-proportion="0.66573817">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/service/MusicService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="44" selection-start="573" selection-end="573" vertical-scroll-proportion="0.44954127">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -853,8 +806,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="16" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.550813">
-          <folding />
+        <state line="132" column="0" selection-start="4738" selection-end="4738" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#1666:2483" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="33" selection-start="3409" selection-end="3409" vertical-scroll-proportion="0.388102">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -11,6 +11,7 @@ public class SSApplication extends Application {
     public static String[] titles;
     public static String[] artists;
     public static String[] albums;
+    public static int position = -1;// 当前播放的音乐
 
     public static void setData(int[] _ids, String[] _titles, String[] _artists, String[] _albums, int[] _durations) {
         ids = _ids;
