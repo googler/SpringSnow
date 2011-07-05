@@ -5,25 +5,9 @@
     <option name="TOOL_WINDOW_LOG_LEVEL" value="WARN" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35d73c42-d21e-43e7-bcd6-34a86226b71a" name="Default" comment="[UI_update_v2]">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/juk2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/juk3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/k3b3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/kbemusedsrv.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/knotify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/knotify2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/knotify3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/multimediaaudio.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/rhythmbox4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/strigi.png" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-hdpi\icon.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-hdpi\mozilla.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-hdpi\sound_juicer.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-hdpi\tuxguitar.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-hdpi\xmms.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/sonata.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/sonata.png" />
+    <list default="true" id="35d73c42-d21e-43e7-bcd6-34a86226b71a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/play.xml" afterPath="$PROJECT_DIR$/res/layout/play.xml" />
     </list>
     <ignored path="SpringSnow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,11 +71,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="40" selection-start="267" selection-end="267" vertical-scroll-proportion="0.3943662">
+            <state line="12" column="18" selection-start="442" selection-end="442" vertical-scroll-proportion="-8.275862">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="play.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/res/layout/play.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="43" selection-start="245" selection-end="245" vertical-scroll-proportion="0.28169015">
+              <folding>
+                <element signature="tag#LinearLayout#0;tag#RelativeLayout#0;tag#LinearLayout#0;tag#LinearLayout#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,10 +117,10 @@
         <option value="$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/Mp3ProfileActivity.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java" />
-        <option value="$PROJECT_DIR$/res/layout/play.xml" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/index.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/res/layout/play.xml" />
       </list>
     </option>
   </component>
@@ -303,7 +298,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="drawable-hdpi" />
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -682,7 +677,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="[UI_update_v2]" />
+    <option name="LAST_COMMIT_MESSAGE" value="[update]update some image;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -702,6 +697,7 @@
     <MESSAGE value="[add]点击首页的音乐标题，可进入播放器界面；" />
     <MESSAGE value="[update]从首页返回时停掉MusicService;" />
     <MESSAGE value="[UI_update_v2]" />
+    <MESSAGE value="[update]update some image;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -769,16 +765,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/play.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="294" selection-end="294" vertical-scroll-proportion="-4.827586">
-          <folding>
-            <element signature="tag#ImageView#0;tag#RelativeLayout#0;tag#LinearLayout#0;tag#LinearLayout#0" expanded="false" />
-            <element signature="tag#LinearLayout#0;tag#RelativeLayout#0;tag#LinearLayout#0;tag#LinearLayout#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="24" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.0">
@@ -802,8 +788,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="40" selection-start="267" selection-end="267" vertical-scroll-proportion="0.3943662">
+        <state line="12" column="18" selection-start="442" selection-end="442" vertical-scroll-proportion="-8.275862">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable-mdpi/ad.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/play.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="43" selection-start="245" selection-end="245" vertical-scroll-proportion="0.28169015">
+          <folding>
+            <element signature="tag#LinearLayout#0;tag#RelativeLayout#0;tag#LinearLayout#0;tag#LinearLayout#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
