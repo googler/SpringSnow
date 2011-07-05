@@ -151,7 +151,7 @@
                             android:layout_height="50sp"
                             android:layout_centerHorizontal="true"
                             android:background="@drawable/stop"
-                            android:id="@+id/btnPause"
+                            android:id="@+id/play_btn_pause"
                             android:onClick="btnPauseClicked"/>
                     <Button
                             android:layout_width="50sp"

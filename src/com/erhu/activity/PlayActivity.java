@@ -31,7 +31,6 @@ public class PlayActivity extends Activity {
 
     private int position;// 第几首歌?
     private int duration;// 歌曲长度
-    public int playState = Constants.STOPPED_STATE;// 程序启动时播放器出于停止状态
     private int currentPosition;//当前播放位置
 
     @Override
@@ -57,6 +56,9 @@ public class PlayActivity extends Activity {
         timeLeft = (TextView) this.findViewById(R.id.time_left);
         artist = (TextView) (this.findViewById(R.id.artist));
         seekBar = (SeekBar) (this.findViewById(R.id.seekBar));
+        playBtn = (Button) this.findViewById(R.id.play_btn_pause);
+        if (SSApplication.playerState != Constants.PLAYING_STATE)
+            playBtn.setBackgroundResource(R.drawable.play);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
@@ -75,7 +77,6 @@ public class PlayActivity extends Activity {
                 }
             }
         });
-        playBtn = (Button) this.findViewById(R.id.btnPause);
         // 获取从音乐列表传递来的数据(所有音乐信息)
         Bundle bundle = getIntent().getExtras();
         position = bundle.getInt("position");
@@ -115,7 +116,7 @@ public class PlayActivity extends Activity {
      * 点击播放/暂停按钮
      */
     public void btnPauseClicked(View _e) {
-        if (this.playState == Constants.PLAYING_STATE)
+        if (SSApplication.playerState == Constants.PLAYING_STATE)
             pause();
         else
             play(position);
@@ -125,7 +126,7 @@ public class PlayActivity extends Activity {
      * 音乐暂停
      */
     private void pause() {
-        playState = Constants.PAUSED_STATE;
+        SSApplication.playerState = Constants.PAUSED_STATE;
         playBtn.setBackgroundResource(R.drawable.play);
         Intent intent = new Intent();
         intent.setAction(Constants.SERVICE_ACTION);
@@ -138,14 +139,14 @@ public class PlayActivity extends Activity {
      */
     public void btnNextClicked(View _e) {
         position = (position == ids.length - 1 ? 0 : position + 1);
-        playState = Constants.PLAYING_STATE;
+        SSApplication.playerState = Constants.PLAYING_STATE;
         play(position);
     }
 
     // 上一首
     public void btnPrevClicked(View _e) {
         position = (position == 0 ? position = ids.length - 1 : position - 1);
-        playState = Constants.PLAYING_STATE;
+        SSApplication.playerState = Constants.PLAYING_STATE;
         play(position);
     }
 
@@ -154,7 +155,7 @@ public class PlayActivity extends Activity {
      */
     private void play(final int _position) {
         Intent intent = new Intent();
-        if (playState == Constants.PAUSED_STATE)
+        if (SSApplication.playerState == Constants.PAUSED_STATE)
             intent.putExtra("op", Constants.CONTINUE_OP);
         else {
             intent.putExtra("position", _position);
@@ -162,7 +163,7 @@ public class PlayActivity extends Activity {
         }
         intent.setAction(Constants.SERVICE_ACTION);
         playBtn.setBackgroundResource(R.drawable.pause);
-        playState = Constants.PLAYING_STATE;
+        SSApplication.playerState = Constants.PLAYING_STATE;
         startService(intent);
     }
 
@@ -214,7 +215,7 @@ public class PlayActivity extends Activity {
 
     @Override
     protected void onStop() {
-        super.onStop();    //To change body of overridden methods use File | Settings | File Templates.
+        super.onStop();
         log("onStop");
         unregisterReceiver(musicReceiver);
     }

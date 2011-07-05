@@ -18,11 +18,10 @@ import static com.erhu.activity.SSApplication.ids;
 
 public class MusicService extends Service implements MediaPlayer.OnCompletionListener {
 
-    private static final String TAG = MusicService.class.getSimpleName();
     private int position;//当前播放第几首歌
     private Handler handler = null;
     private MediaPlayer player;
-    public int musicPos = 0;// 某一首歌内部的位置
+    private int musicPos = 0;// 某一首歌内部的位置
 
     @Override
     public void onCreate() {
@@ -182,6 +181,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     private void log(String _msg) {
-        Log.w(TAG, "(:-----------------------" + TAG + ":)" + _msg);
+        String tag = MusicService.class.getSimpleName();
+        Log.w(tag, "log@::::::::::::::::::::::::::::::::[" + tag + "]: " + _msg);
     }
 }

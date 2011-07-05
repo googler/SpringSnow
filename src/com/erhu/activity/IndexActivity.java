@@ -134,6 +134,7 @@ public class IndexActivity extends ActivityGroup {
         log("onStart");
         if (-1 != SSApplication.position)
             title.setText(SSApplication.titles[SSApplication.position]);
+
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.DURATION_ACTION);
         registerReceiver(musicReceiver, filter);
