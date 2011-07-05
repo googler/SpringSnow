@@ -5,7 +5,8 @@
         android:id="@+id/index_outer_layout"
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:background="@drawable/list_bg">
     <!-- 顶部显示正在播放的歌曲 -->
     <LinearLayout
             android:id="@+id/index_top_bar"
@@ -17,10 +18,10 @@
         <Button
                 android:id="@+id/index_top_btn"
                 android:background="@drawable/index_topbar_play"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2.0dip"
-                android:layout_marginLeft="6.0dip"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_marginTop="2.0dp"
+                android:layout_marginLeft="6.0dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"/>
         <TextView
@@ -34,9 +35,9 @@
             android:id="@+id/index_container"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="#000000"
             android:layout_weight="1.0"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/list_bg">
     </LinearLayout>
     <!-- 底部选项卡 -->
     <LinearLayout
@@ -47,9 +48,9 @@
         <LinearLayout
                 android:id="@+id/index_layout_bottom_music"
                 android:layout_height="fill_parent"
-                android:layout_width="78dip"
+                android:layout_width="78dp"
                 android:orientation="vertical"
-                android:paddingTop="6.0dip"
+                android:paddingTop="6.0dp"
                 android:layout_weight="1.0"
                 android:focusable="true"
                 android:clickable="true">
@@ -63,10 +64,10 @@
         </LinearLayout>
         <LinearLayout
                 android:layout_height="fill_parent"
-                android:layout_width="78dip"
+                android:layout_width="78dp"
                 android:id="@+id/index_layout_bottom_album"
                 android:orientation="vertical"
-                android:paddingTop="6.0dip"
+                android:paddingTop="6.0dp"
                 android:layout_weight="1.0"
                 android:focusable="true"
                 android:clickable="true">
@@ -81,9 +82,9 @@
         <LinearLayout
                 android:id="@+id/index_layout_bottom_artist"
                 android:layout_height="fill_parent"
-                android:layout_width="78dip"
+                android:layout_width="78dp"
                 android:orientation="vertical"
-                android:paddingTop="6.0dip"
+                android:paddingTop="6.0dp"
                 android:layout_weight="1.0"
                 android:focusable="true"
                 android:clickable="true">

@@ -22,7 +22,7 @@
         <activity android:name=".activity.AlbumListActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.ArtistListActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.PlayActivity" android:screenOrientation="portrait"/>
-
+        <activity android:name=".activity.Mp3ProfileActivity" android:screenOrientation="portrait"/>
         <service android:name=".service.MusicService">
             <intent-filter>
                 <action android:name="com.erhu.media.MUSIC_SERVICE"/>

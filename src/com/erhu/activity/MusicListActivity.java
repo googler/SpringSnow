@@ -33,6 +33,7 @@ public class MusicListActivity extends ListActivity {
         listview.setFadingEdgeLength(0);
         listview.setBackgroundResource(R.drawable.list_bg);
         listview.setOnItemClickListener(new ListItemClickListener());
+        listview.setOnItemLongClickListener(new ListItemLongCLickListener());
         this.setListData();
     }
 
@@ -97,6 +98,17 @@ public class MusicListActivity extends ListActivity {
             Intent intent = new Intent(MusicListActivity.this, PlayActivity.class);
             intent.putExtra("position", position);
             startActivity(intent);
+        }
+    }
+
+    class ListItemLongCLickListener implements AdapterView.OnItemLongClickListener {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int _position, long id) {
+            Intent intent = new Intent(MusicListActivity.this, Mp3ProfileActivity.class);
+            intent.putExtra("position", _position);
+            startActivity(intent);
+            log("hello ");
+            return true;
         }
     }
 

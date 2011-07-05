@@ -119,11 +119,13 @@ public class IndexActivity extends ActivityGroup {
             @Override
             public void onClick(View v) {
                 log("top title clicked");
-                Intent intent = new Intent();
-                intent.putExtra("position", SSApplication.position);
-                intent.putExtra("op", "justLook");
-                intent.setClass(IndexActivity.this, PlayActivity.class);
-                startActivity(intent);
+                if (SSApplication.position != -1) {
+                    Intent intent = new Intent();
+                    intent.putExtra("position", SSApplication.position);
+                    intent.putExtra("op", "justLook");
+                    intent.setClass(IndexActivity.this, PlayActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import com.erhu.R;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
@@ -25,9 +27,6 @@ public class PlayActivity extends Activity {
     private TextView timeLeft;
     private TextView artist;
     private Button playBtn;
-    private ImageView imageList;
-    private ImageView imageMyLove;
-    private ImageButton imagePlayFor;
 
     private int position;// 第几首歌?
     private int duration;// 歌曲长度
@@ -41,21 +40,13 @@ public class PlayActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.play);
 
-        LinearLayout imagea = (LinearLayout) findViewById(R.id.imagea);
-        imagea.getBackground().setAlpha(0x88);
-        LinearLayout imageb = (LinearLayout) findViewById(R.id.imageb);
-        imageb.getBackground().setAlpha(0x88);
-        LinearLayout imagec = (LinearLayout) findViewById(R.id.imagec);
-        imagec.getBackground().setAlpha(0x88);
-        LinearLayout imaged = (LinearLayout) findViewById(R.id.imaged);
-        imaged.getBackground().setAlpha(0x88);
-
-        imageList = (ImageView) findViewById(R.id.imageList);
-        imageList.setAlpha(0x88);
-        title = (TextView) (this.findViewById(R.id.musicTitle));
-        timeLeft = (TextView) this.findViewById(R.id.time_left);
-        artist = (TextView) (this.findViewById(R.id.artist));
-        seekBar = (SeekBar) (this.findViewById(R.id.seekBar));
+        // 半透明效果
+        // LinearLayout outer_0 = (LinearLayout) findViewById(R.id.play_layout_top_outer);
+        // outer_0.getBackground().setAlpha(0x88);
+        title = (TextView) (this.findViewById(R.id.play_title));
+        timeLeft = (TextView) this.findViewById(R.id.play_time_left);
+        artist = (TextView) (this.findViewById(R.id.play_artist));
+        seekBar = (SeekBar) (this.findViewById(R.id.play_seekbar));
         playBtn = (Button) this.findViewById(R.id.play_btn_pause);
         if (SSApplication.playerState != Constants.PLAYING_STATE)
             playBtn.setBackgroundResource(R.drawable.play);
