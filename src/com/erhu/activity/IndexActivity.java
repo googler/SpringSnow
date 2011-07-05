@@ -186,7 +186,8 @@ public class IndexActivity extends ActivityGroup {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        log("onDestroy");
+        log("onDestroy");// TODO:when debug，Stop Service here.
+        stopService(new Intent().setAction(Constants.SERVICE_ACTION));
     }
 
     private void log(String _msg) {

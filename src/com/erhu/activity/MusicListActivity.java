@@ -17,7 +17,6 @@ import com.erhu.adapter.MusicListAdapter;
  */
 public class MusicListActivity extends ListActivity {
     private ListView listview;
-    private Cursor cursor;
     private int[] ids;
     private int[] durations;
     private String[] titles;
@@ -41,7 +40,7 @@ public class MusicListActivity extends ListActivity {
      * 给列表填充数据
      */
     private void setListData() {
-        cursor = this.getContentResolver()
+        Cursor cursor = this.getContentResolver()
                 .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                         new String[]{
                                 MediaStore.Audio.Media._ID,
@@ -64,12 +63,10 @@ public class MusicListActivity extends ListActivity {
                 ids[i] = cursor.getInt(0);
                 titles[i] = cursor.getString(1);
                 durations[i] = cursor.getInt(2);
-                artists[i] = cursor.getString(3);
+                artists[i] = cursor.getString(3).equals(MediaStore.UNKNOWN_STRING) ? "悲剧的艺术家" : cursor.getString(3);
                 albums[i] = cursor.getString(4);
                 cursor.moveToNext();
             }
-            MusicListAdapter adapter = new MusicListAdapter(this, cursor);
-            listview.setAdapter(adapter);
         }
     }
 
@@ -80,6 +77,8 @@ public class MusicListActivity extends ListActivity {
         // indexActivity底部在切换选项卡时，调用此方法，重新给SSApplication中的
         // 全局变量赋值
         SSApplication.setData(ids, titles, artists, albums, durations);
+        MusicListAdapter adapter = new MusicListAdapter(this);
+        listview.setAdapter(adapter);
     }
 
     @Override
