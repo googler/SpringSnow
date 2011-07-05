@@ -18,10 +18,11 @@ import com.erhu.adapter.MusicListAdapter;
 public class MusicListActivity extends ListActivity {
     private ListView listview;
     private Cursor cursor;
-    private int[] _ids;
-    private String[] _titles;
-    private String[] _artists;
-    private String[] _path;
+    private int[] ids;
+    private int[] durations;
+    private String[] titles;
+    private String[] albums;
+    private String[] artists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,25 +44,28 @@ public class MusicListActivity extends ListActivity {
         cursor = this.getContentResolver()
                 .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                         new String[]{
+                                MediaStore.Audio.Media._ID,
                                 MediaStore.Audio.Media.TITLE,
                                 MediaStore.Audio.Media.DURATION,
                                 MediaStore.Audio.Media.ARTIST,
-                                MediaStore.Audio.Media._ID,
-                                MediaStore.Audio.Media.DISPLAY_NAME,
-                                MediaStore.Audio.Media.DATA},
+                                MediaStore.Audio.Media.ALBUM,
+                                MediaStore.Audio.Media.DISPLAY_NAME},
                         null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
-            _ids = new int[cursor.getCount()];
-            _titles = new String[cursor.getCount()];
-            _path = new String[cursor.getCount()];
-            _artists = new String[cursor.getCount()];
+            final int t_count = cursor.getCount();
+            ids = new int[t_count];
+            durations = new int[t_count];
+            titles = new String[t_count];
+            albums = new String[t_count];
+            artists = new String[t_count];
 
             for (int i = 0; i < cursor.getCount(); i++) {
-                _ids[i] = cursor.getInt(3);
-                _titles[i] = cursor.getString(0);
-                _artists[i] = cursor.getString(2);
-                _path[i] = cursor.getString(5).substring(4);
+                ids[i] = cursor.getInt(0);
+                titles[i] = cursor.getString(1);
+                durations[i] = cursor.getInt(2);
+                artists[i] = cursor.getString(3);
+                albums[i] = cursor.getString(4);
                 cursor.moveToNext();
             }
             MusicListAdapter adapter = new MusicListAdapter(this, cursor);
@@ -69,17 +73,21 @@ public class MusicListActivity extends ListActivity {
         }
     }
 
-    /**
-     * 播放音乐
-     */
-    private void playMusic(int position) {
-        Intent intent = new Intent(this, PlayActivity.class);
-        intent.putExtra("_ids", _ids);
-        intent.putExtra("_titles", _titles);
-        intent.putExtra("_artists", _artists);
-        intent.putExtra("position", position);
-        startActivity(intent);
+    @Override
+    protected void onStart() {
+        log("onStart");
+        super.onStart();
+        // indexActivity底部在切换选项卡时，调用此方法，重新给SSApplication中的
+        // 全局变量赋值
+        SSApplication.setData(ids, titles, artists, albums, durations);
     }
+
+    @Override
+    protected void onStop() {
+        log("onStop");
+        super.onStop();
+    }
+
 
     /**
      * 列表项单击操作监听器类
@@ -87,12 +95,14 @@ public class MusicListActivity extends ListActivity {
     class ListItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-            playMusic(position);
+            Intent intent = new Intent(MusicListActivity.this, PlayActivity.class);
+            intent.putExtra("position", position);
+            startActivity(intent);
         }
     }
 
     private void log(String _msg) {
         String TAG = MusicListActivity.class.getSimpleName();
-        Log.i(TAG, "log@" + TAG + ":" + this.toString() + " : " + _msg);
+        Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
     }
 }

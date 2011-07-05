@@ -41,52 +41,17 @@ public class IndexActivity extends ActivityGroup {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(Constants.DURATION_ACTION))
-                title.setText(intent.getExtras().getString("title"));
+            if (action.equals(Constants.DURATION_ACTION)) {
+                int pos = intent.getExtras().getInt("position");
+                title.setText(SSApplication.titles[pos]);
+                pauseButton.setBackgroundResource(R.drawable.index_topbar_pause);
+            }
         }
     };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        log("onCrate");
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.index);
-        initUI();
-        initPopMenu();
-    }
-
     /**
-     * Nothing could hold a man back from his future!!!
+     * 底部导航区域监听器
      */
-    private void initUI() {
-        {
-            pauseButton = (Button) findViewById(R.id.index_top_btn);
-            title = (TextView) findViewById(R.id.index_top_title);
-            music = (TextView) findViewById(R.id.index_bottom_music);
-            album = (TextView) findViewById(R.id.index_bottom_album);
-            artist = (TextView) findViewById(R.id.index_bottom_artist);
-            topBar = (LinearLayout) findViewById(R.id.index_top_bar);
-            topBar.getBackground().setAlpha(0x88);
-            musicLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_music);
-            albumLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_album);
-            artistLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_artist);
-            musicLayout.setOnClickListener(itemClickListener);
-            albumLayout.setOnClickListener(itemClickListener);
-            artistLayout.setOnClickListener(itemClickListener);
-        }
-        musicView = getView(MusicListActivity.class);
-        artistView = getView(ArtistListActivity.class);
-        albumView = getView(AlbumListActivity.class);
-        {
-            currentView = musicView;
-            container = (LinearLayout) findViewById(R.id.index_container);
-            container.removeAllViewsInLayout();
-            container.addView(currentView);
-        }
-    }
-
-    View.OnClickListener itemClickListener = new View.OnClickListener() {
+    View.OnClickListener bottomItemClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             container.removeAllViewsInLayout();
@@ -111,6 +76,56 @@ public class IndexActivity extends ActivityGroup {
     };
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        log("onCrate");
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.index);
+        initUI();
+        initMenu();
+    }
+
+    /**
+     * Nothing could hold a man back from his future!!!
+     */
+    private void initUI() {
+        {
+            pauseButton = (Button) findViewById(R.id.index_top_btn);
+            title = (TextView) findViewById(R.id.index_top_title);
+            music = (TextView) findViewById(R.id.index_bottom_music);
+            album = (TextView) findViewById(R.id.index_bottom_album);
+            artist = (TextView) findViewById(R.id.index_bottom_artist);
+            topBar = (LinearLayout) findViewById(R.id.index_top_bar);
+            topBar.getBackground().setAlpha(0x88);
+            musicLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_music);
+            albumLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_album);
+            artistLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_artist);
+            musicLayout.setOnClickListener(bottomItemClickListener);
+            albumLayout.setOnClickListener(bottomItemClickListener);
+            artistLayout.setOnClickListener(bottomItemClickListener);
+        }
+        musicView = getView(MusicListActivity.class);
+        artistView = getView(ArtistListActivity.class);
+        albumView = getView(AlbumListActivity.class);
+        {
+            currentView = musicView;
+            container = (LinearLayout) findViewById(R.id.index_container);
+            container.removeAllViewsInLayout();
+            container.addView(currentView);
+        }
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                log("top title clicked");
+                Intent intent = new Intent();
+                intent.setClass(IndexActivity.this, PlayActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+    @Override
     protected void onStart() {
         super.onStart();
         log("onStart");
@@ -118,6 +133,7 @@ public class IndexActivity extends ActivityGroup {
         filter.addAction(Constants.DURATION_ACTION);
         registerReceiver(musicReceiver, filter);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -132,15 +148,15 @@ public class IndexActivity extends ActivityGroup {
                 mPop.dismiss();
             else {
                 LinearLayout outerLayout = (LinearLayout) findViewById(R.id.index_outer_layout);
-                initPopMenu();
+                initMenu();
                 mPop.showAtLocation(outerLayout, Gravity.CENTER, 0, 0);
             }
         }
         return false;
     }
 
-    private void initPopMenu() {
-        View v = getLayoutInflater().inflate(R.layout.popupmenu, null);
+    private void initMenu() {
+        View v = getLayoutInflater().inflate(R.layout.index_popup_menu, null);
         mPop = new PopupWindow(v, AbsListView.LayoutParams.FILL_PARENT, AbsListView.LayoutParams.WRAP_CONTENT);
     }
 
@@ -171,6 +187,6 @@ public class IndexActivity extends ActivityGroup {
 
     private void log(String _msg) {
         String TAG = IndexActivity.class.getSimpleName();
-        Log.i(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
+        Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
     }
 }

@@ -13,15 +13,13 @@ import com.erhu.util.Constants;
 
 import java.io.IOException;
 
+import static com.erhu.activity.SSApplication.ids;
+
 public class MusicService extends Service implements MediaPlayer.OnCompletionListener {
 
     private static final String TAG = MusicService.class.getSimpleName();
-    private static final String MUSIC_DURATION = "com.alex.duration";
-    private static final String MUSIC_CURRENT = "com.alex.currentTime";
-    private int curPos;//当前播放第几首歌
+    private int position;//当前播放第几首歌
     private Handler handler = null;
-    private int _ids[];
-    private String _titles[];
     private MediaPlayer player;
     public int musicPos = 0;// 某一首歌内部的位置
 
@@ -29,7 +27,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     public void onCreate() {
         super.onCreate();
         log("onCreate()");
-
         if (player != null) {
             player.reset();
             player.release();
@@ -40,26 +37,24 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     @Override
-    public void onStart(Intent intent, int startId) {
-        super.onStart(intent, startId);
+    public void onStart(Intent _intent, int startId) {
+        super.onStart(_intent, startId);
         log("Start");
-        int operation = intent.getIntExtra("op", -1);
+        int operation = _intent.getIntExtra("op", -1);
         switch (operation) {
             case Constants.PLAY_OP:
                 try {
                     player.reset();
-                    int position = intent.getIntExtra("position", -1);
+                    int t_position = _intent.getIntExtra("position", -1);
                     if (position != -1) {
-                        curPos = position;
-                        if (intent.getIntArrayExtra("_ids") != null) {
-                            _ids = intent.getIntArrayExtra("_ids");
-                            _titles = intent.getStringArrayExtra("_titles");
-                            if (_ids[curPos] != -1) {
-                                player.setDataSource(this, Uri.withAppendedPath(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + _ids[curPos]));
-                                pre2Play();
-                                handlePlayPos();
-                                player.start();
-                            }
+                        this.position = t_position;
+                        if (ids[position] != -1) {
+                            player.setDataSource(this,
+                                    Uri.withAppendedPath(
+                                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + ids[position]));
+                            pre2Play();
+                            handlePlayPos();
+                            player.start();
                         }
                     }
                 } catch (IOException e) {
@@ -77,7 +72,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                 stop();
                 break;
             case Constants.PROCESS_CHANGE_OP:
-                player.seekTo(intent.getExtras().getInt("progress"));
+                player.seekTo(_intent.getExtras().getInt("progress"));
                 musicPos = player.getCurrentPosition();
                 break;
         }
@@ -95,10 +90,8 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             });
             // 获取歌曲总时长
             final Intent intent = new Intent();
-            intent.setAction(MUSIC_DURATION);
-            intent.putExtra("duration", player.getDuration());
-            intent.putExtra("position", curPos);
-            intent.putExtra("title", _titles[curPos]);
+            intent.setAction(Constants.DURATION_ACTION);
+            intent.putExtra("position", position);
             sendBroadcast(intent);
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,7 +108,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                     if (msg.what == 1) {
                         if (player != null) {
                             final Intent intent = new Intent();
-                            intent.setAction(MUSIC_CURRENT);
+                            intent.setAction(Constants.CURRENT_ACTION);
                             intent.putExtra("currentTime", player.getCurrentPosition());
                             sendBroadcast(intent);
                             handler.sendEmptyMessageDelayed(1, 500);
@@ -159,9 +152,11 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     public void onCompletion(final MediaPlayer _mediaPlayer) {
         try {
             handler.removeMessages(1);
-            curPos = ((_ids.length == 1 || curPos == _ids.length - 1) ? 0 : curPos + 1);
+            position = ((ids.length == 1 || position == ids.length - 1) ? 0 : position + 1);
             _mediaPlayer.reset();
-            _mediaPlayer.setDataSource(this, Uri.withAppendedPath(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + _ids[curPos]));
+            _mediaPlayer.setDataSource(this,
+                    Uri.withAppendedPath(
+                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + ids[position]));
             pre2Play();
             player.start();
         } catch (Exception e) {

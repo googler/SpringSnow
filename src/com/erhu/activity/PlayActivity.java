@@ -15,9 +15,12 @@ import com.erhu.R;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
 
+import static com.erhu.activity.SSApplication.artists;
+import static com.erhu.activity.SSApplication.titles;
+import static com.erhu.activity.SSApplication.ids;
+import static com.erhu.activity.SSApplication.durations;
 public class PlayActivity extends Activity {
     private static final String TAG = PlayActivity.class.getSimpleName();
-
     // UI
     private SeekBar seekBar;
     private TextView title;
@@ -28,11 +31,8 @@ public class PlayActivity extends Activity {
     private ImageView imageMyLove;
     private ImageButton imagePlayFor;
 
-    private int[] _ids;
     private int position;// 第几首歌?
     private int duration;// 歌曲长度
-    private String _titles[] = null;
-    private String _artists[] = null;
     public int playState = Constants.STOPPED_STATE;// 程序启动时播放器出于停止状态
     private int currentPosition;//当前播放位置
 
@@ -82,9 +82,6 @@ public class PlayActivity extends Activity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             position = bundle.getInt("position");
-            _ids = bundle.getIntArray("_ids");
-            _titles = bundle.getStringArray("_titles");
-            _artists = bundle.getStringArray("_artists");
         }
     }
 
@@ -93,10 +90,18 @@ public class PlayActivity extends Activity {
         super.onStart();
         log("onStart");
         regReceiver();
-        refreshUI();
-        play(position);
+        // 一首全新的歌曲，而非查看正在播放的歌曲
+        if (getIntent().getExtras() != null) {
+            seekBar.setProgress(0);
+            title.setText(titles[position]);
+            artist.setText(artists[position]);
+            play(position);
+        }
     }
 
+    /**
+     * register receiver
+     */
     private void regReceiver() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.CURRENT_ACTION);
@@ -104,15 +109,6 @@ public class PlayActivity extends Activity {
         filter.addAction(Constants.CONTINUE_ACTION);
         registerReceiver(musicReceiver, filter);
         log("register music receiver success");
-    }
-
-    /**
-     * 刷新播放界面
-     */
-    private void refreshUI() {
-        seekBar.setProgress(0);
-        title.setText(_titles[position]);
-        artist.setText(_artists[position]);
     }
 
     /**
@@ -141,14 +137,14 @@ public class PlayActivity extends Activity {
      * 下一首
      */
     public void btnNextClicked(View _e) {
-        position = (position == _ids.length - 1 ? 0 : position + 1);
+        position = (position == ids.length - 1 ? 0 : position + 1);
         playState = Constants.PLAYING_STATE;
         play(position);
     }
 
     // 上一首
     public void btnPrevClicked(View _e) {
-        position = (position == 0 ? position = _ids.length - 1 : position - 1);
+        position = (position == 0 ? position = ids.length - 1 : position - 1);
         playState = Constants.PLAYING_STATE;
         play(position);
     }
@@ -161,12 +157,10 @@ public class PlayActivity extends Activity {
         if (playState == Constants.PAUSED_STATE)
             intent.putExtra("op", Constants.CONTINUE_OP);
         else {
-            intent.putExtra("_ids", _ids);
-            intent.putExtra("_titles", _titles);
             intent.putExtra("position", _position);
             intent.putExtra("op", Constants.PLAY_OP);
         }
-        intent.setAction("com.erhu.media.MUSIC_SERVICE");
+        intent.setAction(Constants.SERVICE_ACTION);
         playBtn.setBackgroundResource(R.drawable.pause);
         playState = Constants.PLAYING_STATE;
         startService(intent);
@@ -194,35 +188,14 @@ public class PlayActivity extends Activity {
                 currentPosition = intent.getExtras().getInt("currentTime");
                 seekBar.setProgress(currentPosition);
                 timeLeft.setText(Tools.toTime(duration - currentPosition));
-                /*Iterator<Integer> iterator = lrc_map.keySet().iterator();
-                while (iterator.hasNext()) {
-                    Object o = iterator.next();
-                    LRCbean val = lrc_map.get(o);
-                    if (val != null) {
-
-                        if (currentPosition > val.getBeginTime()
-                                && currentPosition < val.getBeginTime() + val.getLineTime()) {
-                            lrcText.setText(val.getLrcBody());
-                            break;
-                        }
-                    }
-                }*/
             } else if (action.equals(Constants.DURATION_ACTION)) {
-                duration = intent.getExtras().getInt("duration");
-                position = intent.getExtras().getInt("position");
                 seekBar.setProgress(0);
+                position = intent.getExtras().getInt("position");
+                duration = durations[position];
                 seekBar.setMax(duration);
-                title.setText(_titles[position]);
-                artist.setText(_artists[position]);
-                //log("广播接收器收到歌曲总长度了:" + intent.getExtras().getInt("duration"));
-            } /*else if (action.equals(MUSIC_NEXT)) {
-                log("放下一曲");
-            } else if (action.equals(MUSIC_UPDATE)) {
-                position = intent.getExtras().getInt("position");
-                seekBar.setProgress(0);
-                title.setText(_titles[position]);
-                artist.setText(_artists[position]);
-            }*/
+                title.setText(titles[position]);
+                artist.setText(artists[position]);
+            }
         }
     };
 

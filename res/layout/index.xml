@@ -16,7 +16,7 @@
         <!-- 暂停播放按钮 -->
         <Button
                 android:id="@+id/index_top_btn"
-                android:background="@drawable/index_topbar_pause"
+                android:background="@drawable/index_topbar_play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2.0dip"
@@ -28,7 +28,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="欢迎使用‘阳春白雪’音乐播放器:)"/>
-
     </LinearLayout>
     <!-- 中间动态加载View -->
     <LinearLayout
