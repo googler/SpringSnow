@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.erhu"
-        android:versionCode="1"
-        android:versionName="1.0">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.erhu"
+          android:versionCode="1"
+          android:versionName="1.0">
     <application
             android:icon="@drawable/juk3"
             android:label="@string/app_name"
-            android:name=".activity.SSApplication"
-            >
-
+            android:name=".activity.SSApplication">
         <activity android:name=".activity.IndexActivity"
                   android:label="@string/app_name"
                   android:theme="@android:style/Theme.NoTitleBar"
@@ -19,16 +16,25 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.MusicListActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.AlbumListActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ArtistListActivity" android:screenOrientation="portrait"/>
+        <activity
+                android:name=".activity.MusicListActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".activity.AlbumListActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".activity.ArtistListActivity"
+                android:screenOrientation="portrait"/>
         <activity
                 android:name=".activity.PlayActivity"
                 android:screenOrientation="portrait"
                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
-        <activity android:name=".activity.Mp3ProfileActivity" android:screenOrientation="portrait"/>
-        <service android:name=".service.MusicService">
+        <activity
+                android:name=".activity.Mp3ProfileActivity"
+                android:screenOrientation="portrait"/>
+        <service
+                android:name=".service.MusicService"
+                android:exported="false">
             <intent-filter>
                 <action android:name="com.erhu.media.MUSIC_SERVICE"/>
             </intent-filter>

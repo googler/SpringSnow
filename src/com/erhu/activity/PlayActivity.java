@@ -8,8 +8,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -28,7 +26,7 @@ public class PlayActivity extends Activity {
     private TextView artist;
     private Button playBtn;
 
-    private int position;// 第几首歌?
+    //private int position;// 第几首歌?
     private int duration;// 歌曲长度
     private int currentPosition;//当前播放位置
 
@@ -68,9 +66,6 @@ public class PlayActivity extends Activity {
                 }
             }
         });
-        // 获取从音乐列表传递来的数据(所有音乐信息)
-        Bundle bundle = getIntent().getExtras();
-        position = bundle.getInt("position");
     }
 
     @Override
@@ -78,14 +73,15 @@ public class PlayActivity extends Activity {
         super.onStart();
         log("onStart");
         regReceiver();
-        // 一首全新的歌曲，而非查看正在播放的歌曲
-        Intent intent = getIntent();
-        if (intent != null && intent.getExtras().get("op") != null) {
-            duration = SSApplication.durations[position];
-            seekBar.setMax(duration);
-        } else {
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            position = bundle.getInt("position");
             seekBar.setProgress(0);
             play(position);
+        } else {// 一首全新的歌曲，而非查看正在播放的歌曲
+            duration = SSApplication.durations[position];
+            seekBar.setMax(duration);
         }
         title.setText(titles[position]);
         artist.setText(artists[position]);

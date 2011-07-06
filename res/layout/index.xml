@@ -23,7 +23,8 @@
                 android:layout_marginTop="2.0dp"
                 android:layout_marginLeft="6.0dp"
                 android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:onClick="playBtnClicked"/>
         <TextView
                 android:id="@+id/index_top_title"
                 android:layout_width="wrap_content"

@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.widget.*;
 import com.erhu.R;
 import com.erhu.util.Constants;
@@ -121,13 +120,22 @@ public class IndexActivity extends ActivityGroup {
                 log("top title clicked");
                 if (SSApplication.position != -1) {
                     Intent intent = new Intent();
-                    intent.putExtra("position", SSApplication.position);
-                    intent.putExtra("op", "justLook");
                     intent.setClass(IndexActivity.this, PlayActivity.class);
                     startActivity(intent);
                 }
             }
         });
+    }
+
+
+
+    /**
+     * click the play button on topbar
+     *
+     * @param _view
+     */
+    public void playBtnClicked(final View _view) {
+        log("playBtnClicked");
     }
 
     @Override
@@ -189,7 +197,7 @@ public class IndexActivity extends ActivityGroup {
     protected void onDestroy() {
         super.onDestroy();
         log("onDestroy");// TODO:when debug，Stop Service here.
-        stopService(new Intent().setAction(Constants.SERVICE_ACTION));
+        //stopService(new Intent().setAction(Constants.SERVICE_ACTION));
     }
 
     private void log(String _msg) {
