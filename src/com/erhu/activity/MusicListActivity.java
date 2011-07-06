@@ -28,6 +28,8 @@ public class MusicListActivity extends ListActivity {
         log("onCreate");
         super.onCreate(savedInstanceState);
         listview = getListView();
+        listview.setFastScrollEnabled(true);
+        listview.setDrawSelectorOnTop(false);
         listview.setDivider(null);
         listview.setScrollingCacheEnabled(false);
         listview.setFadingEdgeLength(0);

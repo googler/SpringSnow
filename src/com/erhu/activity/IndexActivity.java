@@ -46,7 +46,6 @@ public class IndexActivity extends ActivityGroup {
             if (action.equals(Constants.DURATION_ACTION)) {
                 int position = intent.getExtras().getInt("position");
                 title.setText(SSApplication.titles[position]);
-                playButton.setBackgroundResource(R.drawable.index_topbar_pause);
             }
         }
     };
@@ -91,8 +90,7 @@ public class IndexActivity extends ActivityGroup {
     private void initUI() {
         {
             playButton = (Button) findViewById(R.id.index_top_btn);
-            if (SSApplication.position != -1)
-                playButton.setBackgroundResource(R.drawable.pause);
+
             title = (TextView) findViewById(R.id.index_top_title);
             music = (TextView) findViewById(R.id.index_bottom_music);
             album = (TextView) findViewById(R.id.index_bottom_album);
@@ -128,6 +126,21 @@ public class IndexActivity extends ActivityGroup {
         });
     }
 
+    @Override
+    protected void onStart() {
+        log("onStart");
+        super.onStart();
+        if (-1 != SSApplication.position) {
+            title.setText(SSApplication.titles[SSApplication.position]);
+            if (SSApplication.playerState == Constants.PAUSED_STATE)
+                playButton.setBackgroundResource(R.drawable.play);
+            else
+                playButton.setBackgroundResource(R.drawable.pause);
+        }
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constants.DURATION_ACTION);
+        registerReceiver(musicReceiver, filter);
+    }
 
     /**
      * click the play button on topbar
@@ -169,18 +182,6 @@ public class IndexActivity extends ActivityGroup {
         playButton.setBackgroundResource(R.drawable.pause);
         SSApplication.playerState = Constants.PLAYING_STATE;
         startService(intent);
-    }
-
-    @Override
-    protected void onStart() {
-        log("onStart");
-        super.onStart();
-        if (-1 != SSApplication.position)
-            title.setText(SSApplication.titles[SSApplication.position]);
-
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Constants.DURATION_ACTION);
-        registerReceiver(musicReceiver, filter);
     }
 
     @Override
