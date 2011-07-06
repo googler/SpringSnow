@@ -2,6 +2,6 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/index_menu_exit"
-          android:icon="@drawable/menu_exit"
+          android:icon="@drawable/ic_menu_exit"
           android:title="退出"/>
 </menu>
