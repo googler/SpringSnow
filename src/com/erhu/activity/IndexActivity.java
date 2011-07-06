@@ -80,7 +80,7 @@ public class IndexActivity extends ActivityGroup {
     protected void onCreate(Bundle savedInstanceState) {
         log("onCrate");
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.index);
 
         initUI();

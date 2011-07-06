@@ -23,6 +23,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_toLeftOf="@+id/play_layout_top"
                     android:layout_marginTop="20sp"
+                    android:layout_marginLeft="5sp"
                     android:id="@+id/play_heart"
                     android:src="@drawable/ad"/>
             <!-- music title and artist -->
