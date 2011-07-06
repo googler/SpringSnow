@@ -128,7 +128,6 @@ public class IndexActivity extends ActivityGroup {
     }
 
 
-
     /**
      * click the play button on topbar
      *
@@ -197,7 +196,7 @@ public class IndexActivity extends ActivityGroup {
     protected void onDestroy() {
         super.onDestroy();
         log("onDestroy");// TODO:when debug，Stop Service here.
-        //stopService(new Intent().setAction(Constants.SERVICE_ACTION));
+        stopService(new Intent().setAction(Constants.SERVICE_ACTION));
     }
 
     private void log(String _msg) {

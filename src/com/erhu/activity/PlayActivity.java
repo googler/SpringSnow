@@ -75,11 +75,11 @@ public class PlayActivity extends Activity {
         regReceiver();
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
+        if (bundle != null) {// 一首全新的歌曲，而非查看正在播放的歌曲
             position = bundle.getInt("position");
             seekBar.setProgress(0);
             play(position);
-        } else {// 一首全新的歌曲，而非查看正在播放的歌曲
+        } else {
             duration = SSApplication.durations[position];
             seekBar.setMax(duration);
         }
@@ -186,7 +186,6 @@ public class PlayActivity extends Activity {
             }
         }
     };
-
 
     @Override
     protected void onDestroy() {
