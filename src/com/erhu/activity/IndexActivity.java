@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import com.erhu.R;
 import com.erhu.util.Constants;
 
@@ -18,7 +21,6 @@ import com.erhu.util.Constants;
  * life is good:-)
  */
 public class IndexActivity extends ActivityGroup {
-    private PopupWindow mPop;
     private LinearLayout container;
     private LinearLayout topBar;
     private LinearLayout musicLayout;// 所有音乐
@@ -81,7 +83,6 @@ public class IndexActivity extends ActivityGroup {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.index);
         initUI();
-        initMenu();
     }
 
     /**
@@ -184,26 +185,22 @@ public class IndexActivity extends ActivityGroup {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.index_menu, menu);
+        return true;
     }
 
     @Override
-    public boolean onMenuOpened(int featureId, Menu menu) {
-        if (mPop != null) {
-            if (mPop.isShowing())
-                mPop.dismiss();
-            else {
-                LinearLayout outerLayout = (LinearLayout) findViewById(R.id.index_outer_layout);
-                initMenu();
-                mPop.showAtLocation(outerLayout, Gravity.CENTER, 0, 0);
-            }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.index_menu_exit:
+                stopService(new Intent().setAction(Constants.SERVICE_ACTION));
+                android.os.Process.killProcess(android.os.Process.myPid());
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return false;
-    }
-
-    private void initMenu() {
-        View v = getLayoutInflater().inflate(R.layout.index_popup_menu, null);
-        mPop = new PopupWindow(v, AbsListView.LayoutParams.FILL_PARENT, AbsListView.LayoutParams.WRAP_CONTENT);
+        return true;
     }
 
     /**
@@ -227,10 +224,8 @@ public class IndexActivity extends ActivityGroup {
 
     @Override
     protected void onDestroy() {
-        log("onDestroy");// TODO:when debug，Stop Service here.
-        stopService(new Intent().setAction(Constants.SERVICE_ACTION));
+        log("onDestroy");
         super.onDestroy();
-        System.exit(0);
     }
 
     private void log(String _msg) {
