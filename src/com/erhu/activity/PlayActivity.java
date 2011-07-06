@@ -201,9 +201,10 @@ public class PlayActivity extends Activity {
 
     @Override
     protected void onStop() {
-        super.onStop();
         log("onStop");
         unregisterReceiver(musicReceiver);
+        super.finish();
+        super.onStop();
     }
 
     private void log(String _msg) {

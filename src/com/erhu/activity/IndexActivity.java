@@ -29,7 +29,7 @@ public class IndexActivity extends ActivityGroup {
     private View artistView;
     private View currentView;
     private TextView title;// 当前播放的音乐的名称
-    private Button pauseButton;
+    private Button playButton;
     private TextView music;
     private TextView album;
     private TextView artist;
@@ -44,7 +44,7 @@ public class IndexActivity extends ActivityGroup {
             if (action.equals(Constants.DURATION_ACTION)) {
                 int position = intent.getExtras().getInt("position");
                 title.setText(SSApplication.titles[position]);
-                pauseButton.setBackgroundResource(R.drawable.index_topbar_pause);
+                playButton.setBackgroundResource(R.drawable.index_topbar_pause);
             }
         }
     };
@@ -79,9 +79,7 @@ public class IndexActivity extends ActivityGroup {
     protected void onCreate(Bundle savedInstanceState) {
         log("onCrate");
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.index);
-
         initUI();
         initMenu();
     }
@@ -91,7 +89,9 @@ public class IndexActivity extends ActivityGroup {
      */
     private void initUI() {
         {
-            pauseButton = (Button) findViewById(R.id.index_top_btn);
+            playButton = (Button) findViewById(R.id.index_top_btn);
+            if (SSApplication.position != -1)
+                playButton.setBackgroundResource(R.drawable.pause);
             title = (TextView) findViewById(R.id.index_top_title);
             music = (TextView) findViewById(R.id.index_bottom_music);
             album = (TextView) findViewById(R.id.index_bottom_album);
@@ -135,12 +135,45 @@ public class IndexActivity extends ActivityGroup {
      */
     public void playBtnClicked(final View _view) {
         log("playBtnClicked");
+        if (SSApplication.playerState == Constants.PLAYING_STATE)
+            pause();
+        else if (SSApplication.position != -1)
+            play(SSApplication.position);
+    }
+
+    /**
+     * 音乐暂停
+     */
+    private void pause() {
+        SSApplication.playerState = Constants.PAUSED_STATE;
+        playButton.setBackgroundResource(R.drawable.play);
+        Intent intent = new Intent();
+        intent.setAction(Constants.SERVICE_ACTION);
+        intent.putExtra("op", Constants.PAUSE_OP);
+        startService(intent);
+    }
+
+    /**
+     * 音乐播放
+     */
+    private void play(final int _position) {
+        Intent intent = new Intent();
+        if (SSApplication.playerState == Constants.PAUSED_STATE)
+            intent.putExtra("op", Constants.CONTINUE_OP);
+        else {
+            intent.putExtra("position", _position);
+            intent.putExtra("op", Constants.PLAY_OP);
+        }
+        intent.setAction(Constants.SERVICE_ACTION);
+        playButton.setBackgroundResource(R.drawable.pause);
+        SSApplication.playerState = Constants.PLAYING_STATE;
+        startService(intent);
     }
 
     @Override
     protected void onStart() {
-        super.onStart();
         log("onStart");
+        super.onStart();
         if (-1 != SSApplication.position)
             title.setText(SSApplication.titles[SSApplication.position]);
 
@@ -187,16 +220,17 @@ public class IndexActivity extends ActivityGroup {
 
     @Override
     protected void onStop() {
-        super.onStop();
         log("onStop");
         unregisterReceiver(musicReceiver);
+        super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         log("onDestroy");// TODO:when debug，Stop Service here.
         stopService(new Intent().setAction(Constants.SERVICE_ACTION));
+        super.onDestroy();
+        System.exit(0);
     }
 
     private void log(String _msg) {
