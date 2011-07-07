@@ -143,7 +143,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     public void onCompletion(final MediaPlayer _mediaPlayer) {
         try {
             int _pos = SSApplication.getPosition();
-            SSApplication.setPosition(_pos == cursor.getCount() - 1 ? 0 : _pos++);
+            SSApplication.setPosition(_pos == cursor.getCount() - 1 ? 0 : _pos + 1);
             handler.removeMessages(1);
             _mediaPlayer.reset();
             _mediaPlayer.setDataSource(this,

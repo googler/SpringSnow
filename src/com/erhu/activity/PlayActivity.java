@@ -120,7 +120,7 @@ public class PlayActivity extends Activity {
      */
     public void btnNextClicked(View _e) {
         int position = SSApplication.getPosition();
-        SSApplication.setPosition(position == cursor.getCount() - 1 ? 0 :position++);
+        SSApplication.setPosition(position == cursor.getCount() - 1 ? 0 : position + 1);
         SSApplication.playerState = Constants.PLAYING_STATE;
         play();
     }
@@ -128,7 +128,7 @@ public class PlayActivity extends Activity {
     // 上一首
     public void btnPrevClicked(View _e) {
         int position = SSApplication.getPosition();
-        SSApplication.setPosition(position == 0 ? cursor.getCount() - 1 :position--);
+        SSApplication.setPosition(position == 0 ? cursor.getCount() - 1 : position - 1);
         SSApplication.playerState = Constants.PLAYING_STATE;
         play();
     }
@@ -138,11 +138,9 @@ public class PlayActivity extends Activity {
      */
     private void play() {
         Intent intent = new Intent();
-        if (SSApplication.playerState == Constants.PAUSED_STATE)
-            intent.putExtra("op", Constants.CONTINUE_OP);
-        else {
-            intent.putExtra("op", Constants.PLAY_OP);
-        }
+        intent.putExtra("op",
+                SSApplication.playerState == Constants.PAUSED_STATE
+                        ? Constants.CONTINUE_OP : Constants.PLAY_OP);
         intent.setAction(Constants.SERVICE_ACTION);
         playBtn.setBackgroundResource(R.drawable.pause);
         SSApplication.playerState = Constants.PLAYING_STATE;
