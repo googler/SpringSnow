@@ -1,13 +1,14 @@
 package com.erhu.adapter;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.erhu.R;
-import com.erhu.activity.SSApplication;
 import com.erhu.util.Tools;
 
 /**
@@ -15,15 +16,16 @@ import com.erhu.util.Tools;
  */
 public class MusicListAdapter extends BaseAdapter {
     private Context context;
+    private Cursor mCursor;
 
-
-    public MusicListAdapter(Context con) {
-        context = con;
+    public MusicListAdapter(Context _context, Cursor mCursor) {
+        context = _context;
+        this.mCursor = mCursor;
     }
 
     @Override
     public int getCount() {
-        return SSApplication.ids.length;
+        return mCursor.getCount();
     }
 
     @Override
@@ -42,9 +44,12 @@ public class MusicListAdapter extends BaseAdapter {
         TextView title = (TextView) convertView.findViewById(R.id.music_list_item_title);
         TextView singer = (TextView) convertView.findViewById(R.id.music_list_item_artist);
         TextView time = (TextView) convertView.findViewById(R.id.music_list_item_time);
-        title.setText(SSApplication.titles[position]);
-        time.setText(Tools.toTime(SSApplication.durations[position]));
-        singer.setText(SSApplication.artists[position]);
+
+        mCursor.moveToPosition(position);
+        title.setText(mCursor.getString(1));
+        time.setText(Tools.toTime(mCursor.getInt(2)));
+        String t_singer = mCursor.getString(3);
+        singer.setText(t_singer.equals(MediaStore.UNKNOWN_STRING) ? "无名氏:)" : t_singer);
         return convertView;
     }
 }

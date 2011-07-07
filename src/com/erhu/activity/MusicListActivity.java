@@ -12,20 +12,18 @@ import android.widget.ListView;
 import com.erhu.R;
 import com.erhu.adapter.MusicListAdapter;
 
+import static com.erhu.activity.SSApplication.cursor;
+
 /**
  * 音乐列表
  */
 public class MusicListActivity extends ListActivity {
     private ListView listview;
-    private int[] ids;
-    private int[] durations;
-    private String[] titles;
-    private String[] albums;
-    private String[] artists;
+    private Cursor mCursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        log("onCreate");
+        log("create");
         super.onCreate(savedInstanceState);
         listview = getListView();
         listview.setFastScrollEnabled(true);
@@ -36,14 +34,7 @@ public class MusicListActivity extends ListActivity {
         listview.setBackgroundResource(R.drawable.list_bg);
         listview.setOnItemClickListener(new ListItemClickListener());
         listview.setOnItemLongClickListener(new ListItemLongCLickListener());
-        this.setListData();
-    }
-
-    /**
-     * 给列表填充数据
-     */
-    private void setListData() {
-        Cursor cursor = this.getContentResolver()
+        mCursor = this.getContentResolver()
                 .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                         new String[]{
                                 MediaStore.Audio.Media._ID,
@@ -53,43 +44,27 @@ public class MusicListActivity extends ListActivity {
                                 MediaStore.Audio.Media.ALBUM,
                                 MediaStore.Audio.Media.DISPLAY_NAME},
                         null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-            final int t_count = cursor.getCount();
-            ids = new int[t_count];
-            durations = new int[t_count];
-            titles = new String[t_count];
-            albums = new String[t_count];
-            artists = new String[t_count];
-
-            for (int i = 0; i < cursor.getCount(); i++) {
-                ids[i] = cursor.getInt(0);
-                titles[i] = cursor.getString(1);
-                durations[i] = cursor.getInt(2);
-                artists[i] = cursor.getString(3).equals(MediaStore.UNKNOWN_STRING) ? "悲剧的艺术家" : cursor.getString(3);
-                albums[i] = cursor.getString(4);
-                cursor.moveToNext();
-            }
-        }
     }
 
     @Override
     protected void onStart() {
-        log("onStart");
+        log("start");
         super.onStart();
-        // indexActivity底部在切换选项卡时，调用此方法，重新给SSApplication中的
-        // 全局变量赋值
-        SSApplication.setData(ids, titles, artists, albums, durations);
-        MusicListAdapter adapter = new MusicListAdapter(this);
-        listview.setAdapter(adapter);
+        listview.setAdapter(new MusicListAdapter(this, mCursor));
     }
 
     @Override
     protected void onStop() {
-        log("onStop");
+        log("stop");
         super.onStop();
     }
 
+
+    @Override
+    protected void onDestroy() {
+        log("destroy");
+        super.onDestroy();
+    }
 
     /**
      * 列表项单击操作监听器类
@@ -97,8 +72,10 @@ public class MusicListActivity extends ListActivity {
     class ListItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
+            cursor = mCursor;
+            SSApplication.setPosition(position);
             Intent intent = new Intent(MusicListActivity.this, PlayActivity.class);
-            intent.putExtra("position", position);
+            intent.putExtra("op", "new One");
             startActivity(intent);
         }
     }
@@ -109,13 +86,13 @@ public class MusicListActivity extends ListActivity {
             Intent intent = new Intent(MusicListActivity.this, Mp3ProfileActivity.class);
             intent.putExtra("position", _position);
             startActivity(intent);
-            log("hello ");
+            log("long click at item:-)");
             return true;
         }
     }
 
     private void log(String _msg) {
-        String TAG = MusicListActivity.class.getSimpleName();
+        final String TAG = MusicListActivity.class.getSimpleName();
         Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
     }
 }

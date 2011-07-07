@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,10 +16,9 @@ import com.erhu.R;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
 
-import static com.erhu.activity.SSApplication.*;
+import static com.erhu.activity.SSApplication.cursor;
 
 public class PlayActivity extends Activity {
-    private static final String TAG = PlayActivity.class.getSimpleName();
     // UI
     private SeekBar seekBar;
     private TextView title;
@@ -26,16 +26,13 @@ public class PlayActivity extends Activity {
     private TextView artist;
     private Button playBtn;
 
-    //private int position;// 第几首歌?
-    private int duration;// 歌曲长度
     private int currentPosition;//当前播放位置
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        log("onCreate");
+        log("create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play);
-
         // 半透明效果
         // LinearLayout outer_0 = (LinearLayout) findViewById(R.id.play_layout_top_outer);
         // outer_0.getBackground().setAlpha(0x88);
@@ -44,12 +41,14 @@ public class PlayActivity extends Activity {
         artist = (TextView) (this.findViewById(R.id.play_artist));
         seekBar = (SeekBar) (this.findViewById(R.id.play_seekbar));
         playBtn = (Button) this.findViewById(R.id.play_btn_pause);
+
         if (SSApplication.playerState != Constants.PLAYING_STATE)
             playBtn.setBackgroundResource(R.drawable.play);
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                play(position);
+                play();
             }
 
             @Override
@@ -59,9 +58,8 @@ public class PlayActivity extends Activity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) {
-                    seekBar_change(progress);
-                }
+                if (fromUser)
+                    seekbarChange(progress);
             }
         });
     }
@@ -69,20 +67,18 @@ public class PlayActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        log("onStart");
+        log("start");
         regReceiver();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {// 一首全新的歌曲，而非查看正在播放的歌曲
-            position = bundle.getInt("position");
             seekBar.setProgress(0);
-            play(position);
+            play();
         } else {
-            duration = SSApplication.durations[position];
-            seekBar.setMax(duration);
+            seekBar.setMax(cursor.getInt(2));
         }
-        title.setText(titles[position]);
-        artist.setText(artists[position]);
+        title.setText(cursor.getString(1));
+        artist.setText(cursor.getString(3));
     }
 
     /**
@@ -104,7 +100,7 @@ public class PlayActivity extends Activity {
         if (SSApplication.playerState == Constants.PLAYING_STATE)
             pause();
         else
-            play(position);
+            play();
     }
 
     /**
@@ -123,27 +119,28 @@ public class PlayActivity extends Activity {
      * 下一首
      */
     public void btnNextClicked(View _e) {
-        position = (position == ids.length - 1 ? 0 : position + 1);
+        int position = SSApplication.getPosition();
+        SSApplication.setPosition(position == cursor.getCount() - 1 ? 0 :position++);
         SSApplication.playerState = Constants.PLAYING_STATE;
-        play(position);
+        play();
     }
 
     // 上一首
     public void btnPrevClicked(View _e) {
-        position = (position == 0 ? position = ids.length - 1 : position - 1);
+        int position = SSApplication.getPosition();
+        SSApplication.setPosition(position == 0 ? cursor.getCount() - 1 :position--);
         SSApplication.playerState = Constants.PLAYING_STATE;
-        play(position);
+        play();
     }
 
     /**
      * 音乐播放
      */
-    private void play(final int _position) {
+    private void play() {
         Intent intent = new Intent();
         if (SSApplication.playerState == Constants.PAUSED_STATE)
             intent.putExtra("op", Constants.CONTINUE_OP);
         else {
-            intent.putExtra("position", _position);
             intent.putExtra("op", Constants.PLAY_OP);
         }
         intent.setAction(Constants.SERVICE_ACTION);
@@ -155,7 +152,7 @@ public class PlayActivity extends Activity {
     /**
      * 用户拖动进度条
      */
-    private void seekBar_change(int progress) {
+    private void seekbarChange(int progress) {
         Intent intent = new Intent();
         intent.setAction(Constants.SERVICE_ACTION);
         intent.putExtra("op", Constants.PROCESS_CHANGE_OP);
@@ -173,14 +170,13 @@ public class PlayActivity extends Activity {
             if (action.equals(Constants.CURRENT_ACTION)) {
                 currentPosition = intent.getExtras().getInt("currentTime");
                 seekBar.setProgress(currentPosition);
-                timeLeft.setText(Tools.toTime(duration - currentPosition));
+                timeLeft.setText(Tools.toTime(cursor.getInt(2) - currentPosition));
             } else if (action.equals(Constants.DURATION_ACTION)) {
+                final String t_artist = cursor.getString(3);
                 seekBar.setProgress(0);
-                position = intent.getExtras().getInt("position");
-                duration = durations[position];
-                seekBar.setMax(duration);
-                title.setText(titles[position]);
-                artist.setText(artists[position]);
+                seekBar.setMax(cursor.getInt(2));
+                title.setText(cursor.getString(1));
+                artist.setText(t_artist.equals(MediaStore.UNKNOWN_STRING) ? "无名氏:)" : t_artist);
             }
         }
     };
@@ -188,23 +184,24 @@ public class PlayActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        log("onDestroy");
+        log("destroy");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        log("onPause");
+        log("pause");
     }
 
     @Override
     protected void onStop() {
-        log("onStop");
+        log("stop");
         unregisterReceiver(musicReceiver);
         super.onStop();
     }
 
     private void log(String _msg) {
-        Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
+        final String tag = PlayActivity.class.getSimpleName();
+        Log.w(tag, "log@::::::::::::::::::::::::::::::::[" + tag + "]: " + _msg);
     }
 }

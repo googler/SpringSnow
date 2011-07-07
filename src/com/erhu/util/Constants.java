@@ -14,7 +14,7 @@ public class Constants {
             MediaStore.Audio.Media.ARTIST_ID,
             MediaStore.Audio.Media.DURATION
     };
-    public final static String SERVICE_ACTION = "com.erhu.media.MUSIC_SERVICE";
+    public final static String SERVICE_ACTION = "me.erhu.media.MUSIC_SERVICE";
 
     public final static int STOPPED_STATE = 0;
     public final static int PLAYING_STATE = 1;
@@ -27,6 +27,6 @@ public class Constants {
     public final static int PROCESS_CHANGE_OP = 7;
 
     public static final String CURRENT_ACTION = "me.erhu.currentTime";
-    public static final String DURATION_ACTION = "me.alex.duration";
-    public static final String CONTINUE_ACTION = "me.alex.continue";
+    public static final String DURATION_ACTION = "me.erhu.duration";
+    public static final String CONTINUE_ACTION = "me.erhu.continue";
 }

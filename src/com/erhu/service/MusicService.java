@@ -14,11 +14,10 @@ import com.erhu.util.Constants;
 
 import java.io.IOException;
 
-import static com.erhu.activity.SSApplication.ids;
+import static com.erhu.activity.SSApplication.cursor;
 
 public class MusicService extends Service implements MediaPlayer.OnCompletionListener {
 
-    private int position;//当前播放第几首歌
     private Handler handler = null;
     private MediaPlayer player;
     private int musicPos = 0;// 某一首歌内部的位置
@@ -26,7 +25,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     @Override
     public void onCreate() {
         super.onCreate();
-        log("onCreate()");
+        log("create");
         if (player != null) {
             player.reset();
             player.release();
@@ -39,24 +38,18 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     @Override
     public void onStart(Intent _intent, int startId) {
         super.onStart(_intent, startId);
-        log("Start");
+        log("start");
         int operation = _intent.getIntExtra("op", -1);
         switch (operation) {
             case Constants.PLAY_OP:
                 try {
                     player.reset();
-                    int t_position = _intent.getIntExtra("position", -1);
-                    if (position != -1) {
-                        this.position = t_position;
-                        if (ids[position] != -1) {
-                            player.setDataSource(this,
-                                    Uri.withAppendedPath(
-                                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + ids[position]));
-                            pre2Play();
-                            handlePlayPos();
-                            player.start();
-                        }
-                    }
+                    player.setDataSource(this,
+                            Uri.withAppendedPath(
+                                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, cursor.getString(0)));
+                    pre2Play();
+                    handlePlayPos();
+                    player.start();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -88,11 +81,9 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                     handler.sendEmptyMessage(1);
                 }
             });
-            SSApplication.position = position;
             // 获取歌曲总时长
             final Intent intent = new Intent();
             intent.setAction(Constants.DURATION_ACTION);
-            intent.putExtra("position", position);
             sendBroadcast(intent);
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,7 +91,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     private void handlePlayPos() {
-        log("Prepare to play -- current");
         if (handler == null) {
             handler = new Handler() {
                 @Override
@@ -138,12 +128,12 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
-        log("Service destroy!");
+        log("destroy!");
         if (player != null) {
             player.stop();
             player = null;
         }
+        super.onDestroy();
     }
 
     /**
@@ -152,12 +142,13 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     @Override
     public void onCompletion(final MediaPlayer _mediaPlayer) {
         try {
+            int _pos = SSApplication.getPosition();
+            SSApplication.setPosition(_pos == cursor.getCount() - 1 ? 0 : _pos++);
             handler.removeMessages(1);
-            position = ((ids.length == 1 || position == ids.length - 1) ? 0 : position + 1);
             _mediaPlayer.reset();
             _mediaPlayer.setDataSource(this,
                     Uri.withAppendedPath(
-                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + ids[position]));
+                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, cursor.getString(0)));
             pre2Play();
             player.start();
         } catch (Exception e) {
@@ -166,7 +157,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     /**
-     * 暂时时
+     * 暂停时
      */
     public void pause() {
         if (player != null) {

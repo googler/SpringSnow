@@ -17,23 +17,24 @@ import android.widget.TextView;
 import com.erhu.R;
 import com.erhu.util.Constants;
 
+import static com.erhu.activity.SSApplication.cursor;
+import static com.erhu.activity.SSApplication.playerState;
+
 /**
  * life is good:-)
  */
 public class IndexActivity extends ActivityGroup {
     private LinearLayout container;
-    private LinearLayout topBar;
     private LinearLayout musicLayout;// 所有音乐
-    private LinearLayout albumLayout;// 专辑
+    private LinearLayout favouriteLayout;// 最爱
     private LinearLayout artistLayout;// 艺术家
     private View musicView;
-    private View albumView;
+    private View favouriteView;
     private View artistView;
-    private View currentView;
     private TextView title;// 当前播放的音乐的名称
     private Button playButton;
     private TextView music;
-    private TextView album;
+    private TextView favourite;
     private TextView artist;
 
     /**
@@ -44,8 +45,8 @@ public class IndexActivity extends ActivityGroup {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(Constants.DURATION_ACTION)) {
-                int position = intent.getExtras().getInt("position");
-                title.setText(SSApplication.titles[position]);
+                SSApplication.setPosition();
+                title.setText(cursor.getString(1));
             }
         }
     };
@@ -54,31 +55,33 @@ public class IndexActivity extends ActivityGroup {
      */
     View.OnClickListener bottomItemClickListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
+        public void onClick(View _view) {
             container.removeAllViewsInLayout();
-            if (v == artistLayout) {
+            if (_view == artistLayout) {
                 music.setText("音乐");//TODO:以后考虑使用selector实现
-                album.setText("专辑");
+                favourite.setText("最爱");
                 artist.setText("[艺术家]");
-                currentView = artistView;
-            } else if (v == musicLayout) {
+                artistView = getView(ArtistListActivity.class);
+                container.addView(artistView);
+            } else if (_view == musicLayout) {
                 music.setText("[音乐]");
-                album.setText("专辑");
+                favourite.setText("最爱");
                 artist.setText("艺术家");
-                currentView = musicView;
-            } else if (v == albumLayout) {
+                musicView = getView(MusicListActivity.class);
+                container.addView(musicView);
+            } else if (_view == favouriteLayout) {
                 music.setText("音乐");
-                album.setText("[专辑]");
+                favourite.setText("[最爱]");
                 artist.setText("艺术家");
-                currentView = albumView;
+                favouriteView = getView(FavouriteListActivity.class);
+                container.addView(favouriteView);
             }
-            container.addView(currentView);
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        log("onCrate");
+        log("create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.index);
         initUI();
@@ -88,55 +91,46 @@ public class IndexActivity extends ActivityGroup {
      * Nothing could hold a man back from his future!!!
      */
     private void initUI() {
-        {
-            playButton = (Button) findViewById(R.id.index_top_btn);
+        playButton = (Button) findViewById(R.id.index_top_btn);
+        title = (TextView) findViewById(R.id.index_top_title);
+        music = (TextView) findViewById(R.id.index_bottom_music);
+        favourite = (TextView) findViewById(R.id.index_bottom_favourite);
+        artist = (TextView) findViewById(R.id.index_bottom_artist);
+        musicLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_music);
+        favouriteLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_favourite);
+        artistLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_artist);
+        container = (LinearLayout) findViewById(R.id.index_container);
 
-            title = (TextView) findViewById(R.id.index_top_title);
-            music = (TextView) findViewById(R.id.index_bottom_music);
-            album = (TextView) findViewById(R.id.index_bottom_album);
-            artist = (TextView) findViewById(R.id.index_bottom_artist);
-            topBar = (LinearLayout) findViewById(R.id.index_top_bar);
-            topBar.getBackground().setAlpha(0x88);
-            musicLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_music);
-            albumLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_album);
-            artistLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_artist);
-            musicLayout.setOnClickListener(bottomItemClickListener);
-            albumLayout.setOnClickListener(bottomItemClickListener);
-            artistLayout.setOnClickListener(bottomItemClickListener);
-        }
+        musicLayout.setOnClickListener(bottomItemClickListener);
+        favouriteLayout.setOnClickListener(bottomItemClickListener);
+        artistLayout.setOnClickListener(bottomItemClickListener);
+
         musicView = getView(MusicListActivity.class);
-        artistView = getView(ArtistListActivity.class);
-        albumView = getView(AlbumListActivity.class);
-        {
-            currentView = musicView;
-            container = (LinearLayout) findViewById(R.id.index_container);
-            container.removeAllViewsInLayout();
-            container.addView(currentView);
-        }
+        container.removeAllViewsInLayout();
+        container.addView(musicView);
+
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                log("top title clicked");
-                if (SSApplication.position != -1) {
-                    Intent intent = new Intent();
-                    intent.setClass(IndexActivity.this, PlayActivity.class);
-                    startActivity(intent);
+                if (cursor != null && SSApplication.getPosition() != -1) {
+                    SSApplication.setPosition();
+                    startActivity(new Intent().setClass(IndexActivity.this, PlayActivity.class));
                 }
             }
-        });
+        }
+        );
     }
 
     @Override
     protected void onStart() {
-        log("onStart");
+        log("start");
         super.onStart();
-        if (-1 != SSApplication.position) {
-            title.setText(SSApplication.titles[SSApplication.position]);
-            if (SSApplication.playerState == Constants.PAUSED_STATE)
-                playButton.setBackgroundResource(R.drawable.play);
-            else
-                playButton.setBackgroundResource(R.drawable.pause);
+        if (playerState != Constants.STOPPED_STATE && SSApplication.getPosition() != -1) {
+            SSApplication.setPosition();
+            title.setText(cursor.getString(1));
         }
+        playButton.setBackgroundResource(playerState == Constants.PLAYING_STATE ?
+                    R.drawable.pause : R.drawable.play);
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.DURATION_ACTION);
         registerReceiver(musicReceiver, filter);
@@ -148,18 +142,19 @@ public class IndexActivity extends ActivityGroup {
      * @param _view
      */
     public void playBtnClicked(final View _view) {
-        log("playBtnClicked");
-        if (SSApplication.playerState == Constants.PLAYING_STATE)
-            pause();
-        else if (SSApplication.position != -1)
-            play(SSApplication.position);
+        if (cursor != null && SSApplication.getPosition() != -1) {
+            if (playerState == Constants.PLAYING_STATE)
+                pause();
+            else
+                play();
+        }
     }
 
     /**
      * 音乐暂停
      */
     private void pause() {
-        SSApplication.playerState = Constants.PAUSED_STATE;
+        playerState = Constants.PAUSED_STATE;
         playButton.setBackgroundResource(R.drawable.play);
         Intent intent = new Intent();
         intent.setAction(Constants.SERVICE_ACTION);
@@ -170,17 +165,15 @@ public class IndexActivity extends ActivityGroup {
     /**
      * 音乐播放
      */
-    private void play(final int _position) {
+    private void play() {
         Intent intent = new Intent();
-        if (SSApplication.playerState == Constants.PAUSED_STATE)
-            intent.putExtra("op", Constants.CONTINUE_OP);
-        else {
-            intent.putExtra("position", _position);
-            intent.putExtra("op", Constants.PLAY_OP);
-        }
+        intent.putExtra("op",
+                playerState == Constants.PAUSED_STATE ?
+                        Constants.CONTINUE_OP : Constants.PLAY_OP);
+
         intent.setAction(Constants.SERVICE_ACTION);
         playButton.setBackgroundResource(R.drawable.pause);
-        SSApplication.playerState = Constants.PLAYING_STATE;
+        playerState = Constants.PLAYING_STATE;
         startService(intent);
     }
 
@@ -218,14 +211,14 @@ public class IndexActivity extends ActivityGroup {
 
     @Override
     protected void onStop() {
-        log("onStop");
+        log("stop");
         unregisterReceiver(musicReceiver);
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        log("onDestroy");
+        log("destroy");
         super.onDestroy();
     }
 

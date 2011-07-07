@@ -7,7 +7,9 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import com.erhu.R;
 import com.erhu.adapter.ArtistListAdapter;
 
@@ -16,18 +18,16 @@ import com.erhu.adapter.ArtistListAdapter;
  */
 public class ArtistListActivity extends ListActivity {
     private ListView listview;
-    private Cursor cursor;
+    private Cursor mCursor;
     private String[] _artists;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        log("create");
         super.onCreate(savedInstanceState);
         listview = getListView();
         this.setListData();
-        // 消除listview的线
         listview.setDivider(null);
-        // 消除listview的全选黑线
         listview.setScrollingCacheEnabled(false);
         listview.setFadingEdgeLength(0);
         listview.setBackgroundResource(R.drawable.list_bg);
@@ -38,22 +38,24 @@ public class ArtistListActivity extends ListActivity {
      * 给列表填充数据
      */
     private void setListData() {
-        cursor = this.getContentResolver()
-                .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                        new String[]{MediaStore.Audio.Media.ARTIST},
-                        null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-            _artists = new String[cursor.getCount()];
-            for (int i = 0; i < cursor.getCount(); i++) {
-                _artists[i] = cursor.getString(0);
-                cursor.moveToNext();
+        mCursor = this.getContentResolver()
+                .query(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
+                        new String[]{MediaStore.Audio.Artists._ID,
+                                MediaStore.Audio.Artists.ARTIST,
+                                MediaStore.Audio.Artists.NUMBER_OF_TRACKS,
+                                MediaStore.Audio.Artists.NUMBER_OF_ALBUMS},
+                        null, null, MediaStore.Audio.Artists.ARTIST_KEY);
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+            _artists = new String[mCursor.getCount()];
+            for (int i = 0; i < mCursor.getCount(); i++) {
+                _artists[i] = mCursor.getString(0);
+                mCursor.moveToNext();
             }
-            ArtistListAdapter adapter = new ArtistListAdapter(this, cursor);
+            ArtistListAdapter adapter = new ArtistListAdapter(this, mCursor);
             listview.setAdapter(adapter);
         }
     }
-
 
     /**
      * 列表项单击操作监听器类
@@ -61,12 +63,24 @@ public class ArtistListActivity extends ListActivity {
     class ListItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-            //playMusic(position);
+            LinearLayout layout = (LinearLayout) view;
+            TextView artist = (TextView) layout.findViewById(R.id.artist_list_item_singer);
+            /*mCursor = getContentResolver()
+                    .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                            new String[]{
+                                    MediaStore.Audio.Media._ID,
+                                    MediaStore.Audio.Media.TITLE,
+                                    MediaStore.Audio.Media.DURATION,
+                                    MediaStore.Audio.Media.ARTIST,
+                                    MediaStore.Audio.Media.ALBUM,
+                                    MediaStore.Audio.Media.DISPLAY_NAME},
+                            null, null, null);//TODO:这里加where条件过滤
+                            */
         }
     }
 
     private void log(String _msg) {
-        String TAG = IndexActivity.class.getSimpleName();
+        String TAG = ArtistListActivity.class.getSimpleName();
         Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
     }
 }

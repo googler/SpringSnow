@@ -67,23 +67,6 @@
                     android:textSize="20dp"/>
         </LinearLayout>
         <LinearLayout
-                android:layout_height="fill_parent"
-                android:layout_width="78dp"
-                android:id="@+id/index_layout_bottom_album"
-                android:orientation="vertical"
-                android:paddingTop="6.0dp"
-                android:layout_weight="1.0"
-                android:focusable="true"
-                android:clickable="true">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/index_bottom_album"
-                    android:text="专辑"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"/>
-        </LinearLayout>
-        <LinearLayout
                 android:id="@+id/index_layout_bottom_artist"
                 android:layout_height="fill_parent"
                 android:layout_width="78dp"
@@ -100,5 +83,23 @@
                     android:layout_gravity="center"
                     android:textSize="20dp"/>
         </LinearLayout>
+        <LinearLayout
+                android:layout_height="fill_parent"
+                android:layout_width="78dp"
+                android:id="@+id/index_layout_bottom_favourite"
+                android:orientation="vertical"
+                android:paddingTop="6.0dp"
+                android:layout_weight="1.0"
+                android:focusable="true"
+                android:clickable="true">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/index_bottom_favourite"
+                    android:text="最爱"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"/>
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

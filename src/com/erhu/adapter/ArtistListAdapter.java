@@ -2,6 +2,7 @@ package com.erhu.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +15,16 @@ import com.erhu.R;
  */
 public class ArtistListAdapter extends BaseAdapter {
     private Context context;
-    private Cursor cursor;
+    private Cursor mCursor;
 
     public ArtistListAdapter(Context con, Cursor cur) {
         context = con;
-        cursor = cur;
+        mCursor = cur;
     }
 
     @Override
     public int getCount() {
-        return cursor.getCount();
+        return mCursor.getCount();
     }
 
     @Override
@@ -37,15 +38,13 @@ public class ArtistListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int _position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(context).inflate(R.layout.artist_list_item, null);
-        cursor.moveToPosition(position);
-
-        TextView tv_singer = (TextView) convertView.findViewById(R.id.artist_list_item_singer);
-        if (cursor.getString(0).equals("<unknown>"))
-            tv_singer.setText("悲剧的艺术家");
-        else
-            tv_singer.setText(cursor.getString(0));
+        mCursor.moveToPosition(_position);
+        TextView count = (TextView) convertView.findViewById(R.id.artist_list_item_count);
+        count.setText(mCursor.getString(2));
+        TextView singer = (TextView) convertView.findViewById(R.id.artist_list_item_singer);
+        singer.setText(mCursor.getString(3).equals(MediaStore.UNKNOWN_STRING) ? "无名氏:(" : mCursor.getString(1));
         return convertView;
     }
 }

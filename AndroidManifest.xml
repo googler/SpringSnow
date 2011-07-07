@@ -20,7 +20,7 @@
                 android:name=".activity.MusicListActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".activity.AlbumListActivity"
+                android:name=".activity.FavouriteListActivity"
                 android:screenOrientation="portrait"/>
         <activity
                 android:name=".activity.ArtistListActivity"
@@ -36,7 +36,7 @@
                 android:name=".service.MusicService"
                 android:exported="false">
             <intent-filter>
-                <action android:name="com.erhu.media.MUSIC_SERVICE"/>
+                <action android:name="me.erhu.media.MUSIC_SERVICE"/>
             </intent-filter>
         </service>
     </application>
