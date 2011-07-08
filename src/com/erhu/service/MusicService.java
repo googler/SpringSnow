@@ -1,6 +1,10 @@
 package com.erhu.service;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -9,8 +13,11 @@ import android.os.IBinder;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
+import com.erhu.R;
+import com.erhu.activity.PlayActivity;
 import com.erhu.activity.SSApplication;
 import com.erhu.util.Constants;
+import com.erhu.util.Tools;
 
 import java.io.IOException;
 
@@ -33,6 +40,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         }
         player = new MediaPlayer();
         player.setOnCompletionListener(this);
+        this.addNotification();
     }
 
     @Override
@@ -55,14 +63,27 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                 }
                 break;
             case Constants.PAUSE_OP:
-                pause();
+                player.pause();
+                musicPos = player.getCurrentPosition();
+                Tools.stopNotification(this);
                 break;
             case Constants.CONTINUE_OP:
                 player.seekTo(musicPos);
                 player.start();
+                addNotification();
                 break;
             case Constants.STOP_OP:
-                stop();
+                try {
+                    if (player != null) {
+                        player.stop();
+                        player.prepare();
+                        player.seekTo(0);
+                        handler.removeMessages(1);
+                    }
+                    Tools.stopNotification(this);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
             case Constants.PROCESS_CHANGE_OP:
                 player.seekTo(_intent.getExtras().getInt("progress"));
@@ -85,6 +106,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             final Intent intent = new Intent();
             intent.setAction(Constants.DURATION_ACTION);
             sendBroadcast(intent);
+            addNotification();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,22 +132,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         }
     }
 
-    /**
-     * 停止播放
-     */
-    private void stop() {
-        try {
-            if (player != null) {
-                player.stop();
-                player.prepare();
-                player.seekTo(0);
-                handler.removeMessages(1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void onDestroy() {
         log("destroy!");
@@ -136,9 +142,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         super.onDestroy();
     }
 
-    /**
-     * 歌曲播完了
-     */
     @Override
     public void onCompletion(final MediaPlayer _mediaPlayer) {
         try {
@@ -156,15 +159,25 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         }
     }
 
-    /**
-     * 暂停时
-     */
-    public void pause() {
-        if (player != null) {
-            player.pause();
-            musicPos = player.getCurrentPosition();
-        }
+    private void addNotification() {
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        String title = cursor.getString(1);
+        String artist = cursor.getString(3);
+
+        Intent intent = new Intent(this, PlayActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        Notification status = new Notification(R.drawable.sonata, title + " - " + artist, System.currentTimeMillis());
+        status.flags |= Notification.FLAG_ONGOING_EVENT;
+        status.setLatestEventInfo(getApplicationContext(), title, artist, contentIntent);
+
+        //status.contentView = views;
+        //status.flags |= Notification.FLAG_ONGOING_EVENT;
+        //status.contentIntent = PendingIntent.getActivity(this, 0, new Intent("me.erhu.media.PLAY_VIEWER").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), 0);
+        manager.notify(Constants.NOTIFICATION_ID, status);
     }
+
 
     @Override
     public IBinder onBind(Intent intent) {

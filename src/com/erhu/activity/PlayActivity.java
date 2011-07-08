@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.erhu.R;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
@@ -26,6 +27,27 @@ public class PlayActivity extends Activity {
     private TextView artist;
     private Button playBtn;
     private int currentPosition;//当前播放位置
+
+    /**
+     * 定义musicReceiver,接收MusicService发送的广播
+     */
+    protected BroadcastReceiver musicReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Constants.CURRENT_ACTION)) {
+                currentPosition = intent.getExtras().getInt("currentTime");
+                seekBar.setProgress(currentPosition);
+                timeLeft.setText(Tools.toTime(cursor.getInt(2) - currentPosition));
+            } else if (action.equals(Constants.DURATION_ACTION)) {
+                final String t_artist = cursor.getString(3);
+                seekBar.setProgress(0);
+                seekBar.setMax(cursor.getInt(2));
+                title.setText(cursor.getString(1));
+                artist.setText(t_artist.equals(MediaStore.UNKNOWN_STRING) ? "无名氏:)" : t_artist);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +91,7 @@ public class PlayActivity extends Activity {
         log("start");
         regReceiver();
         Bundle bundle = getIntent().getExtras();
-
+        SSApplication.setPosition();//TODO:为什么这里必须setPosition呢？否则cursor会自己跑到一个奇怪的位置
         if (bundle != null) {// 一首全新的歌曲，而非查看正在播放的歌曲
             seekBar.setProgress(0);
             play();
@@ -141,6 +163,7 @@ public class PlayActivity extends Activity {
                 SSApplication.playerState == Constants.PAUSED_STATE
                         ? Constants.CONTINUE_OP : Constants.PLAY_OP);
         intent.setAction(Constants.SERVICE_ACTION);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         playBtn.setBackgroundResource(R.drawable.pause);
         SSApplication.playerState = Constants.PLAYING_STATE;
         startService(intent);
@@ -158,25 +181,21 @@ public class PlayActivity extends Activity {
     }
 
     /**
-     * 定义musicReceiver,接收MusicService发送的广播
+     * 回到列表界面
+     *
+     * @param _view
      */
-    protected BroadcastReceiver musicReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(Constants.CURRENT_ACTION)) {
-                currentPosition = intent.getExtras().getInt("currentTime");
-                seekBar.setProgress(currentPosition);
-                timeLeft.setText(Tools.toTime(cursor.getInt(2) - currentPosition));
-            } else if (action.equals(Constants.DURATION_ACTION)) {
-                final String t_artist = cursor.getString(3);
-                seekBar.setProgress(0);
-                seekBar.setMax(cursor.getInt(2));
-                title.setText(cursor.getString(1));
-                artist.setText(t_artist.equals(MediaStore.UNKNOWN_STRING) ? "无名氏:)" : t_artist);
-            }
+    public void listImgClicked(View _view) {
+        finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
+            Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
         }
-    };
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     protected void onDestroy() {

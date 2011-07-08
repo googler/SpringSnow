@@ -2,7 +2,6 @@ package com.erhu.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +47,7 @@ public class MusicListAdapter extends BaseAdapter {
         mCursor.moveToPosition(position);
         title.setText(mCursor.getString(1));
         time.setText(Tools.toTime(mCursor.getInt(2)));
-        String t_singer = mCursor.getString(3);
-        singer.setText(t_singer.equals(MediaStore.UNKNOWN_STRING) ? "无名氏:)" : t_singer);
+        singer.setText(mCursor.getString(3));
         return convertView;
     }
 }

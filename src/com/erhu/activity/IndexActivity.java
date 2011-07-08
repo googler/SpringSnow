@@ -1,6 +1,7 @@
 package com.erhu.activity;
 
 import android.app.ActivityGroup;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.erhu.R;
 import com.erhu.util.Constants;
+import com.erhu.util.Tools;
 
 import static com.erhu.activity.SSApplication.cursor;
 import static com.erhu.activity.SSApplication.playerState;
@@ -112,8 +114,11 @@ public class IndexActivity extends ActivityGroup {
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cursor != null && SSApplication.getPosition() != -1)
-                    startActivity(new Intent().setClass(IndexActivity.this, PlayActivity.class));
+                if (cursor != null && SSApplication.getPosition() != -1) {
+                    Intent intent = new Intent();
+                    intent.setClass(IndexActivity.this, PlayActivity.class);
+                    startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+                }
             }
         }
         );
@@ -124,7 +129,7 @@ public class IndexActivity extends ActivityGroup {
         log("start");
         super.onStart();
         if (playerState != Constants.STOPPED_STATE && SSApplication.getPosition() != -1) {
-            SSApplication.setPosition();
+            SSApplication.setPosition();//TODO:为什么这里必须setPosition呢？否则cursor会自己跑到一个奇怪的位置
             title.setText(cursor.getString(1));
         }
         playButton.setBackgroundResource(playerState == Constants.PLAYING_STATE ?
@@ -193,6 +198,7 @@ public class IndexActivity extends ActivityGroup {
         switch (item.getItemId()) {
             case R.id.index_menu_exit:
                 stopService(new Intent().setAction(Constants.SERVICE_ACTION));
+                Tools.stopNotification(this);
                 android.os.Process.killProcess(android.os.Process.myPid());
                 break;
             default:

@@ -99,6 +99,7 @@ public class MusicListActivity extends ListActivity {
             cursor = mCursor;
             SSApplication.setPosition(position);
             Intent intent = new Intent(MusicListActivity.this, PlayActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             intent.putExtra("op", "new One");
             startActivity(intent);
         }
@@ -108,6 +109,7 @@ public class MusicListActivity extends ListActivity {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int _position, long id) {
             Intent intent = new Intent(MusicListActivity.this, Mp3ProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             intent.putExtra("pos", _position);
             startActivityForResult(intent, 1);
             return true;

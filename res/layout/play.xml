@@ -25,7 +25,7 @@
                     android:layout_marginTop="20sp"
                     android:layout_marginLeft="5sp"
                     android:id="@+id/play_heart"
-                    android:src="@drawable/ad"/>
+                    android:src="@drawable/heart"/>
             <!-- music title and artist -->
             <LinearLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,7 +57,8 @@
                     android:layout_width="wrap_content"
                     android:layout_marginTop="20sp"
                     android:layout_alignParentRight="true"
-                    android:layout_toRightOf="@+id/play_layout_top"></ImageView>
+                    android:layout_toRightOf="@+id/play_layout_top"
+                    android:onClick="listImgClicked"/>
         </RelativeLayout>
         <!-- process bar -->
         <RelativeLayout
@@ -104,7 +105,7 @@
                     <Button
                             android:layout_width="50sp"
                             android:layout_height="50sp"
-                            android:background="@drawable/last"
+                            android:background="@drawable/previous"
                             android:layout_alignParentLeft="true"
                             android:layout_toLeftOf="@+id/play_layout_control"
                             android:id="@+id/btnLast"
@@ -113,14 +114,14 @@
                             android:layout_width="50sp"
                             android:layout_height="50sp"
                             android:layout_centerHorizontal="true"
-                            android:background="@drawable/stop"
+                            android:background="@drawable/pause"
                             android:id="@+id/play_btn_pause"
                             android:onClick="btnPauseClicked"/>
                     <Button
                             android:layout_width="50sp"
                             android:layout_height="50sp"
                             android:layout_alignParentRight="true"
-                            android:layout_toRightOf="@+id/play_layout_controle"
+                            android:layout_toRightOf="@+id/play_layout_control"
                             android:background="@drawable/next"
                             android:id="@+id/btnNext"
                             android:onClick="btnNextClicked"/>
