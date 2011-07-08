@@ -41,8 +41,8 @@ public class MusicListActivity extends ListActivity {
 
     @Override
     protected void onStart() {
-        log("start");
         super.onStart();
+        log("start");
         // 音乐被编辑过,重新获取Cursor
         if (SSApplication.musicEdit) {
             this.resetCursor();
@@ -54,6 +54,7 @@ public class MusicListActivity extends ListActivity {
      * 音乐被编辑后，重新设置Cursor
      */
     private void resetCursor() {
+        log("reset cursor");
         if (mCursor != null)
             mCursor.close();
         mCursor = this.getContentResolver()
@@ -69,6 +70,12 @@ public class MusicListActivity extends ListActivity {
         SSApplication.cursor = mCursor;
         SSApplication.setPosition();
         listview.setAdapter(new MusicListAdapter(this, mCursor));
+    }
+
+    @Override
+    public void finish() {
+        log("finish");
+        super.finish();
     }
 
     @Override

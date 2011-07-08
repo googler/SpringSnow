@@ -84,6 +84,12 @@ public class Mp3ProfileActivity extends Activity {
     }
 
     @Override
+    public void finish() {
+        log("finish");
+        super.finish();
+    }
+
+    @Override
     protected void onStop() {
         log("stop");
         mCursor.close();

@@ -148,6 +148,12 @@ public class IndexActivity extends ActivityGroup {
         }
     }
 
+    @Override
+    public void finish() {
+        log("finish");
+        super.finish();
+    }
+
     /**
      * 音乐暂停
      */
