@@ -36,12 +36,26 @@ public class MusicListActivity extends ListActivity {
         listview.setBackgroundResource(R.drawable.list_bg);
         listview.setOnItemClickListener(new ListItemClickListener());
         listview.setOnItemLongClickListener(new ListItemLongCLickListener());
+        this.resetCursor();
     }
 
     @Override
     protected void onStart() {
         log("start");
         super.onStart();
+        // 音乐被编辑过,重新获取Cursor
+        if (SSApplication.musicEdit) {
+            this.resetCursor();
+            SSApplication.musicEdit = false;
+        }
+    }
+
+    /**
+     * 音乐被编辑后，重新设置Cursor
+     */
+    private void resetCursor() {
+        if (mCursor != null)
+            mCursor.close();
         mCursor = this.getContentResolver()
                 .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                         new String[]{
@@ -52,6 +66,8 @@ public class MusicListActivity extends ListActivity {
                                 MediaStore.Audio.Media.ALBUM,
                                 MediaStore.Audio.Media.DISPLAY_NAME},
                         null, null, null);
+        SSApplication.cursor = mCursor;
+        SSApplication.setPosition();
         listview.setAdapter(new MusicListAdapter(this, mCursor));
     }
 

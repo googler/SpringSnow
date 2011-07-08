@@ -30,8 +30,7 @@
                 android:screenOrientation="portrait"
                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity
-                android:name=".activity.Mp3ProfileActivity"
-                android:screenOrientation="portrait"/>
+                android:name=".activity.Mp3ProfileActivity"/>
         <service
                 android:name=".service.MusicService"
                 android:exported="false">

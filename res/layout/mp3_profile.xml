@@ -56,12 +56,22 @@
                       android:singleLine="true"/>
         </TableRow>
     </TableLayout>
+    <TextView android:textColor="#ff89a2b1"
+              android:gravity="left"
+              android:paddingLeft="10.0dip"
+              android:paddingRight="10.0dip"
+              android:textSize="15sp"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="友情提示:如果编辑框信息显示不全，把屏幕横着放试试看吧:)"
+              style="@android:style/TextAppearance.Medium"/>
     <Button android:id="@+id/mp3_profile_save"
-            android:background="@drawable/btn_style3"
             android:layout_width="100.0dip"
             android:layout_height="wrap_content"
             android:layout_marginTop="20.0dip"
+            android:textColor="#000"
             android:text="保存"
             style="@android:style/TextAppearance.Medium"
             android:onClick="saveBtnClicked"/>
+
 </LinearLayout>

@@ -112,10 +112,8 @@ public class IndexActivity extends ActivityGroup {
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cursor != null && SSApplication.getPosition() != -1) {
-                    SSApplication.setPosition();
+                if (cursor != null && SSApplication.getPosition() != -1)
                     startActivity(new Intent().setClass(IndexActivity.this, PlayActivity.class));
-                }
             }
         }
         );
@@ -130,7 +128,7 @@ public class IndexActivity extends ActivityGroup {
             title.setText(cursor.getString(1));
         }
         playButton.setBackgroundResource(playerState == Constants.PLAYING_STATE ?
-                    R.drawable.pause : R.drawable.play);
+                R.drawable.pause : R.drawable.play);
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.DURATION_ACTION);
         registerReceiver(musicReceiver, filter);

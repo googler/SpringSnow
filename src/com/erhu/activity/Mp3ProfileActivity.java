@@ -73,6 +73,7 @@ public class Mp3ProfileActivity extends Activity {
         uri = ContentUris.withAppendedId(uri, mCursor.getInt(0));
         super.getContentResolver().update(uri, cv, null, null);
         setResult(Activity.RESULT_OK);
+        SSApplication.musicEdit = true;
         finish();
     }
 

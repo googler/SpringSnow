@@ -25,7 +25,6 @@ public class PlayActivity extends Activity {
     private TextView timeLeft;
     private TextView artist;
     private Button playBtn;
-
     private int currentPosition;//当前播放位置
 
     @Override
@@ -69,14 +68,14 @@ public class PlayActivity extends Activity {
         super.onStart();
         log("start");
         regReceiver();
-
         Bundle bundle = getIntent().getExtras();
+
         if (bundle != null) {// 一首全新的歌曲，而非查看正在播放的歌曲
             seekBar.setProgress(0);
             play();
-        } else {
+        } else
             seekBar.setMax(cursor.getInt(2));
-        }
+
         title.setText(cursor.getString(1));
         artist.setText(cursor.getString(3));
     }
