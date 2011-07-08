@@ -10,6 +10,6 @@ public class FavouriteListActivity extends Activity {
 
     private void log(String _msg) {
         String TAG = FavouriteListActivity.class.getSimpleName();
-        Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
+        Log.w(TAG, "log@:::::[" + TAG + "]: " + _msg);
     }
 }

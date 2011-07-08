@@ -224,6 +224,6 @@ public class IndexActivity extends ActivityGroup {
 
     private void log(String _msg) {
         String TAG = IndexActivity.class.getSimpleName();
-        Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
+        Log.w(TAG, "log@:::::[" + TAG + "]: " + _msg);
     }
 }

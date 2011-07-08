@@ -1,39 +1,102 @@
 package com.erhu.activity;
 
 import android.app.Activity;
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+import com.erhu.R;
 
 /**
  * this activity is used to edit mp3 profile
  */
 public class Mp3ProfileActivity extends Activity {
+
+    private Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+    private EditText titleETxt;
+    private EditText artistETxt;
+    private EditText albumETxt;
+
+    private Cursor mCursor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        log("onCreate");
+        log("create");
+        setContentView(R.layout.mp3_profile);
+        int position = getIntent().getExtras().getInt("pos");
+        titleETxt = (EditText) findViewById(R.id.mp3_profile_title);
+        artistETxt = (EditText) findViewById(R.id.mp3_profile_artist);
+        albumETxt = (EditText) findViewById(R.id.mp3_profile_album);
+
+        mCursor = this.getContentResolver()
+                .query(uri, new String[]{
+                        MediaStore.Audio.Media._ID,
+                        MediaStore.Audio.Media.TITLE,
+                        MediaStore.Audio.Media.ARTIST,
+                        MediaStore.Audio.Media.ALBUM,
+                        MediaStore.Audio.Media.DISPLAY_NAME},
+                        null, null, null);
+        mCursor.moveToPosition(position);
+
+        titleETxt.setText(mCursor.getString(1));
+        artistETxt.setText(mCursor.getString(2));
+        albumETxt.setText(mCursor.getString(3));
+    }
+
+    /**
+     * you clicked the button named 'save'
+     *
+     * @param _view
+     */
+    public void saveBtnClicked(final View _view) {
+        if (TextUtils.isEmpty(titleETxt.getText().toString().trim())) {
+            Toast.makeText(this, "请填写标题", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String title = titleETxt.getText().toString().trim();
+        String artist = artistETxt.getText().toString().trim();
+        String album = albumETxt.getText().toString().trim();
+
+        ContentValues cv = new ContentValues();
+        cv.put(MediaStore.Audio.Media.TITLE, title);
+        cv.put(MediaStore.Audio.Media.ARTIST, artist);
+        cv.put(MediaStore.Audio.Media.ALBUM, album);
+
+        uri = ContentUris.withAppendedId(uri, mCursor.getInt(0));
+        super.getContentResolver().update(uri, cv, null, null);
+        setResult(Activity.RESULT_OK);
+        finish();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        log("onStart");
+        log("start");
     }
 
     @Override
     protected void onStop() {
+        log("stop");
+        mCursor.close();
         super.onStop();
-        log("onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        log("onDestroy");
+        log("destroy");
     }
 
     private void log(String _msg) {
         String TAG = Mp3ProfileActivity.class.getSimpleName();
-        Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
+        Log.w(TAG, "log@:::::[" + TAG + "]: " + _msg);
     }
 }

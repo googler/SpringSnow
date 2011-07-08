@@ -1,5 +1,6 @@
 package com.erhu.activity;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 import com.erhu.R;
 import com.erhu.adapter.MusicListAdapter;
 
@@ -34,6 +36,12 @@ public class MusicListActivity extends ListActivity {
         listview.setBackgroundResource(R.drawable.list_bg);
         listview.setOnItemClickListener(new ListItemClickListener());
         listview.setOnItemLongClickListener(new ListItemLongCLickListener());
+    }
+
+    @Override
+    protected void onStart() {
+        log("start");
+        super.onStart();
         mCursor = this.getContentResolver()
                 .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                         new String[]{
@@ -44,12 +52,6 @@ public class MusicListActivity extends ListActivity {
                                 MediaStore.Audio.Media.ALBUM,
                                 MediaStore.Audio.Media.DISPLAY_NAME},
                         null, null, null);
-    }
-
-    @Override
-    protected void onStart() {
-        log("start");
-        super.onStart();
         listview.setAdapter(new MusicListAdapter(this, mCursor));
     }
 
@@ -58,7 +60,6 @@ public class MusicListActivity extends ListActivity {
         log("stop");
         super.onStop();
     }
-
 
     @Override
     protected void onDestroy() {
@@ -84,15 +85,22 @@ public class MusicListActivity extends ListActivity {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int _position, long id) {
             Intent intent = new Intent(MusicListActivity.this, Mp3ProfileActivity.class);
-            intent.putExtra("position", _position);
-            startActivity(intent);
-            log("long click at item:-)");
+            intent.putExtra("pos", _position);
+            startActivityForResult(intent, 1);
             return true;
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
+            Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void log(String _msg) {
         final String TAG = MusicListActivity.class.getSimpleName();
-        Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
+        Log.w(TAG, "log@:::::[" + TAG + "]: " + _msg);
     }
 }

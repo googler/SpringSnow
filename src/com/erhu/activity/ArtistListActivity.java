@@ -81,6 +81,6 @@ public class ArtistListActivity extends ListActivity {
 
     private void log(String _msg) {
         String TAG = ArtistListActivity.class.getSimpleName();
-        Log.w(TAG, "log@::::::::::::::::::::::::::::::::[" + TAG + "]: " + _msg);
+        Log.w(TAG, "log@:::::[" + TAG + "]: " + _msg);
     }
 }

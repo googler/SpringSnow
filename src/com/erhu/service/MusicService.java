@@ -173,6 +173,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     private void log(String _msg) {
         String tag = MusicService.class.getSimpleName();
-        Log.w(tag, "log@::::::::::::::::::::::::::::::::[" + tag + "]: " + _msg);
+        Log.w(tag, "log@:::::[" + tag + "]: " + _msg);
     }
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:background="@drawable/list_bg"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+    <TableLayout android:paddingTop="10.0dip"
+                 android:paddingRight="15.0dip"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:stretchColumns="1">
+        <TableRow android:paddingBottom="10.0dip">
+            <TextView android:textColor="#ff89a2b1"
+                      android:gravity="right|center"
+                      android:paddingLeft="10.0dip"
+                      android:paddingRight="10.0dip"
+                      android:layout_width="fill_parent"
+                      android:layout_height="fill_parent"
+                      android:text="标题"
+                      style="@android:style/TextAppearance.Medium"/>
+            <EditText android:id="@+id/mp3_profile_title"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:hint="不能为空哦?"
+                      android:singleLine="true"/>
+        </TableRow>
+        <TableRow android:paddingBottom="10.0dip">
+            <TextView android:textColor="#ff89a2b1"
+                      android:gravity="right|center"
+                      android:paddingLeft="10.0dip"
+                      android:paddingRight="10.0dip"
+                      android:layout_width="fill_parent"
+                      android:layout_height="fill_parent"
+                      android:text="艺术家"
+                      style="@android:style/TextAppearance.Medium"/>
+            <EditText android:id="@+id/mp3_profile_artist"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:hint="谁唱的？"
+                      android:singleLine="true"/>
+        </TableRow>
+        <TableRow android:paddingBottom="10.0dip">
+            <TextView android:textColor="#ff89a2b1"
+                      android:gravity="right|center"
+                      android:paddingLeft="10.0dip"
+                      android:paddingRight="10.0dip"
+                      android:layout_width="fill_parent"
+                      android:layout_height="fill_parent"
+                      android:text="唱片标题"
+                      style="@android:style/TextAppearance.Medium"/>
+            <EditText android:id="@+id/mp3_profile_album"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:hint="可以不填"
+                      android:singleLine="true"/>
+        </TableRow>
+    </TableLayout>
+    <Button android:id="@+id/mp3_profile_save"
+            android:background="@drawable/btn_style3"
+            android:layout_width="100.0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20.0dip"
+            android:text="保存"
+            style="@android:style/TextAppearance.Medium"
+            android:onClick="saveBtnClicked"/>
+</LinearLayout>

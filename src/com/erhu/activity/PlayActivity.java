@@ -200,6 +200,6 @@ public class PlayActivity extends Activity {
 
     private void log(String _msg) {
         final String tag = PlayActivity.class.getSimpleName();
-        Log.w(tag, "log@::::::::::::::::::::::::::::::::[" + tag + "]: " + _msg);
+        Log.w(tag, "log@:::::[" + tag + "]: " + _msg);
     }
 }
