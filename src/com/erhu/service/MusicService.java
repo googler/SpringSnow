@@ -14,14 +14,12 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import com.erhu.R;
-import com.erhu.activity.PlayActivity;
+import com.erhu.activity.IndexActivity;
 import com.erhu.activity.SSApplication;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
 
 import java.io.IOException;
-
-import static com.erhu.activity.SSApplication.cursor;
 
 public class MusicService extends Service implements MediaPlayer.OnCompletionListener {
 
@@ -54,7 +52,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                     player.reset();
                     player.setDataSource(this,
                             Uri.withAppendedPath(
-                                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, cursor.getString(0)));
+                                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, SSApplication.getCursor().getString(0)));
                     pre2Play();
                     handlePlayPos();
                     player.start();
@@ -146,12 +144,12 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     public void onCompletion(final MediaPlayer _mediaPlayer) {
         try {
             int _pos = SSApplication.getPosition();
-            SSApplication.setPosition(_pos == cursor.getCount() - 1 ? 0 : _pos + 1);
+            SSApplication.moveCursor(_pos == SSApplication.getCursor().getCount() - 1 ? 0 : _pos + 1);
             handler.removeMessages(1);
             _mediaPlayer.reset();
             _mediaPlayer.setDataSource(this,
                     Uri.withAppendedPath(
-                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, cursor.getString(0)));
+                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, SSApplication.getCursor().getString(0)));
             pre2Play();
             player.start();
         } catch (Exception e) {
@@ -162,10 +160,10 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     private void addNotification() {
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        String title = cursor.getString(1);
-        String artist = cursor.getString(3);
+        String title = SSApplication.getCursor().getString(1);
+        String artist = SSApplication.getCursor().getString(3);
 
-        Intent intent = new Intent(this, PlayActivity.class);
+        Intent intent = new Intent(this, IndexActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
         Notification status = new Notification(R.drawable.sonata, title + " - " + artist, System.currentTimeMillis());

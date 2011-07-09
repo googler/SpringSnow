@@ -14,12 +14,11 @@ import android.widget.Toast;
 import com.erhu.R;
 import com.erhu.adapter.MusicListAdapter;
 
-import static com.erhu.activity.SSApplication.cursor;
-
 /**
  * 音乐列表
  */
 public class MusicListActivity extends ListActivity {
+
     private ListView listview;
     private Cursor mCursor;
 
@@ -43,7 +42,7 @@ public class MusicListActivity extends ListActivity {
     protected void onStart() {
         super.onStart();
         log("start");
-        // 音乐被编辑过,重新获取Cursor
+        // if music be edited, reGet cursor
         if (SSApplication.musicEdit) {
             this.resetCursor();
             SSApplication.musicEdit = false;
@@ -67,8 +66,7 @@ public class MusicListActivity extends ListActivity {
                                 MediaStore.Audio.Media.ALBUM,
                                 MediaStore.Audio.Media.DISPLAY_NAME},
                         null, null, null);
-        SSApplication.cursor = mCursor;
-        SSApplication.setPosition();
+        SSApplication.setCursor(mCursor);
         listview.setAdapter(new MusicListAdapter(this, mCursor));
     }
 
@@ -96,8 +94,7 @@ public class MusicListActivity extends ListActivity {
     class ListItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-            cursor = mCursor;
-            SSApplication.setPosition(position);
+            SSApplication.setCursor(mCursor, position);
             Intent intent = new Intent(MusicListActivity.this, PlayActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             intent.putExtra("op", "new One");

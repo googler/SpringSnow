@@ -1,7 +1,6 @@
 package com.erhu.activity;
 
 import android.app.ActivityGroup;
-import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +18,6 @@ import com.erhu.R;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
 
-import static com.erhu.activity.SSApplication.cursor;
 import static com.erhu.activity.SSApplication.playerState;
 
 /**
@@ -30,9 +28,6 @@ public class IndexActivity extends ActivityGroup {
     private LinearLayout musicLayout;// 所有音乐
     private LinearLayout favouriteLayout;// 最爱
     private LinearLayout artistLayout;// 艺术家
-    private View musicView;
-    private View favouriteView;
-    private View artistView;
     private TextView title;// 当前播放的音乐的名称
     private Button playButton;
     private TextView music;
@@ -47,8 +42,7 @@ public class IndexActivity extends ActivityGroup {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(Constants.DURATION_ACTION)) {
-                SSApplication.setPosition();
-                title.setText(cursor.getString(1));
+                title.setText(SSApplication.getCursor().getString(1));
             }
         }
     };
@@ -63,20 +57,17 @@ public class IndexActivity extends ActivityGroup {
                 music.setText("音乐");//TODO:以后考虑使用selector实现
                 favourite.setText("最爱");
                 artist.setText("[艺术家]");
-                artistView = getView(ArtistListActivity.class);
-                container.addView(artistView);
+                container.addView(getView(ArtistListActivity.class));
             } else if (_view == musicLayout) {
                 music.setText("[音乐]");
                 favourite.setText("最爱");
                 artist.setText("艺术家");
-                musicView = getView(MusicListActivity.class);
-                container.addView(musicView);
+                container.addView(getView(MusicListActivity.class));
             } else if (_view == favouriteLayout) {
                 music.setText("音乐");
                 favourite.setText("[最爱]");
                 artist.setText("艺术家");
-                favouriteView = getView(FavouriteListActivity.class);
-                container.addView(favouriteView);
+                container.addView(getView(FavouriteListActivity.class));
             }
         }
     };
@@ -107,14 +98,13 @@ public class IndexActivity extends ActivityGroup {
         favouriteLayout.setOnClickListener(bottomItemClickListener);
         artistLayout.setOnClickListener(bottomItemClickListener);
 
-        musicView = getView(MusicListActivity.class);
         container.removeAllViewsInLayout();
-        container.addView(musicView);
+        container.addView(getView(MusicListActivity.class));
 
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cursor != null && SSApplication.getPosition() != -1) {
+                if (SSApplication.getCursor() != null && SSApplication.getPosition() != -1) {
                     Intent intent = new Intent();
                     intent.setClass(IndexActivity.this, PlayActivity.class);
                     startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
@@ -129,11 +119,11 @@ public class IndexActivity extends ActivityGroup {
         log("start");
         super.onStart();
         if (playerState != Constants.STOPPED_STATE && SSApplication.getPosition() != -1) {
-            SSApplication.setPosition();//TODO:为什么这里必须setPosition呢？否则cursor会自己跑到一个奇怪的位置
-            title.setText(cursor.getString(1));
+            //TODO:为什么这里必须setPosition呢？否则cursor会自己跑到一个奇怪的位置
+            title.setText(SSApplication.getCursor().getString(1));
         }
-        playButton.setBackgroundResource(playerState == Constants.PLAYING_STATE ?
-                R.drawable.pause : R.drawable.play);
+        playButton.setBackgroundResource(
+                playerState == Constants.PLAYING_STATE ? R.drawable.pause : R.drawable.play);
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.DURATION_ACTION);
         registerReceiver(musicReceiver, filter);
@@ -145,7 +135,7 @@ public class IndexActivity extends ActivityGroup {
      * @param _view
      */
     public void playBtnClicked(final View _view) {
-        if (cursor != null && SSApplication.getPosition() != -1) {
+        if (SSApplication.getCursor() != null && SSApplication.getPosition() != -1) {
             if (playerState == Constants.PLAYING_STATE)
                 pause();
             else

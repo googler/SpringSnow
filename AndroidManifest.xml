@@ -10,7 +10,8 @@
         <activity android:name=".activity.IndexActivity"
                   android:label="@string/app_name"
                   android:theme="@android:style/Theme.NoTitleBar"
-                  android:screenOrientation="portrait">
+                  android:screenOrientation="portrait"
+                  android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -28,6 +29,7 @@
         <activity
                 android:name=".activity.PlayActivity"
                 android:screenOrientation="portrait"
+                android:launchMode="singleInstance"
                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity
                 android:name=".activity.Mp3ProfileActivity"/>

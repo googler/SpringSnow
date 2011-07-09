@@ -4,63 +4,14 @@
     <option name="TAB_LOG_LEVEL" value="WARN" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35d73c42-d21e-43e7-bcd6-34a86226b71a" name="Default" comment="[small change]add some finish();">
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\ap.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\b.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\black_btn_bg.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\black_btn_bg_select.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\black_btn_pressed_bg.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\bofang.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\btn.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\btn_a.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\btn_local_focused.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\btn_style3.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\btn_style3_focused.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\btn_style3_normal.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\btn_style3_pressed.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\context_menu_title.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\d.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\edit_text_bg.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\edittext_bg_focused.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\edittext_bg_normal.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\edittext_bg_pressed.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\hou.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\ic_mp_folder_list.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\icon_menu_exit.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\icon_menu_filter.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\icon_menu_findlrc.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\icon_menu_skin.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\last.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\list_allsong.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\list_artist.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\listbg.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\menu.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\menu_exit.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\message_icon_active.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\message_icon_unactive.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\music.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\mylove.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\mytask_icon_active.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\mytask_icon_unactive.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\navigation_online_bg_right.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\nowplaying.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\nowplaying_item_bg.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\nowplaying_play_on.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\nowplaying_unfavorite.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\qian.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\SpringSnow\res\drawable-mdpi\stop.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Erhu.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Erhu.xml" />
+    <list default="true" id="35d73c42-d21e-43e7-bcd6-34a86226b71a" name="Default" comment="[add notification]">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/play.xml" afterPath="$PROJECT_DIR$/res/layout/play.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/adapter/MusicListAdapter.java" afterPath="$PROJECT_DIR$/src/com/erhu/adapter/MusicListAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java" afterPath="$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/service/MusicService.java" afterPath="$PROJECT_DIR$/src/com/erhu/service/MusicService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/util/Constants.java" afterPath="$PROJECT_DIR$/src/com/erhu/util/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/erhu/util/Tools.java" afterPath="$PROJECT_DIR$/src/com/erhu/util/Tools.java" />
-      <change type="MOVED" beforePath="D:\SpringSnow\res\drawable-mdpi\ad.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/heart.png" />
     </list>
     <ignored path="SpringSnow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -124,37 +75,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="PlayActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="90" column="18" selection-start="3109" selection-end="3112" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SSApplication.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="39" column="26" selection-start="1167" selection-end="1167" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IndexActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="92" column="49" selection-start="3185" selection-end="3186" vertical-scroll-proportion="0.16638935">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="51" selection-start="1448" selection-end="1448" vertical-scroll-proportion="-6.62069">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="MusicListActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="116" column="5" selection-start="3707" selection-end="3707" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="48" column="9" selection-start="1448" selection-end="1448" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="play.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/play.xml">
+      <file leaf-file-name="FavouriteListActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/FavouriteListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="51" selection-start="2932" selection-end="2946" vertical-scroll-proportion="-14.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/index.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="53" selection-start="1190" selection-end="1190" vertical-scroll-proportion="-11.034483">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="188" column="17" selection-start="6083" selection-end="6083" vertical-scroll-proportion="0.32258064">
+            <state line="29" column="26" selection-start="521" selection-end="521" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -184,21 +157,21 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/res/drawable-mdpi/edit_text_bg.xml" />
-        <option value="$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java" />
         <option value="$PROJECT_DIR$/res/layout/mp3_profile.xml" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/FavouriteListActivity.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/ArtistListActivity.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/util/Constants.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/util/Tools.java" />
-        <option value="$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/erhu/service/MusicService.java" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/erhu/adapter/MusicListAdapter.java" />
-        <option value="$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/Mp3ProfileActivity.java" />
         <option value="$PROJECT_DIR$/res/drawable-mdpi/black_btn_bg_select.xml" />
         <option value="$PROJECT_DIR$/res/layout/play.xml" />
+        <option value="$PROJECT_DIR$/src/com/erhu/service/MusicService.java" />
+        <option value="$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java" />
         <option value="$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java" />
       </list>
     </option>
   </component>
@@ -267,7 +240,77 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erhu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringSnow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringSnow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erhu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringSnow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringSnow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erhu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringSnow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringSnow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erhu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -284,9 +327,21 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Non-Project Files" />
+        <subPane subId="Problems" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SpringSnow">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -306,34 +361,18 @@
         </subPane>
       </pane>
       <pane id="Favorites" />
-      <pane id="Scope">
-        <subPane subId="Non-Project Files" />
-        <subPane subId="Problems" />
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="SpringSnow">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="145" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="148" />
-    <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="154" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="MemberChooser.sorted" value="false" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="148" />
     <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="154" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/erhu/service" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="159" />
@@ -391,6 +430,18 @@
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
       <module name="" />
       <setting name="path" value="" />
@@ -405,15 +456,11 @@
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" class_name="" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" method_name="" module_name="" output_log_level="" package_name="" player_path="FlashPlayer.exe" port="0" run_mode="HtmlOrSwfFile" run_trusted="false" scope="Class" socket_policy_port="0" url_to_launch="http://">
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
@@ -426,14 +473,6 @@
       <setting name="workingDirectory" value="$PROJECT_DIR$" />
       <setting name="sysFilter" value=".*" />
       <setting name="exampleFilter" value=".*" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="PhingTarget" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" class_name="" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" method_name="" module_name="" output_log_level="" package_name="" player_path="FlashPlayer.exe" port="0" run_mode="HtmlOrSwfFile" run_trusted="false" scope="Class" socket_policy_port="0" url_to_launch="http://">
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -505,21 +544,6 @@
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="version" value="false" />
-      <setting name="workingDirectory" value="$PROJECT_DIR$" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="PhingTarget" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -533,6 +557,21 @@
       <option name="NETWORK_SPEED" value="full" />
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="PhingTarget" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="version" value="false" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -616,26 +655,26 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1374" height="776" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Scheme.REPL" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.6255778" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.328594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="256" y="465" width="1064" height="208" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.16358025" sideWeight="0.44874716" order="3" side_tool="false" content_ui="tabs" x="339" y="195" width="880" height="518" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.16358025" sideWeight="0.44874716" order="3" side_tool="false" content_ui="tabs" x="349" y="76" width="880" height="427" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.69135803" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3271605" sideWeight="0.49430525" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.49734244" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2103265" sideWeight="0.3611111" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39939255" sideWeight="0.7211094" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29081246" sideWeight="0.6728395" order="0" side_tool="false" content_ui="tabs" x="1092" y="63" width="242" height="552" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2164009" sideWeight="0.6728395" order="0" side_tool="false" content_ui="tabs" x="1092" y="63" width="242" height="552" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3271605" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4058642" sideWeight="0.5451784" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.328594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="256" y="465" width="1064" height="208" />
       <window_info id="Android Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32973805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24981017" sideWeight="0.7211094" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -666,7 +705,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="[small change]add some finish();" />
+    <option name="LAST_COMMIT_MESSAGE" value="[add notification]" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -700,6 +739,7 @@
     <MESSAGE value="[add]添加mp3信息编辑功能；" />
     <MESSAGE value="[optimize]对音乐进行过编辑操作才更新MusicListActivity的数据；" />
     <MESSAGE value="[small change]add some finish();" />
+    <MESSAGE value="[add notification]" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -713,79 +753,19 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/FavouriteListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="257" selection-end="350" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/ArtistListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="9" selection-start="3021" selection-end="3021" vertical-scroll-proportion="0.7758064">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/util/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="46" selection-start="222" selection-end="222" vertical-scroll-proportion="0.19354838">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/AndroidDevelop/文档/sources_2.2/android/content/Intent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2307" column="28" selection-start="107240" selection-end="107240" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/AndroidDevelop/文档/sources_2.2/android/content/ContextWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="334" column="25" selection-start="8824" selection-end="8824" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="334" column="25" selection-start="8824" selection-end="8824" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/erhu/util/Tools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="69" selection-start="568" selection-end="568" vertical-scroll-proportion="0.67741936">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="45" selection-start="6836" selection-end="6836" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/service/MusicService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="0" selection-start="5352" selection-end="5352" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#onCompletion#0;class#MusicService#0" expanded="false" />
-            <element signature="method#onBind#0;class#MusicService#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="37" selection-start="351" selection-end="351" vertical-scroll-proportion="-5.5172415">
-          <folding />
-        </state>
+        <state line="22" column="69" selection-start="568" selection-end="568" vertical-scroll-proportion="0.67741936" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/erhu/adapter/MusicListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="5" selection-start="825" selection-end="825" vertical-scroll-proportion="0.26788685">
-          <folding />
-        </state>
+        <state line="37" column="5" selection-start="825" selection-end="825" vertical-scroll-proportion="0.26788685" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable-mdpi/index_topbar_play.png">
@@ -793,23 +773,69 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/service/MusicService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="5" selection-start="3707" selection-end="3707" vertical-scroll-proportion="0.0">
+        <state line="177" column="0" selection-start="6271" selection-end="6271" vertical-scroll-proportion="0.9319728">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/index.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="53" selection-start="1190" selection-end="1190" vertical-scroll-proportion="-0.44444445">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/play.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="51" selection-start="2932" selection-end="2946" vertical-scroll-proportion="-14.0">
+        <state line="60" column="51" selection-start="2932" selection-end="2946" vertical-scroll-proportion="-0.6896552">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/index.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/util/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="53" selection-start="1190" selection-end="1190" vertical-scroll-proportion="-11.034483">
+        <state line="6" column="46" selection-start="222" selection-end="222" vertical-scroll-proportion="0.29411766">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="18" selection-start="3109" selection-end="3112" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/SSApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="26" selection-start="1167" selection-end="1167" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/AndroidDevelop/文档/sources_2.2/android/app/ActivityGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="19" selection-start="2459" selection-end="2459" vertical-scroll-proportion="0.33225808">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="51" selection-start="1448" selection-end="1448" vertical-scroll-proportion="-6.62069">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/FavouriteListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="26" selection-start="521" selection-end="521" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -821,9 +847,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/PlayActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/MusicListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="17" selection-start="6083" selection-end="6083" vertical-scroll-proportion="0.32258064">
+        <state line="48" column="9" selection-start="1448" selection-end="1448" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/erhu/activity/IndexActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="49" selection-start="3185" selection-end="3186" vertical-scroll-proportion="0.16638935">
           <folding />
         </state>
       </provider>

@@ -5,8 +5,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,8 +16,6 @@ import android.widget.Toast;
 import com.erhu.R;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
-
-import static com.erhu.activity.SSApplication.cursor;
 
 public class PlayActivity extends Activity {
     // UI
@@ -34,17 +32,17 @@ public class PlayActivity extends Activity {
     protected BroadcastReceiver musicReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Cursor cur = SSApplication.getCursor();
             String action = intent.getAction();
             if (action.equals(Constants.CURRENT_ACTION)) {
                 currentPosition = intent.getExtras().getInt("currentTime");
                 seekBar.setProgress(currentPosition);
-                timeLeft.setText(Tools.toTime(cursor.getInt(2) - currentPosition));
+                timeLeft.setText(Tools.toTime(cur.getInt(2) - currentPosition));
             } else if (action.equals(Constants.DURATION_ACTION)) {
-                final String t_artist = cursor.getString(3);
                 seekBar.setProgress(0);
-                seekBar.setMax(cursor.getInt(2));
-                title.setText(cursor.getString(1));
-                artist.setText(t_artist.equals(MediaStore.UNKNOWN_STRING) ? "无名氏:)" : t_artist);
+                seekBar.setMax(cur.getInt(2));
+                title.setText(cur.getString(1));
+                artist.setText(cur.getString(3));
             }
         }
     };
@@ -90,16 +88,15 @@ public class PlayActivity extends Activity {
         super.onStart();
         log("start");
         regReceiver();
+        Cursor cur = SSApplication.getCursor();//TODO:为什么这里必须setPosition呢？否则cursor会自己跑到一个奇怪的位置
         Bundle bundle = getIntent().getExtras();
-        SSApplication.setPosition();//TODO:为什么这里必须setPosition呢？否则cursor会自己跑到一个奇怪的位置
         if (bundle != null) {// 一首全新的歌曲，而非查看正在播放的歌曲
             seekBar.setProgress(0);
             play();
         } else
-            seekBar.setMax(cursor.getInt(2));
-
-        title.setText(cursor.getString(1));
-        artist.setText(cursor.getString(3));
+            seekBar.setMax(cur.getInt(2));
+        title.setText(cur.getString(1));
+        artist.setText(cur.getString(3));
     }
 
     /**
@@ -141,7 +138,7 @@ public class PlayActivity extends Activity {
      */
     public void btnNextClicked(View _e) {
         int position = SSApplication.getPosition();
-        SSApplication.setPosition(position == cursor.getCount() - 1 ? 0 : position + 1);
+        SSApplication.moveCursor(position == SSApplication.getCursor().getCount() - 1 ? 0 : position + 1);
         SSApplication.playerState = Constants.PLAYING_STATE;
         play();
     }
@@ -149,7 +146,7 @@ public class PlayActivity extends Activity {
     // 上一首
     public void btnPrevClicked(View _e) {
         int position = SSApplication.getPosition();
-        SSApplication.setPosition(position == 0 ? cursor.getCount() - 1 : position - 1);
+        SSApplication.moveCursor(position == 0 ? SSApplication.getCursor().getCount() - 1 : position - 1);
         SSApplication.playerState = Constants.PLAYING_STATE;
         play();
     }
