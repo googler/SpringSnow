@@ -30,7 +30,7 @@ public class SSApplication extends Application {
 
     public static void setCursor(Cursor _cursor) {
         cursor = _cursor;
-        if (cursor != null && position != -1)
+        if (cursor != null && position < cursor.getCount() && position != -1)
             cursor.moveToPosition(position);
     }
 
@@ -40,7 +40,7 @@ public class SSApplication extends Application {
             cursor = null;
             cursor = _cursor;
         }
-        if (_pos != -1) {
+        if (_pos != -1 && _pos < cursor.getCount()) {
             position = _pos;
             cursor.moveToPosition(position);
         }

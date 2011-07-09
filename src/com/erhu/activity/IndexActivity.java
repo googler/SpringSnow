@@ -166,10 +166,7 @@ public class IndexActivity extends ActivityGroup {
      */
     private void play() {
         Intent intent = new Intent();
-        intent.putExtra("op",
-                playerState == Constants.PAUSED_STATE ?
-                        Constants.CONTINUE_OP : Constants.PLAY_OP);
-
+        intent.putExtra("op", playerState == Constants.PAUSED_STATE ? Constants.CONTINUE_OP : Constants.PLAY_OP);
         intent.setAction(Constants.SERVICE_ACTION);
         playButton.setBackgroundResource(R.drawable.pause);
         playerState = Constants.PLAYING_STATE;
