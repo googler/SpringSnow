@@ -13,11 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.erhu.R;
-import org.farng.mp3.MP3File;
-import org.farng.mp3.TagException;
-import org.farng.mp3.id3.AbstractID3v2;
-
-import java.io.IOException;
+import com.erhu.util.Tools;
 
 /**
  * this activity is used to edit mp3 profile
@@ -28,6 +24,7 @@ public class Mp3ProfileActivity extends Activity {
     private EditText artistETxt;
     private EditText albumETxt;
 
+    private String oldTitle;
     private Cursor mCursor;
 
     @Override
@@ -51,7 +48,8 @@ public class Mp3ProfileActivity extends Activity {
                         null, null, null);
         mCursor.moveToPosition(position);
 
-        titleETxt.setText(mCursor.getString(1));
+        oldTitle = mCursor.getString(1);
+        titleETxt.setText(oldTitle);
         artistETxt.setText(mCursor.getString(2));
         albumETxt.setText(mCursor.getString(3));
     }
@@ -79,22 +77,8 @@ public class Mp3ProfileActivity extends Activity {
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         uri = ContentUris.withAppendedId(uri, mCursor.getInt(0));
         super.getContentResolver().update(uri, cv, null, null);
-
-        try {
-            MP3File mp3 = new MP3File(mCursor.getString(4).substring(4));
-            AbstractID3v2 id3v2 = mp3.getID3v2Tag();
-            if (id3v2 != null) {
-                id3v2.setLeadArtist(artist);
-                id3v2.setAlbumTitle(album);
-                id3v2.setSongTitle(title);
-                mp3.save();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TagException e) {
-            e.printStackTrace();
-        }
-        setResult(Activity.RESULT_OK);
+        if (Tools.editMp3(mCursor.getString(4).substring(4), new String[]{artist, album, title}, oldTitle))
+            setResult(Activity.RESULT_OK);
         SSApplication.musicEdit = true;
         finish();
     }

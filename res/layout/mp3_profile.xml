@@ -22,7 +22,7 @@
             <EditText android:id="@+id/mp3_profile_title"
                       android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
-                      android:hint="不能为空哦?"
+                      android:hint="不能为空哦!"
                       android:singleLine="true"/>
         </TableRow>
         <TableRow android:paddingBottom="10.0dip">
@@ -37,7 +37,7 @@
             <EditText android:id="@+id/mp3_profile_artist"
                       android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
-                      android:hint="谁唱的？"
+                      android:hint="谁的作品"
                       android:singleLine="true"/>
         </TableRow>
         <TableRow android:paddingBottom="10.0dip">
@@ -52,7 +52,7 @@
             <EditText android:id="@+id/mp3_profile_album"
                       android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
-                      android:hint="可以不填"
+                      android:hint="唱片"
                       android:singleLine="true"/>
         </TableRow>
     </TableLayout>

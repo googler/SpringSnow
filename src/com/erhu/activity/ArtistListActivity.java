@@ -30,7 +30,6 @@ public class ArtistListActivity extends ListActivity {
         listview.setDivider(null);
         listview.setScrollingCacheEnabled(false);
         listview.setFadingEdgeLength(0);
-        listview.setBackgroundResource(R.drawable.list_bg);
         listview.setOnItemClickListener(new ListItemClickListener());
     }
 

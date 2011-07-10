@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import com.erhu.R;
 import com.erhu.adapter.MusicListAdapter;
+import com.erhu.util.Constants;
 
 import java.io.File;
 
@@ -100,6 +101,7 @@ public class MusicListActivity extends ListActivity {
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
             SSApplication.setCursor(mCursor, position);
+            SSApplication.playerState = Constants.STOPPED_STATE;
             Intent intent = new Intent(MusicListActivity.this, PlayActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             intent.putExtra("op", "new One");
@@ -129,8 +131,8 @@ public class MusicListActivity extends ListActivity {
                             else
                                 new AlertDialog.Builder(MusicListActivity.this)
                                         .setIcon(R.drawable.alert_dialog_icon)
-                                        .setTitle("真的要删吗??")
-                                        .setPositiveButton("真删!!", new DialogInterface.OnClickListener() {
+                                        .setTitle("你真的要删除这首歌吗??")
+                                        .setPositiveButton("真 删!!", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
                                                 Cursor t_cur = getContentResolver()
                                                         .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -149,7 +151,7 @@ public class MusicListActivity extends ListActivity {
                                                 resetCursor();
                                             }
                                         })
-                                        .setNegativeButton("我不删:)", new DialogInterface.OnClickListener() {
+                                        .setNegativeButton("不 删:)", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
                                             }
                                         }).create().show();
@@ -172,9 +174,9 @@ public class MusicListActivity extends ListActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == 1)
-                Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "保存成功:)", Toast.LENGTH_SHORT).show();
             else if (requestCode == 2)
-                Toast.makeText(this, "删除成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "删除成功:)", Toast.LENGTH_SHORT).show();
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
