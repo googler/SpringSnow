@@ -164,7 +164,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         String artist = SSApplication.getCursor().getString(3);
 
         Intent intent = new Intent(this, IndexActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
         Notification status = new Notification(R.drawable.sonata, title + " - " + artist, System.currentTimeMillis());
         status.flags |= Notification.FLAG_ONGOING_EVENT;
