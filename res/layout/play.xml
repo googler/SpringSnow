@@ -32,7 +32,8 @@
                     android:orientation="vertical"
                     android:layout_width="180sp"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true">
+                    android:layout_centerHorizontal="true"
+                    android:onClick="titleBarClicked">
                 <TextView
                         android:id="@+id/play_title"
                         android:layout_width="wrap_content"

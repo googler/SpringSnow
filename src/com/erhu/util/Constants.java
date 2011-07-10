@@ -1,5 +1,7 @@
 package com.erhu.util;
 
+import android.provider.MediaStore;
+
 public class Constants {
     public final static String SERVICE_ACTION = "me.erhu.media.MUSIC_SERVICE";
 
@@ -18,4 +20,12 @@ public class Constants {
     public static final String CONTINUE_ACTION = "me.erhu.continue";
 
     public static int NOTIFICATION_ID = 0x0618;
+
+    public static String[] MUSIC_CUR = new String[]{
+            MediaStore.Audio.Media._ID,
+            MediaStore.Audio.Media.TITLE,
+            MediaStore.Audio.Media.DURATION,
+            MediaStore.Audio.Media.ARTIST,
+            MediaStore.Audio.Media.ALBUM,
+            MediaStore.Audio.Media.DATA};
 }
