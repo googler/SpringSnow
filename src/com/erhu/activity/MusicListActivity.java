@@ -141,6 +141,9 @@ public class MusicListActivity extends ListActivity {
                                                 getContentResolver().notifyChange(uri, null);
                                                 new File(t_cur.getString(2).substring(4)).delete();
                                                 SSApplication.musicEdit = true;
+                                                // 被删除的歌曲在当前播放歌曲的前面，position - 1
+                                                if (_position < SSApplication.getPosition())
+                                                    SSApplication.setPosition(SSApplication.getPosition() - 1);
                                                 resetCursor();
                                             }
                                         })

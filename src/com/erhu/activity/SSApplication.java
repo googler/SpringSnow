@@ -29,21 +29,31 @@ public class SSApplication extends Application {
     }
 
     public static void setCursor(Cursor _cursor) {
-        setCursor(_cursor, position);
+        if (_cursor != null && cursor != _cursor) {
+            if (cursor != null) {
+                cursor.close();
+                cursor = null;
+            }
+            cursor = _cursor;
+            if (cursor != null && position < cursor.getCount() && position != -1)
+                cursor.moveToPosition(position);
+        }
     }
 
     public static void setCursor(Cursor _cursor, int _pos) {
-        if (cursor != null) {
-            cursor.close();
-        }
         if (_cursor != null && cursor != _cursor) {
+            cursor.close();
             cursor = null;
             cursor = _cursor;
-            if (_pos != -1 && _pos < cursor.getCount()) {
-                position = _pos;
-                cursor.moveToPosition(position);
-            }
         }
+        if (_pos != -1 && _pos < cursor.getCount()) {
+            position = _pos;
+            cursor.moveToPosition(position);
+        }
+    }
+
+    public static void setPosition(int _pos) {
+        position = _pos;
     }
 
     public static int getPosition() {
