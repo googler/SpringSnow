@@ -1,7 +1,9 @@
 package com.erhu.activity;
 
 import android.app.Application;
+import android.content.Context;
 import android.database.Cursor;
+import android.provider.MediaStore;
 import com.erhu.util.Constants;
 
 /**
@@ -50,6 +52,14 @@ public class SSApplication extends Application {
         if (_pos != -1 && _pos < cursor.getCount()) {
             position = _pos;
             cursor.moveToPosition(position);
+        }
+    }
+
+    public static void resetCursor(Context _context, String _type) {
+        if (_type.equals(Constants.ALL_MUSIC)) {
+            Cursor cur = _context.getContentResolver().query(
+                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Constants.MUSIC_CUR, null, null, null);
+            setCursor(cur);
         }
     }
 

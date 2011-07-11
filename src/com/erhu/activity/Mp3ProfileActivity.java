@@ -75,7 +75,9 @@ public class Mp3ProfileActivity extends Activity {
         if (!(title.equals(mCursor.getString(1)) && artist.equals(mCursor.getString(3)) &&
                 album.equals(mCursor.getString(4))))
             if (Tools.editMp3(mCursor.getString(5).substring(4), new String[]{artist, album, title})) {
+                SSApplication.resetCursor(Mp3ProfileActivity.this, Constants.PLAY_LIST);
                 Toast.makeText(this, "保存成功:)", Toast.LENGTH_SHORT).show();
+                mCursor.close();
             }
         finish();
     }
@@ -95,7 +97,6 @@ public class Mp3ProfileActivity extends Activity {
     @Override
     protected void onStop() {
         log("stop");
-        mCursor.close();
         super.onStop();
     }
 

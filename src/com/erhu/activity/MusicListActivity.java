@@ -86,7 +86,7 @@ public class MusicListActivity extends ListActivity {
                                 new AlertDialog.Builder(MusicListActivity.this)
                                         .setIcon(R.drawable.alert_dialog_icon)
                                         .setTitle("你真的要删除这首歌吗??")
-                                        .setPositiveButton("真 删!!", new DialogInterface.OnClickListener() {
+                                        .setPositiveButton("删除之!!", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
                                                 Cursor t_cur = getContentResolver()
                                                         .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -107,8 +107,7 @@ public class MusicListActivity extends ListActivity {
                                                         MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Constants.MUSIC_CUR, null, null, null);
                                                 listview.setAdapter(new MusicListAdapter(MusicListActivity.this, mCursor));
                                                 // 如果当前播放序列中有被删除的歌曲，则要重新给全局cursor赋值
-                                                if (Constants.PLAY_LIST.equals(Constants.ALL_MUSIC))
-                                                    SSApplication.setCursor(mCursor);
+                                                SSApplication.resetCursor(MusicListActivity.this, Constants.PLAY_LIST);
                                                 // 被删除的歌曲在当前播放歌曲的前面，position - 1
                                                 if (_position < SSApplication.getPosition())
                                                     SSApplication.setPosition(SSApplication.getPosition() - 1);
@@ -126,7 +125,7 @@ public class MusicListActivity extends ListActivity {
             };
             AlertDialog.Builder builder = new AlertDialog.Builder(MusicListActivity.this);
             builder.setTitle("你可以...");
-            builder.setItems(new String[]{"编辑之", "删除之"}, listener);
+            builder.setItems(new String[]{"编辑音乐", "删除之"}, listener);
             builder.create().show();
             return true;
         }

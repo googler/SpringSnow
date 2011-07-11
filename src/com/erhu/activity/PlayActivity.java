@@ -54,6 +54,7 @@ public final class PlayActivity extends Activity {
                 title.setText(bdl.getString("title"));
                 artist.setText(bdl.getString("artist"));
                 Toast.makeText(PlayActivity.this, "保存成功:)", Toast.LENGTH_SHORT).show();
+                SSApplication.resetCursor(PlayActivity.this, Constants.PLAY_LIST);
             }
             super.handleMessage(msg);
         }
