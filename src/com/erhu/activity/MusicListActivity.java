@@ -69,24 +69,6 @@ public class MusicListActivity extends ListActivity {
         listview.setAdapter(new MusicListAdapter(this, mCursor));
     }
 
-    @Override
-    public void finish() {
-        log("finish");
-        super.finish();
-    }
-
-    @Override
-    protected void onStop() {
-        log("stop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        log("destroy");
-        super.onDestroy();
-    }
-
     /**
      * 列表项单击操作监听器类
      */
@@ -165,7 +147,6 @@ public class MusicListActivity extends ListActivity {
         }
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
@@ -178,8 +159,26 @@ public class MusicListActivity extends ListActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void finish() {
+        log("finish");
+        super.finish();
+    }
+
+    @Override
+    protected void onStop() {
+        log("stop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        log("destroy");
+        super.onDestroy();
+    }
+
     private void log(String _msg) {
-        final String TAG = MusicListActivity.class.getSimpleName();
-        Log.w(TAG, "log@:::::[" + TAG + "]: " + _msg);
+        final String tag = MusicListActivity.class.getSimpleName();
+        Log.w(tag, "log@:::::[" + tag + "]: " + _msg);
     }
 }

@@ -34,9 +34,7 @@ public class IndexActivity extends ActivityGroup {
     private TextView favourite;
     private TextView artist;
 
-    /**
-     * 接收 MusicService 发送的广播
-     */
+    // 接收 MusicService 发送的广播
     private BroadcastReceiver musicReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -46,9 +44,8 @@ public class IndexActivity extends ActivityGroup {
             }
         }
     };
-    /**
-     * 底部导航区域监听器
-     */
+
+    // 底部导航区域监听器
     View.OnClickListener bottomItemClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View _view) {
@@ -80,9 +77,7 @@ public class IndexActivity extends ActivityGroup {
         initUI();
     }
 
-    /**
-     * Nothing could hold a man back from his future!!!
-     */
+    // Nothing could hold a man back from his future!
     private void initUI() {
         playButton = (Button) findViewById(R.id.index_top_btn);
         title = (TextView) findViewById(R.id.index_top_title);
@@ -129,11 +124,7 @@ public class IndexActivity extends ActivityGroup {
         registerReceiver(musicReceiver, filter);
     }
 
-    /**
-     * click the play button on topbar
-     *
-     * @param _view
-     */
+    // click the play button on topbar
     public void playBtnClicked(final View _view) {
         if (SSApplication.getCursor() != null && SSApplication.getPosition() != -1) {
             if (playerState == Constants.PLAYING_STATE)
@@ -149,9 +140,8 @@ public class IndexActivity extends ActivityGroup {
         super.finish();
     }
 
-    /**
-     * 音乐暂停
-     */
+
+    // 音乐暂停
     private void pause() {
         playerState = Constants.PAUSED_STATE;
         playButton.setBackgroundResource(R.drawable.play);
@@ -161,9 +151,7 @@ public class IndexActivity extends ActivityGroup {
         startService(intent);
     }
 
-    /**
-     * 音乐播放
-     */
+    // 音乐播放
     private void play() {
         Intent intent = new Intent();
         intent.putExtra("op", playerState == Constants.PAUSED_STATE ? Constants.CONTINUE_OP : Constants.PLAY_OP);
@@ -194,12 +182,8 @@ public class IndexActivity extends ActivityGroup {
         return true;
     }
 
-    /**
-     * 根据class获取加载到activityGroup中的视图
-     *
-     * @param _activity
-     * @return
-     */
+
+    // 根据class获取加载到activityGroup中的视图
     private View getView(Class<?> _activity) {
         Intent t_intent = new Intent(this, _activity).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         View t_view = getLocalActivityManager().startActivity(_activity.getClass().getSimpleName(), t_intent).getDecorView();
