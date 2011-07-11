@@ -29,9 +29,13 @@ public class SSApplication extends Application {
     }
 
     public static void setCursor(Cursor _cursor) {
-        cursor = _cursor;
-        if (cursor != null && position < cursor.getCount() && position != -1)
-            cursor.moveToPosition(position);
+        cursor.close();
+        cursor = null;
+        if (_cursor != null && cursor != _cursor) {
+            cursor = _cursor;
+            if (position < cursor.getCount() && position != -1)
+                cursor.moveToPosition(position);
+        }
     }
 
     public static void setCursor(Cursor _cursor, int _pos) {
@@ -39,10 +43,10 @@ public class SSApplication extends Application {
             cursor.close();
             cursor = null;
             cursor = _cursor;
-        }
-        if (_pos != -1 && _pos < cursor.getCount()) {
-            position = _pos;
-            cursor.moveToPosition(position);
+            if (_pos != -1 && _pos < cursor.getCount()) {
+                position = _pos;
+                cursor.moveToPosition(position);
+            }
         }
     }
 

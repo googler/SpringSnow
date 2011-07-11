@@ -6,6 +6,8 @@ import android.content.*;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,7 +18,7 @@ import com.erhu.R;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
 
-public class PlayActivity extends Activity {
+public final class PlayActivity extends Activity {
     // UI
     private SeekBar seekBar;
     private TextView title;
@@ -25,9 +27,7 @@ public class PlayActivity extends Activity {
     private Button playBtn;
     private int currentPosition;//当前播放位置
 
-    /**
-     * 定义musicReceiver,接收MusicService发送的广播
-     */
+    // 定义musicReceiver,接收MusicService发送的广播
     protected BroadcastReceiver musicReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -43,6 +43,20 @@ public class PlayActivity extends Activity {
                 title.setText(cur.getString(1));
                 artist.setText(cur.getString(3));
             }
+        }
+    };
+
+    final Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.arg1 == 1) {
+                Bundle bdl = msg.getData();
+                title.setText(bdl.getString("title"));
+                artist.setText(bdl.getString("artist"));
+                Toast.makeText(PlayActivity.this, "保存成功:)", Toast.LENGTH_SHORT).show();
+                SSApplication.musicEdit = true;
+            }
+            super.handleMessage(msg);
         }
     };
 
@@ -98,9 +112,7 @@ public class PlayActivity extends Activity {
         artist.setText(cur.getString(3));
     }
 
-    /**
-     * register receiver
-     */
+    // register receiver
     private void regReceiver() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.CURRENT_ACTION);
@@ -110,9 +122,7 @@ public class PlayActivity extends Activity {
         log("register music receiver success");
     }
 
-    /**
-     * 点击播放/暂停按钮
-     */
+    // 点击播放/暂停按钮
     public void btnPauseClicked(View _e) {
         if (SSApplication.playerState == Constants.PLAYING_STATE)
             pause();
@@ -120,9 +130,7 @@ public class PlayActivity extends Activity {
             play();
     }
 
-    /**
-     * 音乐暂停
-     */
+    // 音乐暂停
     private void pause() {
         SSApplication.playerState = Constants.PAUSED_STATE;
         playBtn.setBackgroundResource(R.drawable.play);
@@ -132,9 +140,7 @@ public class PlayActivity extends Activity {
         startService(intent);
     }
 
-    /**
-     * 下一首
-     */
+    // 下一首
     public void btnNextClicked(View _e) {
         int position = SSApplication.getPosition();
         SSApplication.moveCursor(position == SSApplication.getCursor().getCount() - 1 ? 0 : position + 1);
@@ -150,9 +156,7 @@ public class PlayActivity extends Activity {
         play();
     }
 
-    /**
-     * 音乐播放
-     */
+    // 音乐播放
     private void play() {
         Intent intent = new Intent();
         intent.putExtra("op",
@@ -165,9 +169,7 @@ public class PlayActivity extends Activity {
         startService(intent);
     }
 
-    /**
-     * 用户拖动进度条
-     */
+    // 用户拖动进度条
     private void seekbarChange(int progress) {
         Intent intent = new Intent();
         intent.setAction(Constants.SERVICE_ACTION);
@@ -176,23 +178,24 @@ public class PlayActivity extends Activity {
         startService(intent);
     }
 
-    /**
-     * 回到列表界面
-     *
-     * @param _view
-     */
+    // 回到列表界面
     public void listImgClicked(View _view) {
         finish();
     }
 
-    /**
-     * when title bar clicked
-     *
-     * @param _view
-     */
+    // when title bar clicked
     public void titleBarClicked(View _view) {
+        // 第一次编辑后，马上再点击标题编辑时需要重新获取cursor,否则显示的数据不正确
+        if (SSApplication.musicEdit) {
+            Cursor __cur = this.getContentResolver()
+                    .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                            Constants.MUSIC_CUR, null, null, null);
+            SSApplication.setCursor(__cur);
+            SSApplication.musicEdit = false;
+        }
+        // update mp3 profile
         final Cursor _cur = SSApplication.getCursor();
-        LayoutInflater factory = LayoutInflater.from(this);
+        final LayoutInflater factory = LayoutInflater.from(this);
         final View textEntryView = factory.inflate(R.layout.mp3_profile_dialog, null);
         final EditText title_ETxt = (EditText) textEntryView.findViewById(R.id.mp3_profile_dialog_title);
         final EditText artist_ETxt = (EditText) textEntryView.findViewById(R.id.mp3_profile_dialog_artist);
@@ -212,28 +215,34 @@ public class PlayActivity extends Activity {
                             Toast.makeText(PlayActivity.this, "请填写标题:)", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        String _title = title_ETxt.getText().toString().trim();
-                        String _artist = artist_ETxt.getText().toString().trim();
-                        String _album = album_ETxt.getText().toString().trim();
+                        final String _title = title_ETxt.getText().toString().trim();
+                        final String _artist = artist_ETxt.getText().toString().trim();
+                        final String _album = album_ETxt.getText().toString().trim();
 
                         if (title.getText().equals(_title) && artist.getText().equals(_artist)
                                 && _cur.getString(4).equals(_album))
-                            return;
+                            ;
+                        else {
+                            ContentValues cv = new ContentValues();
+                            cv.put(MediaStore.Audio.Media.TITLE, _title);
+                            cv.put(MediaStore.Audio.Media.ARTIST, _artist);
+                            cv.put(MediaStore.Audio.Media.ALBUM, _album);
 
-                        title.setText(_title);
-                        artist.setText(_artist);
-
-                        ContentValues cv = new ContentValues();
-                        cv.put(MediaStore.Audio.Media.TITLE, _title);
-                        cv.put(MediaStore.Audio.Media.ARTIST, _artist);
-                        cv.put(MediaStore.Audio.Media.ALBUM, _album);
-
-                        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                        uri = ContentUris.withAppendedId(uri, _cur.getInt(0));
-                        getContentResolver().update(uri, cv, null, null);
-                        if (Tools.editMp3(_cur.getString(5).substring(4), new String[]{_artist, _album, _title})) {
-                            Toast.makeText(PlayActivity.this, "保存成功:)", Toast.LENGTH_SHORT).show();
-                            SSApplication.musicEdit = true;
+                            Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                            uri = ContentUris.withAppendedId(uri, _cur.getInt(0));
+                            getContentResolver().update(uri, cv, null, null);
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    boolean flag = Tools.editMp3(_cur.getString(5).substring(4), new String[]{_artist, _album, _title});
+                                    Message msg = handler.obtainMessage();
+                                    Bundle bdl = msg.getData();
+                                    bdl.putString("title", _title);
+                                    bdl.putString("artist", _artist);
+                                    msg.arg1 = flag ? 1 : 0;
+                                    handler.sendMessage(msg);
+                                }
+                            }).start();
                         }
                     }
                 })
