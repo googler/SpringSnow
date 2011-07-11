@@ -28,4 +28,6 @@ public class Constants {
             MediaStore.Audio.Media.ARTIST,
             MediaStore.Audio.Media.ALBUM,
             MediaStore.Audio.Media.DATA};
+    public static String ALL_MUSIC = "ALL";
+    public static String PLAY_LIST = ALL_MUSIC;
 }

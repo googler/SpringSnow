@@ -41,37 +41,18 @@ public class MusicListActivity extends ListActivity {
         listview.setFadingEdgeLength(0);
         listview.setOnItemClickListener(new ListItemClickListener());
         listview.setOnItemLongClickListener(new ListItemLongClickListener());
-        this.resetCursor();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         log("start");
-        // if music be edited, reGet cursor
-        if (SSApplication.musicEdit) {
-            this.resetCursor();
-            SSApplication.musicEdit = false;
-        }
-    }
-
-    /**
-     * 音乐被编辑后，重新设置Cursor
-     */
-    private void resetCursor() {
-        log("reset cursor");
-        if (mCursor != null)
-            mCursor.close();
-        mCursor = this.getContentResolver()
-                .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                        Constants.MUSIC_CUR, null, null, null);
-        SSApplication.setCursor(mCursor);
+        mCursor = getContentResolver().query(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Constants.MUSIC_CUR, null, null, null);
         listview.setAdapter(new MusicListAdapter(this, mCursor));
     }
 
-    /**
-     * 列表项单击操作监听器类
-     */
+    // 列表项单击操作监听器类
     class ListItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
@@ -84,9 +65,7 @@ public class MusicListActivity extends ListActivity {
         }
     }
 
-    /**
-     * if long click, we provide a popup dialog.
-     */
+    // if long click, we provide a popup dialog.
     class ListItemLongClickListener implements AdapterView.OnItemLongClickListener {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, final int _position, long id) {
@@ -121,12 +100,18 @@ public class MusicListActivity extends ListActivity {
                                                 getContentResolver().delete(uri, null, null);
                                                 Toast.makeText(MusicListActivity.this, "删除成功:)", Toast.LENGTH_SHORT).show();
                                                 getContentResolver().notifyChange(uri, null);
+                                                // delete file
                                                 new File(t_cur.getString(2).substring(4)).delete();
-                                                SSApplication.musicEdit = true;
+                                                t_cur.close();
+                                                mCursor = getContentResolver().query(
+                                                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Constants.MUSIC_CUR, null, null, null);
+                                                listview.setAdapter(new MusicListAdapter(MusicListActivity.this, mCursor));
+                                                // 如果当前播放序列中有被删除的歌曲，则要重新给全局cursor赋值
+                                                if (Constants.PLAY_LIST.equals(Constants.ALL_MUSIC))
+                                                    SSApplication.setCursor(mCursor);
                                                 // 被删除的歌曲在当前播放歌曲的前面，position - 1
                                                 if (_position < SSApplication.getPosition())
                                                     SSApplication.setPosition(SSApplication.getPosition() - 1);
-                                                resetCursor();
                                             }
                                         })
                                         .setNegativeButton("不 删:)", new DialogInterface.OnClickListener() {
@@ -141,7 +126,7 @@ public class MusicListActivity extends ListActivity {
             };
             AlertDialog.Builder builder = new AlertDialog.Builder(MusicListActivity.this);
             builder.setTitle("你可以...");
-            builder.setItems(new String[]{"编辑音乐信息", "删除它"}, listener);
+            builder.setItems(new String[]{"编辑之", "删除之"}, listener);
             builder.create().show();
             return true;
         }

@@ -11,7 +11,6 @@ public class SSApplication extends Application {
     public static int playerState = Constants.STOPPED_STATE;// 播放器的状态
     private static int position = -1;// 当前播放歌曲ID
     private static Cursor cursor;
-    public static boolean musicEdit = false;// 如果有音乐被编辑过，则要重新获取MusicUri
 
     // move cursor to _pos
     public static void moveCursor(int _pos) {
@@ -42,8 +41,10 @@ public class SSApplication extends Application {
 
     public static void setCursor(Cursor _cursor, int _pos) {
         if (_cursor != null && cursor != _cursor) {
-            cursor.close();
-            cursor = null;
+            if (cursor != null) {
+                cursor.close();
+                cursor = null;
+            }
             cursor = _cursor;
         }
         if (_pos != -1 && _pos < cursor.getCount()) {

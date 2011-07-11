@@ -54,7 +54,6 @@ public final class PlayActivity extends Activity {
                 title.setText(bdl.getString("title"));
                 artist.setText(bdl.getString("artist"));
                 Toast.makeText(PlayActivity.this, "保存成功:)", Toast.LENGTH_SHORT).show();
-                SSApplication.musicEdit = true;
             }
             super.handleMessage(msg);
         }
@@ -98,8 +97,8 @@ public final class PlayActivity extends Activity {
 
     @Override
     protected void onStart() {
-        super.onStart();
         log("start");
+        super.onStart();
         regReceiver();
         Cursor cur = SSApplication.getCursor();//TODO:为什么这里必须setPosition呢？否则cursor会自己跑到一个奇怪的位置
         Bundle bundle = getIntent().getExtras();
@@ -160,8 +159,7 @@ public final class PlayActivity extends Activity {
     private void play() {
         Intent intent = new Intent();
         intent.putExtra("op",
-                SSApplication.playerState == Constants.PAUSED_STATE
-                        ? Constants.CONTINUE_OP : Constants.PLAY_OP);
+                SSApplication.playerState == Constants.PAUSED_STATE ? Constants.CONTINUE_OP : Constants.PLAY_OP);
         intent.setAction(Constants.SERVICE_ACTION);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         playBtn.setBackgroundResource(R.drawable.pause);
@@ -185,14 +183,6 @@ public final class PlayActivity extends Activity {
 
     // when title bar clicked
     public void titleBarClicked(View _view) {
-        // 第一次编辑后，马上再点击标题编辑时需要重新获取cursor,否则显示的数据不正确
-        if (SSApplication.musicEdit) {
-            Cursor __cur = this.getContentResolver()
-                    .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                            Constants.MUSIC_CUR, null, null, null);
-            SSApplication.setCursor(__cur);
-            SSApplication.musicEdit = false;
-        }
         // update mp3 profile
         final Cursor _cur = SSApplication.getCursor();
         final LayoutInflater factory = LayoutInflater.from(this);
@@ -231,6 +221,7 @@ public final class PlayActivity extends Activity {
                             Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
                             uri = ContentUris.withAppendedId(uri, _cur.getInt(0));
                             getContentResolver().update(uri, cv, null, null);
+                            getContentResolver().notifyChange(uri, null);
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
