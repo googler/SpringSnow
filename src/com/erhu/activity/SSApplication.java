@@ -29,18 +29,14 @@ public class SSApplication extends Application {
     }
 
     public static void setCursor(Cursor _cursor) {
-        cursor.close();
-        cursor = null;
-        if (_cursor != null && cursor != _cursor) {
-            cursor = _cursor;
-            if (position < cursor.getCount() && position != -1)
-                cursor.moveToPosition(position);
-        }
+        setCursor(_cursor, position);
     }
 
     public static void setCursor(Cursor _cursor, int _pos) {
-        if (_cursor != null && cursor != _cursor) {
+        if (cursor != null) {
             cursor.close();
+        }
+        if (_cursor != null && cursor != _cursor) {
             cursor = null;
             cursor = _cursor;
             if (_pos != -1 && _pos < cursor.getCount()) {
