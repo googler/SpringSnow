@@ -166,9 +166,10 @@ public class MusicListActivity extends ListActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == 1)
-                Toast.makeText(this, "保存成功:)", Toast.LENGTH_SHORT).show();
-            else if (requestCode == 2)
+            //if (requestCode == 1)
+            //Toast.makeText(this, "保存成功:)", Toast.LENGTH_SHORT).show();
+            //else
+            if (requestCode == 2)
                 Toast.makeText(this, "删除成功:)", Toast.LENGTH_SHORT).show();
         }
         super.onActivityResult(requestCode, resultCode, data);

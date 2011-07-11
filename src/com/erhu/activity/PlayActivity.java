@@ -213,35 +213,35 @@ public class PlayActivity extends Activity {
         dlg_builder.setIcon(R.drawable.folder_item_img);
         dlg_builder.setTitle("编辑MP3信息");
         dlg_builder.setView(textEntryView);
-        dlg_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                if (TextUtils.isEmpty(title_ETxt.getText().toString().trim())) {
-                    Toast.makeText(PlayActivity.this, "请填写标题:)", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                String _title = title_ETxt.getText().toString().trim();
-                String _artist = artist_ETxt.getText().toString().trim();
-                String _album = album_ETxt.getText().toString().trim();
-                title.setText(_title);
-                artist.setText(_artist);
+        dlg_builder.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        if (TextUtils.isEmpty(title_ETxt.getText().toString().trim())) {
+                            Toast.makeText(PlayActivity.this, "请填写标题:)", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        String _title = title_ETxt.getText().toString().trim();
+                        String _artist = artist_ETxt.getText().toString().trim();
+                        String _album = album_ETxt.getText().toString().trim();
+                        title.setText(_title);
+                        artist.setText(_artist);
 
-                ContentValues cv = new ContentValues();
-                cv.put(MediaStore.Audio.Media.TITLE, _title);
-                cv.put(MediaStore.Audio.Media.ARTIST, _artist);
-                cv.put(MediaStore.Audio.Media.ALBUM, _album);
+                        ContentValues cv = new ContentValues();
+                        cv.put(MediaStore.Audio.Media.TITLE, _title);
+                        cv.put(MediaStore.Audio.Media.ARTIST, _artist);
+                        cv.put(MediaStore.Audio.Media.ALBUM, _album);
 
-                Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                uri = ContentUris.withAppendedId(uri, _cur.getInt(0));
-                getContentResolver().update(uri, cv, null, null);
-                if (Tools.editMp3(_cur.getString(5).substring(4),
-                        new String[]{_artist, _album, _title}, title.getText().toString()))
-                    setResult(Activity.RESULT_OK);
-                SSApplication.musicEdit = true;
-            }
-        })
+                        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                        uri = ContentUris.withAppendedId(uri, _cur.getInt(0));
+                        getContentResolver().update(uri, cv, null, null);
+                        if (Tools.editMp3(_cur.getString(5).substring(4), new String[]{_artist, _album, _title})) {
+                            Toast.makeText(PlayActivity.this, "保存成功:)", Toast.LENGTH_SHORT).show();
+                            SSApplication.musicEdit = true;
+                        }
+                    }
+                })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-
                     }
                 }).create().show();
     }

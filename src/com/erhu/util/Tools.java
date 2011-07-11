@@ -40,8 +40,8 @@ public final class Tools {
      * @param _mp3Info
      * @return
      */
-    public static boolean editMp3(final String _fileName, String[] _mp3Info, final String _oldTitle) {
-        if (TextUtils.isEmpty(_fileName) || null == _mp3Info || null == _oldTitle)
+    public static boolean editMp3(final String _fileName, String[] _mp3Info) {
+        if (TextUtils.isEmpty(_fileName) || null == _mp3Info)
             return false;
 
         final String artist = _mp3Info[0];
