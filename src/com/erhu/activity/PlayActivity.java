@@ -185,14 +185,6 @@ public class PlayActivity extends Activity {
         finish();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
-            Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
     /**
      * when title bar clicked
      *
@@ -223,6 +215,11 @@ public class PlayActivity extends Activity {
                         String _title = title_ETxt.getText().toString().trim();
                         String _artist = artist_ETxt.getText().toString().trim();
                         String _album = album_ETxt.getText().toString().trim();
+
+                        if (title.getText().equals(_title) && artist.getText().equals(_artist)
+                                && _cur.getString(4).equals(_album))
+                            return;
+
                         title.setText(_title);
                         artist.setText(_artist);
 

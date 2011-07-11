@@ -72,9 +72,11 @@ public class Mp3ProfileActivity extends Activity {
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         uri = ContentUris.withAppendedId(uri, mCursor.getInt(0));
         super.getContentResolver().update(uri, cv, null, null);
-        if (Tools.editMp3(mCursor.getString(5).substring(4), new String[]{artist, album, title})) {
+        if (title.equals(mCursor.getString(1)) && artist.equals(mCursor.getString(3)) &&
+                album.equals(mCursor.getString(4)))
+            ;
+        else if (Tools.editMp3(mCursor.getString(5).substring(4), new String[]{artist, album, title})) {
             Toast.makeText(this, "保存成功:)", Toast.LENGTH_SHORT).show();
-            //setResult(Activity.RESULT_OK);
             SSApplication.musicEdit = true;
         }
         finish();
