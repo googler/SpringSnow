@@ -216,7 +216,7 @@ public final class PlayActivity extends Activity {
                                 @Override
                                 public void run() {
                                     final int id = _cur.getInt(0);
-                                    final String path = _cur.getString(5).substring(4);
+                                    final String path = _cur.getString(5);
                                     boolean flag = Tools.editMp3(PlayActivity.this, id, new String[]{_artist, _album, _title, path});
                                     Message msg = handler.obtainMessage();
                                     Bundle bdl = msg.getData();

@@ -82,7 +82,7 @@ public class Mp3ProfileActivity extends Activity {
                 @Override
                 public void run() {
                     final int id = mCursor.getInt(0);
-                    final String path = mCursor.getString(5).substring(4);
+                    final String path = mCursor.getString(5);
                     if (Tools.editMp3(Mp3ProfileActivity.this, id, new String[]{artist, album, title, path})) {
                         SSApplication.resetCursor(Mp3ProfileActivity.this);
                         mCursor.close();

@@ -175,7 +175,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         manager.notify(Constants.NOTIFICATION_ID, status);
     }
 
-
     @Override
     public IBinder onBind(Intent intent) {
         return null;
