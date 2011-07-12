@@ -103,11 +103,14 @@ public class MusicListActivity extends ListActivity {
                                                 // delete file
                                                 new File(t_cur.getString(2).substring(4)).delete();
                                                 t_cur.close();
-                                                mCursor = getContentResolver().query(
-                                                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Constants.MUSIC_CUR, null, null, null);
-                                                listview.setAdapter(new MusicListAdapter(MusicListActivity.this, mCursor));
+                                                // fresh UI
+                                                {
+                                                    mCursor = getContentResolver().query(
+                                                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Constants.MUSIC_CUR, null, null, null);
+                                                    listview.setAdapter(new MusicListAdapter(MusicListActivity.this, mCursor));
+                                                }
                                                 // 如果当前播放序列中有被删除的歌曲，则要重新给全局cursor赋值
-                                                SSApplication.resetCursor(MusicListActivity.this, Constants.PLAY_LIST);
+                                                SSApplication.resetCursor(MusicListActivity.this);
                                                 // 被删除的歌曲在当前播放歌曲的前面，position - 1
                                                 if (_position < SSApplication.getPosition())
                                                     SSApplication.setPosition(SSApplication.getPosition() - 1);
@@ -125,7 +128,7 @@ public class MusicListActivity extends ListActivity {
             };
             AlertDialog.Builder builder = new AlertDialog.Builder(MusicListActivity.this);
             builder.setTitle("你可以...");
-            builder.setItems(new String[]{"编辑音乐", "删除之"}, listener);
+            builder.setItems(new String[]{"编辑音乐信息", "删除这首"}, listener);
             builder.create().show();
             return true;
         }
@@ -133,13 +136,8 @@ public class MusicListActivity extends ListActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            //if (requestCode == 1)
-            //Toast.makeText(this, "保存成功:)", Toast.LENGTH_SHORT).show();
-            //else
-            if (requestCode == 2)
-                Toast.makeText(this, "删除成功:)", Toast.LENGTH_SHORT).show();
-        }
+        if (resultCode == Activity.RESULT_OK && requestCode == 2)
+            Toast.makeText(this, "删除成功:)", Toast.LENGTH_SHORT).show();
         super.onActivityResult(requestCode, resultCode, data);
     }
 

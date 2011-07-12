@@ -1,11 +1,11 @@
 package com.erhu.activity;
 
 import android.app.Activity;
-import android.content.ContentUris;
-import android.content.ContentValues;
+import android.app.ProgressDialog;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,9 +24,20 @@ public class Mp3ProfileActivity extends Activity {
     private EditText titleETxt;
     private EditText artistETxt;
     private EditText albumETxt;
+    private ProgressDialog progressDlg;
 
     private String oldTitle;
     private Cursor mCursor;
+
+    final Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Toast.makeText(Mp3ProfileActivity.this, "保存成功:)", Toast.LENGTH_SHORT).show();
+            progressDlg.dismiss();
+            finish();
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,26 +71,27 @@ public class Mp3ProfileActivity extends Activity {
             Toast.makeText(this, "请填写标题:)", Toast.LENGTH_SHORT).show();
             return;
         }
-        String title = titleETxt.getText().toString().trim();
-        String artist = artistETxt.getText().toString().trim();
-        String album = albumETxt.getText().toString().trim();
+        final String title = titleETxt.getText().toString().trim();
+        final String artist = artistETxt.getText().toString().trim();
+        final String album = albumETxt.getText().toString().trim();
 
-        ContentValues cv = new ContentValues();
-        cv.put(MediaStore.Audio.Media.TITLE, title);
-        cv.put(MediaStore.Audio.Media.ARTIST, artist);
-        cv.put(MediaStore.Audio.Media.ALBUM, album);
-
-        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        uri = ContentUris.withAppendedId(uri, mCursor.getInt(0));
-        super.getContentResolver().update(uri, cv, null, null);
         if (!(title.equals(mCursor.getString(1)) && artist.equals(mCursor.getString(3)) &&
-                album.equals(mCursor.getString(4))))
-            if (Tools.editMp3(mCursor.getString(5).substring(4), new String[]{artist, album, title})) {
-                SSApplication.resetCursor(Mp3ProfileActivity.this, Constants.PLAY_LIST);
-                Toast.makeText(this, "保存成功:)", Toast.LENGTH_SHORT).show();
-                mCursor.close();
-            }
-        finish();
+                album.equals(mCursor.getString(4)))) {
+            progressDlg = ProgressDialog.show(Mp3ProfileActivity.this, "友情提示:)", "我们正在努力...");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    final int id = mCursor.getInt(0);
+                    final String path = mCursor.getString(5).substring(4);
+                    if (Tools.editMp3(Mp3ProfileActivity.this, id, new String[]{artist, album, title, path})) {
+                        SSApplication.resetCursor(Mp3ProfileActivity.this);
+                        mCursor.close();
+                        handler.sendMessage(handler.obtainMessage());
+                    }
+                }
+            }).start();
+        } else
+            finish();
     }
 
     @Override

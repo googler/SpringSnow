@@ -1,8 +1,11 @@
 package com.erhu.util;
 
 import android.app.NotificationManager;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
-import android.text.TextUtils;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
@@ -33,22 +36,28 @@ public final class Tools {
         manager.cancel(Constants.NOTIFICATION_ID);
     }
 
-    /**
-     * edit mp3 file
-     *
-     * @param _fileName
-     * @param _mp3Info
-     * @return
-     */
-    public static boolean editMp3(final String _fileName, String[] _mp3Info) {
-        if (TextUtils.isEmpty(_fileName) || null == _mp3Info)
+
+    // edit mp3 file
+    public static boolean editMp3(final Context _context, final int _id, String[] _mp3Info) {
+        if (null == _mp3Info)
             return false;
 
         final String artist = _mp3Info[0];
         final String album = _mp3Info[1];
         final String title = _mp3Info[2];
+        final String _path = _mp3Info[3];
+        // ----update db
+        ContentValues cv = new ContentValues();
+        cv.put(MediaStore.Audio.Media.TITLE, title);
+        cv.put(MediaStore.Audio.Media.ARTIST, artist);
+        cv.put(MediaStore.Audio.Media.ALBUM, album);
+
+        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        uri = ContentUris.withAppendedId(uri, _id);
+        _context.getContentResolver().update(uri, cv, null, null);
+        // ----update file
         try {
-            MP3File mp3 = new MP3File(_fileName);
+            MP3File mp3 = new MP3File(_path);
             AbstractID3v2 id3v2 = mp3.getID3v2Tag();
             if (id3v2 != null && id3v2.getClass().toString().indexOf("ID3v2_3") > 0) {
                 id3v2.setLeadArtist(artist);

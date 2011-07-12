@@ -2,13 +2,12 @@ package com.erhu.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.*;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +24,8 @@ public final class PlayActivity extends Activity {
     private TextView timeLeft;
     private TextView artist;
     private Button playBtn;
+    private ProgressDialog progressDlg;
+
     private int currentPosition;//当前播放位置
 
     // 定义musicReceiver,接收MusicService发送的广播
@@ -53,8 +54,9 @@ public final class PlayActivity extends Activity {
                 Bundle bdl = msg.getData();
                 title.setText(bdl.getString("title"));
                 artist.setText(bdl.getString("artist"));
+                progressDlg.dismiss();
                 Toast.makeText(PlayActivity.this, "保存成功:)", Toast.LENGTH_SHORT).show();
-                SSApplication.resetCursor(PlayActivity.this, Constants.PLAY_LIST);
+                SSApplication.resetCursor(PlayActivity.this);
             }
             super.handleMessage(msg);
         }
@@ -202,31 +204,20 @@ public final class PlayActivity extends Activity {
         dlg_builder.setPositiveButton("确定",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        if (TextUtils.isEmpty(title_ETxt.getText().toString().trim())) {
-                            Toast.makeText(PlayActivity.this, "请填写标题:)", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        final String _title = title_ETxt.getText().toString().trim();
+                        String __title = title_ETxt.getText().toString().trim();
+                        final String _title = TextUtils.isEmpty(__title) ? "<unknown>" : __title;
                         final String _artist = artist_ETxt.getText().toString().trim();
                         final String _album = album_ETxt.getText().toString().trim();
 
-                        if (title.getText().equals(_title) && artist.getText().equals(_artist)
-                                && _cur.getString(4).equals(_album))
-                            ;
-                        else {
-                            ContentValues cv = new ContentValues();
-                            cv.put(MediaStore.Audio.Media.TITLE, _title);
-                            cv.put(MediaStore.Audio.Media.ARTIST, _artist);
-                            cv.put(MediaStore.Audio.Media.ALBUM, _album);
-
-                            Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                            uri = ContentUris.withAppendedId(uri, _cur.getInt(0));
-                            getContentResolver().update(uri, cv, null, null);
-                            getContentResolver().notifyChange(uri, null);
+                        if (!(title.getText().equals(_title) && artist.getText().equals(_artist)
+                                && _cur.getString(4).equals(_album))) {
+                            progressDlg = ProgressDialog.show(PlayActivity.this, "友情提示:)", "我们正在努力...");
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    boolean flag = Tools.editMp3(_cur.getString(5).substring(4), new String[]{_artist, _album, _title});
+                                    final int id = _cur.getInt(0);
+                                    final String path = _cur.getString(5).substring(4);
+                                    boolean flag = Tools.editMp3(PlayActivity.this, id, new String[]{_artist, _album, _title, path});
                                     Message msg = handler.obtainMessage();
                                     Bundle bdl = msg.getData();
                                     bdl.putString("title", _title);
