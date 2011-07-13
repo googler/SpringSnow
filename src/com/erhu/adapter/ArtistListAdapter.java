@@ -2,7 +2,6 @@ package com.erhu.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,7 @@ public class ArtistListAdapter extends BaseAdapter {
         TextView count = (TextView) convertView.findViewById(R.id.artist_list_item_count);
         count.setText(mCursor.getString(2));
         TextView singer = (TextView) convertView.findViewById(R.id.artist_list_item_singer);
-        singer.setText(mCursor.getString(3).equals(MediaStore.UNKNOWN_STRING) ? "无名氏:(" : mCursor.getString(1));
+        singer.setText(mCursor.getString(3));
         return convertView;
     }
 }

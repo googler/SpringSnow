@@ -1,18 +1,18 @@
 package com.mpatric.mp3agic;
 
 public class ID3v2TextFrameData extends AbstractID3v2FrameData {
-	
+
 	protected EncodedText text;
-	
+
 	public ID3v2TextFrameData(boolean unsynchronisation) {
 		super(unsynchronisation);
 	}
-	
+
 	public ID3v2TextFrameData(boolean unsynchronisation, EncodedText text) {
 		super(unsynchronisation);
 		this.text = text;
 	}
-	
+
 	public ID3v2TextFrameData(boolean unsynchronisation, byte[] bytes) throws InvalidDataException {
 		super(unsynchronisation);
 		synchroniseAndUnpackFrameData(bytes);
@@ -21,7 +21,7 @@ public class ID3v2TextFrameData extends AbstractID3v2FrameData {
 	protected void unpackFrameData(byte[] bytes) throws InvalidDataException {
 		text = new EncodedText(bytes[0], BufferTools.copyBuffer(bytes, 1, bytes.length - 1));
 	}
-	
+
 	protected byte[] packFrameData() {
 		byte[] bytes = new byte[getLength()];
 		if (text != null) bytes[0] = text.getTextEncoding();
@@ -31,7 +31,7 @@ public class ID3v2TextFrameData extends AbstractID3v2FrameData {
 		}
 		return bytes;
 	}
-	
+
 	protected int getLength() {
 		int length = 1;
 		if (text != null) length += text.toBytes().length;
@@ -45,7 +45,7 @@ public class ID3v2TextFrameData extends AbstractID3v2FrameData {
 	public void setText(EncodedText text) {
 		this.text = text;
 	}
-	
+
 	public boolean equals(Object obj) {
 		if (! (obj instanceof ID3v2TextFrameData)) return false;
 		if (! super.equals(obj)) return false;

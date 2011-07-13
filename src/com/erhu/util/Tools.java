@@ -9,7 +9,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.ID3v2;
-import com.mpatric.mp3agic.ID3v23Tag;
+import com.mpatric.mp3agic.ID3v24Tag;
 import com.mpatric.mp3agic.Mp3File;
 
 import java.io.File;
@@ -23,7 +23,7 @@ public final class Tools {
     }
 
     // edit mp3 file
-    public static synchronized boolean editMp3(final Context _context, final int _id, String[] _mp3Info) {
+    public static boolean editMp3(final Context _context, final int _id, String[] _mp3Info) {
         if (null == _mp3Info)
             return false;
         // ----- update file
@@ -72,10 +72,10 @@ public final class Tools {
 
     private static void changeTag(final Mp3File mp3, final String[] _mp3Info, final String _new_file_name) {
         try {
-            final String artist = Tools.convertGBK2ISO8859(_mp3Info[0]);
-            final String album = Tools.convertGBK2ISO8859(_mp3Info[1]);
-            final String title = Tools.convertGBK2ISO8859(_mp3Info[2]);
-            ID3v2 id3v2 = mp3.getId3v2Tag();
+            final String artist = Tools.gbk2ISO8859(_mp3Info[0]);
+            final String album = Tools.gbk2ISO8859(_mp3Info[1]);
+            final String title = Tools.gbk2ISO8859(_mp3Info[2]);
+            /*ID3v2 id3v2 = mp3.getId3v2Tag();
             ID3v1 id3v1 = mp3.getId3v1Tag();
             if (id3v2 != null) {
                 id3v2.setArtist(artist);
@@ -89,12 +89,14 @@ public final class Tools {
                 id3v1.setTitle(title);
                 mp3.setId3v1Tag(id3v1);
             } else {
-                ID3v2 id3v2_4 = new ID3v23Tag();
-                id3v2_4.setArtist(artist);
-                id3v2_4.setAlbum(album);
-                id3v2_4.setTitle(title);
-                mp3.setId3v2Tag(id3v2_4);
-            }
+            */
+            mp3.setId3v1Tag(null);
+            ID3v24Tag id3v2_4 = new ID3v24Tag();
+            id3v2_4.setArtist(artist);
+            id3v2_4.setAlbum(album);
+            id3v2_4.setTitle(title);
+            mp3.setId3v2Tag(id3v2_4);
+            //}
             mp3.save(_new_file_name);
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,7 +104,7 @@ public final class Tools {
     }
 
     // convert gbk to iso-8859-1
-    public static String convertGBK2ISO8859(final String _gbk_str) {
+    public static String gbk2ISO8859(final String _gbk_str) {
         try {
             return new String(_gbk_str.getBytes("GBK"), "ISO-8859-1");
         } catch (UnsupportedEncodingException e) {

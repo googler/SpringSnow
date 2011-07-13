@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.erhu.R;
 import com.erhu.util.Constants;
@@ -25,6 +26,7 @@ public class Mp3ProfileActivity extends Activity {
     private EditText artistETxt;
     private EditText albumETxt;
     private ProgressDialog progressDlg;
+    private TextView tipTView;
 
     private String oldTitle;
     private Cursor mCursor;
@@ -48,6 +50,7 @@ public class Mp3ProfileActivity extends Activity {
         titleETxt = (EditText) findViewById(R.id.mp3_profile_title);
         artistETxt = (EditText) findViewById(R.id.mp3_profile_artist);
         albumETxt = (EditText) findViewById(R.id.mp3_profile_album);
+        tipTView = (TextView) findViewById(R.id.mp3_profile_tip);
 
         mCursor = this.getContentResolver()
                 .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -58,6 +61,9 @@ public class Mp3ProfileActivity extends Activity {
         titleETxt.setText(oldTitle);
         artistETxt.setText(mCursor.getString(3));
         albumETxt.setText(mCursor.getString(4));
+        String str = "友情提示:\n1.如果编辑框信息显示不全，把屏幕横着放试试看吧:)\n2.编辑后的中文信息在系统重启后会乱码，" +
+                "使用iTunes将文件TAG转成ID3V2.4可解决此问题(erhu.com@gmail.com).";
+        tipTView.setText(str);
     }
 
     /**
