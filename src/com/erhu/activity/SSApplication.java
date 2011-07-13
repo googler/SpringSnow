@@ -58,7 +58,10 @@ public class SSApplication extends Application {
     public static void resetCursor(final Context _context) {
         if (Constants.PLAY_LIST.equals(Constants.ALL_MUSIC)) {
             Cursor cur = _context.getContentResolver().query(
-                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Constants.MUSIC_CUR, null, null, null);
+                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                    Constants.MUSIC_CUR,
+                    null, null,
+                    MediaStore.Audio.Media.TITLE);
             setCursor(cur);
         }
     }

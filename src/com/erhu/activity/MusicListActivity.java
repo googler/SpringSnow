@@ -48,7 +48,8 @@ public class MusicListActivity extends ListActivity {
         super.onStart();
         log("start");
         mCursor = getContentResolver().query(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Constants.MUSIC_CUR, null, null, null);
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Constants.MUSIC_CUR, null, null,
+                MediaStore.Audio.Media.TITLE);
         listview.setAdapter(new MusicListAdapter(this, mCursor));
     }
 
