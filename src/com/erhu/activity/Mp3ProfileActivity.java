@@ -54,7 +54,7 @@ public class Mp3ProfileActivity extends Activity {
 
         mCursor = this.getContentResolver()
                 .query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                        Constants.MUSIC_CUR, null, null, null);
+                        Constants.MUSIC_CUR, null, null, MediaStore.Audio.Media.TITLE);
         mCursor.moveToPosition(position);
 
         oldTitle = mCursor.getString(1);
