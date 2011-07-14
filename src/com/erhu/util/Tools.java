@@ -7,8 +7,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
-import com.mpatric.mp3agic.ID3v1;
-import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.ID3v24Tag;
 import com.mpatric.mp3agic.Mp3File;
 

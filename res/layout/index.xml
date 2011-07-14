@@ -8,35 +8,10 @@
         android:layout_height="fill_parent"
         android:background="@drawable/list_bg">
     <!-- 顶部显示正在播放的歌曲 -->
-    <LinearLayout
-            android:id="@+id/index_top_bar"
-            android:layout_gravity="center"
-            android:layout_width="fill_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/list_bg">
-        <TextView
-                android:id="@+id/index_top_title"
-                android:layout_width="285dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2.0dp"
-                android:layout_marginLeft="6.0dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="欢迎使用‘阳春白雪’音乐播放器:)"/>
-        <!-- 暂停播放按钮 -->
-        <Button
-                android:id="@+id/index_top_btn"
-                android:background="@drawable/index_topbar_play"
-                android:layout_width="28sp"
-                android:layout_height="28sp"
-                android:layout_marginTop="2.0dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:onClick="playBtnClicked"/>
-    </LinearLayout>
+    <include android:id="@+id/index_bar" layout="@layout/playbar"/>
     <!-- 中间动态加载View -->
     <LinearLayout
-            android:id="@+id/index_container"
+            android:id="@+id/index_mid_container"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
@@ -100,6 +75,5 @@
                     android:layout_gravity="center"
                     android:textSize="20dp"/>
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

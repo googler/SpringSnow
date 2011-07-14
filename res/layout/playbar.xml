@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/list_bg">
+    <TextView
+            android:id="@+id/playbar_title"
+            android:layout_width="285dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2.0dp"
+            android:layout_marginLeft="6.0dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="欢迎使用‘阳春白雪’音乐播放器:)"/>
+    <!-- 暂停播放按钮 -->
+    <Button
+            android:id="@+id/playbar_btn"
+            android:background="@drawable/index_topbar_play"
+            android:layout_width="28sp"
+            android:layout_height="28sp"
+            android:layout_marginTop="2.0dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="playBtnClicked"/>
+</LinearLayout>

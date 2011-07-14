@@ -28,7 +28,7 @@ public class EncodedText {
     };
 
     private byte[] value;
-	private byte textEncoding;
+    private byte textEncoding;
 
     public EncodedText(byte textEncoding, byte[] value) {
         this.textEncoding = textEncoding;
@@ -40,7 +40,7 @@ public class EncodedText {
         value = stringToUnicodeBytes(ascii, characterSetForTextEncoding(textEncoding));
     }
 
-	private String characterSetForTextEncoding(byte textEncoding) {
+    private String characterSetForTextEncoding(byte textEncoding) {
         try {
             return characterSets[textEncoding];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -48,7 +48,7 @@ public class EncodedText {
         }
     }
 
-	public byte getTextEncoding() {
+    public byte getTextEncoding() {
         return textEncoding;
     }
 
@@ -92,7 +92,7 @@ public class EncodedText {
     }
 
     public static byte[] stringToUnicodeBytes(String s, String characterSet) {
-         Charset charset = Charset.forName(characterSet);
+        Charset charset = Charset.forName(characterSet);
         CharsetEncoder encoder = charset.newEncoder();
         ByteBuffer byteBuffer;
         try {

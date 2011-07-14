@@ -41,7 +41,7 @@ public class SimpleTest {
 
     private static void changeTag(Mp3File mp3, final String[] _mp3Info, final String _new_file_name) throws InvalidDataException, IOException, UnsupportedTagException, NotSupportedException {
         final String artist = Tools.gbk2ISO8859(_mp3Info[0]);
-         final String album = Tools.gbk2ISO8859(_mp3Info[1]);
+        final String album = Tools.gbk2ISO8859(_mp3Info[1]);
         final String title = Tools.gbk2ISO8859(_mp3Info[2]);
         //final String artist = _mp3Info[0];
         //final String album = _mp3Info[1];

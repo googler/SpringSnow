@@ -1,6 +1,5 @@
 package com.erhu.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.*;
@@ -9,15 +8,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import com.erhu.R;
+import com.erhu.activity.base.BaseActivity;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
 
-public final class PlayActivity extends Activity {
+public final class PlayActivity extends BaseActivity {
     // UI
     private SeekBar seekBar;
     private TextView title;
@@ -64,7 +63,6 @@ public final class PlayActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        log("create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play);
         // 半透明效果
@@ -100,7 +98,6 @@ public final class PlayActivity extends Activity {
 
     @Override
     protected void onStart() {
-        log("start");
         super.onStart();
         regReceiver();
         Cursor cur = SSApplication.getCursor();//TODO:为什么这里必须setPosition呢？否则cursor会自己跑到一个奇怪的位置
@@ -121,7 +118,7 @@ public final class PlayActivity extends Activity {
         filter.addAction(Constants.DURATION_ACTION);
         filter.addAction(Constants.CONTINUE_ACTION);
         registerReceiver(musicReceiver, filter);
-        log("register music receiver success");
+        log(this, "register music receiver success");
     }
 
     // 点击播放/暂停按钮
@@ -235,33 +232,10 @@ public final class PlayActivity extends Activity {
                 }).create().show();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        log("destroy");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        log("pause");
-    }
 
     @Override
     protected void onStop() {
-        log("stop");
         unregisterReceiver(musicReceiver);
         super.onStop();
-    }
-
-    @Override
-    public void finish() {
-        log("finish");
-        super.finish();
-    }
-
-    private void log(String _msg) {
-        final String tag = PlayActivity.class.getSimpleName();
-        Log.w(tag, "log@:::::[" + tag + "]: " + _msg);
     }
 }

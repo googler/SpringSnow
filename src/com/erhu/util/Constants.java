@@ -28,6 +28,11 @@ public class Constants {
             MediaStore.Audio.Media.ARTIST,
             MediaStore.Audio.Media.ALBUM,
             MediaStore.Audio.Media.DATA};
+    public static String[] ARTIST_CUR = new String[]{
+            MediaStore.Audio.Artists._ID,
+            MediaStore.Audio.Artists.ARTIST,
+            MediaStore.Audio.Artists.NUMBER_OF_TRACKS,
+            MediaStore.Audio.Artists.NUMBER_OF_ALBUMS};
     public static String ALL_MUSIC = "ALL";
     public static String PLAY_LIST = ALL_MUSIC;
 }

@@ -1,6 +1,5 @@
 package com.erhu.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -8,19 +7,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.erhu.R;
+import com.erhu.activity.base.BaseActivity;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
 
 /**
  * this activity is used to edit mp3 profile
  */
-public class Mp3ProfileActivity extends Activity {
+public class Mp3ProfileActivity extends BaseActivity {
 
     private EditText titleETxt;
     private EditText artistETxt;
@@ -44,7 +43,6 @@ public class Mp3ProfileActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        log("create");
         setContentView(R.layout.mp3_profile);
         int position = getIntent().getExtras().getInt("pos");
         titleETxt = (EditText) findViewById(R.id.mp3_profile_title);
@@ -98,34 +96,5 @@ public class Mp3ProfileActivity extends Activity {
             }).start();
         } else
             finish();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        log("start");
-    }
-
-    @Override
-    public void finish() {
-        log("finish");
-        super.finish();
-    }
-
-    @Override
-    protected void onStop() {
-        log("stop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        log("destroy");
-    }
-
-    private void log(String _msg) {
-        String TAG = Mp3ProfileActivity.class.getSimpleName();
-        Log.w(TAG, "log@:::::[" + TAG + "]: " + _msg);
     }
 }

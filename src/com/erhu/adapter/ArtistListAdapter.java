@@ -43,7 +43,7 @@ public class ArtistListAdapter extends BaseAdapter {
         TextView count = (TextView) convertView.findViewById(R.id.artist_list_item_count);
         count.setText(mCursor.getString(2));
         TextView singer = (TextView) convertView.findViewById(R.id.artist_list_item_singer);
-        singer.setText(mCursor.getString(3));
+        singer.setText(mCursor.getString(1));
         return convertView;
     }
 }

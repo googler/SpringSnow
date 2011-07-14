@@ -1,29 +1,28 @@
 package com.erhu.activity;
 
-import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.erhu.R;
+import com.erhu.activity.base.BaseListActivity;
 import com.erhu.adapter.ArtistListAdapter;
+import com.erhu.util.Constants;
 
 /**
  * 艺术家
  */
-public class ArtistListActivity extends ListActivity {
+public class ArtistListActivity extends BaseListActivity {
     private ListView listview;
     private Cursor mCursor;
     private String[] _artists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        log("create");
         super.onCreate(savedInstanceState);
         listview = getListView();
         this.setListData();
@@ -37,13 +36,9 @@ public class ArtistListActivity extends ListActivity {
      * 给列表填充数据
      */
     private void setListData() {
-        mCursor = this.getContentResolver()
-                .query(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
-                        new String[]{MediaStore.Audio.Artists._ID,
-                                MediaStore.Audio.Artists.ARTIST,
-                                MediaStore.Audio.Artists.NUMBER_OF_TRACKS,
-                                MediaStore.Audio.Artists.NUMBER_OF_ALBUMS},
-                        null, null, MediaStore.Audio.Artists.ARTIST_KEY);
+        mCursor = this.getContentResolver().query(
+                MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
+                Constants.ARTIST_CUR, null, null, MediaStore.Audio.Artists.ARTIST_KEY);
         if (mCursor != null) {
             mCursor.moveToFirst();
             _artists = new String[mCursor.getCount()];
@@ -76,16 +71,5 @@ public class ArtistListActivity extends ListActivity {
                             null, null, null);//TODO:这里加where条件过滤
                             */
         }
-    }
-
-    @Override
-    public void finish() {
-        log("finish");
-        super.finish();
-    }
-
-    private void log(String _msg) {
-        String TAG = ArtistListActivity.class.getSimpleName();
-        Log.w(TAG, "log@:::::[" + TAG + "]: " + _msg);
     }
 }
