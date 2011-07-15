@@ -9,14 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.erhu.R;
 
-/**
- * life is very good:-)
- */
-public class ArtistListAdapter extends BaseAdapter {
+public class AlbumListAdapter extends BaseAdapter {
     private Context context;
     private Cursor mCursor;
 
-    public ArtistListAdapter(Context con, Cursor cur) {
+    public AlbumListAdapter(Context con, Cursor cur) {
         context = con;
         mCursor = cur;
     }
@@ -38,13 +35,14 @@ public class ArtistListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int _position, View convertView, ViewGroup parent) {
-        if (convertView == null)
-            convertView = LayoutInflater.from(context).inflate(R.layout.list_item_artist, null);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.list_item_album, null);
+        }
         mCursor.moveToPosition(_position);
-        TextView count = (TextView) convertView.findViewById(R.id.artist_list_item_count);
-        count.setText(mCursor.getString(2));
-        TextView singer = (TextView) convertView.findViewById(R.id.artist_list_item_singer);
-        singer.setText(mCursor.getString(1));
+        //TextView count = (TextView) convertView.findViewById(R.id.artist_list_item_count);
+        //count.setText(mCursor.getString(2));
+        TextView album = (TextView) convertView.findViewById(R.id.album_list_item_name);
+        album.setText(mCursor.getString(1));
         return convertView;
     }
 }

@@ -14,8 +14,8 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import com.erhu.R;
-import com.erhu.activityGroup.IndexActivityGroup;
 import com.erhu.activity.SSApplication;
+import com.erhu.activityGroup.IndexActivityGroup;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
 
@@ -168,10 +168,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         Notification status = new Notification(R.drawable.sonata, title + " - " + artist, System.currentTimeMillis());
         status.flags |= Notification.FLAG_ONGOING_EVENT;
         status.setLatestEventInfo(getApplicationContext(), title, artist, contentIntent);
-
-        //status.contentView = views;
-        //status.flags |= Notification.FLAG_ONGOING_EVENT;
-        //status.contentIntent = PendingIntent.getActivity(this, 0, new Intent("me.erhu.media.PLAY_VIEWER").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), 0);
         manager.notify(Constants.NOTIFICATION_ID, status);
     }
 

@@ -37,6 +37,8 @@ public abstract class AbstractID3v2FrameData {
     }
 
     protected abstract void unpackFrameData(byte[] bytes) throws InvalidDataException;
+
     protected abstract byte[] packFrameData();
+
     protected abstract int getLength();
 }

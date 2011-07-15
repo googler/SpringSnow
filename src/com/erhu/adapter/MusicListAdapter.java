@@ -39,7 +39,8 @@ public class MusicListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(context).inflate(R.layout.music_list_item, null);
+        if (convertView == null)
+            convertView = LayoutInflater.from(context).inflate(R.layout.list_item_music, null);
         TextView title = (TextView) convertView.findViewById(R.id.music_list_item_title);
         TextView singer = (TextView) convertView.findViewById(R.id.music_list_item_artist);
         TextView time = (TextView) convertView.findViewById(R.id.music_list_item_time);

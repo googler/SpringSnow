@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
-public class BaseListActivity extends ListActivity {
+public abstract class BaseListActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         log(this, "create");
@@ -36,7 +36,7 @@ public class BaseListActivity extends ListActivity {
         super.onDestroy();
     }
 
-    private void log(final Context _context, String _msg) {
+    protected void log(final Context _context, String _msg) {
         String TAG = _context.getClass().getSimpleName();
         Log.w(TAG, "log@:::::[" + TAG + "]: " + _msg);
     }

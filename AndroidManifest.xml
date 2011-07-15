@@ -18,13 +18,13 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".activity.AllMusicListActivity"
+                android:name=".activity.list.MusicListActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".activity.FavouriteListActivity"
+                android:name=".activity.list.FavouriteListActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".activity.ArtistListActivity"
+                android:name=".activity.list.ArtistListActivity"
                 android:screenOrientation="portrait"/>
         <activity
                 android:name=".activity.PlayActivity"
@@ -33,9 +33,18 @@
                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity
                 android:name=".activity.Mp3ProfileActivity"/>
-        <service
-                android:name=".service.MusicService"
-                android:exported="false">
+        <activity
+                android:name=".activityGroup.ArtistActivityGroup"
+                android:theme="@android:style/Theme.NoTitleBar"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".activityGroup.AlbumActivityGroup"
+                android:theme="@android:style/Theme.NoTitleBar"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".activity.list.AlbumListActivity"
+                android:screenOrientation="portrait"/>
+        <service android:name=".service.MusicService" android:exported="false">
             <intent-filter>
                 <action android:name="me.erhu.media.MUSIC_SERVICE"/>
             </intent-filter>

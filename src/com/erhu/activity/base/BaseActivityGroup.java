@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,12 @@ public abstract class BaseActivityGroup extends ActivityGroup {
             }
         }
     };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        log(this, "create");
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     protected void onStart() {

@@ -10,47 +10,42 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.erhu.R;
 import com.erhu.activity.base.BaseActivityGroup;
-import com.erhu.activity.list.ArtistListActivity;
-import com.erhu.activity.list.FavouriteListActivity;
+import com.erhu.activity.list.AlbumListActivity;
 import com.erhu.activity.list.MusicListActivity;
 import com.erhu.util.Constants;
 import com.erhu.util.Tools;
 
-// life is good:-)
-public class IndexActivityGroup extends BaseActivityGroup {
-
+// 某艺术家的所有音乐列表界面
+public class ArtistActivityGroup extends BaseActivityGroup {
     private LinearLayout midContainer;
 
-    private LinearLayout musicLayout;// 所有音乐
-    private LinearLayout favouriteLayout;// 最爱
-    private LinearLayout artistLayout;// 艺术家
+    private LinearLayout allMusicLayout;// 最爱
+    private LinearLayout albumsLayout;// 艺术家
 
-    private TextView music;
-    private TextView favourite;
     private TextView artist;
+    private TextView allMusic;
+    private TextView albums;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         log(this, "create");
-        setContentView(R.layout.group_index);
+        setContentView(R.layout.group_artist);
         super.onCreate(savedInstanceState);
         initUI();
     }
 
     // Nothing could hold a man back from his future!
     private void initUI() {
-        music = (TextView) findViewById(R.id.index_bottom_music);
-        favourite = (TextView) findViewById(R.id.index_bottom_favourite);
-        artist = (TextView) findViewById(R.id.index_bottom_artist);
-        musicLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_music);
-        favouriteLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_favourite);
-        artistLayout = (LinearLayout) findViewById(R.id.index_layout_bottom_artist);
-        midContainer = (LinearLayout) findViewById(R.id.index_mid_container);
+        allMusic = (TextView) findViewById(R.id.artist_bottom_music);
+        albums = (TextView) findViewById(R.id.artist_bottom_albums);
+        artist = (TextView) findViewById(R.id.artist_bottom_artist);
 
-        musicLayout.setOnClickListener(bottomItemClickListener);
-        favouriteLayout.setOnClickListener(bottomItemClickListener);
-        artistLayout.setOnClickListener(bottomItemClickListener);
+        allMusicLayout = (LinearLayout) findViewById(R.id.artist_layout_bottom_music);
+        albumsLayout = (LinearLayout) findViewById(R.id.artist_layout_bottom_albums);
+        allMusicLayout.setOnClickListener(bottomItemClickListener);
+        albumsLayout.setOnClickListener(bottomItemClickListener);
 
+        midContainer = (LinearLayout) findViewById(R.id.artist_mid_container);
         midContainer.removeAllViewsInLayout();
         midContainer.addView(getView(MusicListActivity.class));
     }
@@ -78,7 +73,11 @@ public class IndexActivityGroup extends BaseActivityGroup {
 
     // 根据class获取加载到activityGroup中的视图
     private View getView(Class<?> _activity) {
+        Bundle bundle = getIntent().getExtras();
+        String artist_name = bundle.getString("artist_name");
         Intent t_intent = new Intent(this, _activity).setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        t_intent.putExtra("artist_name", artist_name);
+        artist.setText(artist_name + "->");
         View t_view = getLocalActivityManager().startActivity(_activity.getClass().getSimpleName(), t_intent).getDecorView();
         return t_view;
     }
@@ -88,21 +87,14 @@ public class IndexActivityGroup extends BaseActivityGroup {
         @Override
         public void onClick(View _view) {
             midContainer.removeAllViewsInLayout();
-            if (_view == artistLayout) {
-                music.setText("音乐");//TODO:以后考虑使用selector实现
-                favourite.setText("最爱");
-                artist.setText("[艺术家]");
-                midContainer.addView(getView(ArtistListActivity.class));
-            } else if (_view == musicLayout) {
-                music.setText("[音乐]");
-                favourite.setText("最爱");
-                artist.setText("艺术家");
+            if (_view == albumsLayout) {
+                allMusic.setText("音乐");//TODO:以后考虑使用selector实现
+                albums.setText("[唱片]");
+                midContainer.addView(getView(AlbumListActivity.class));
+            } else if (_view == allMusicLayout) {
+                allMusic.setText("[音乐]");
+                albums.setText("唱片");
                 midContainer.addView(getView(MusicListActivity.class));
-            } else if (_view == favouriteLayout) {
-                music.setText("音乐");
-                favourite.setText("[最爱]");
-                artist.setText("艺术家");
-                midContainer.addView(getView(FavouriteListActivity.class));
             }
         }
     };

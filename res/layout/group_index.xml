@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页布局文件 -->
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/index_outer_layout"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/list_bg">
+    <!-- 顶部显示正在播放的歌曲 -->
+    <include android:id="@+id/index_bar" layout="@layout/playbar"/>
+    <!-- 中间动态加载View -->
+    <LinearLayout
+            android:id="@+id/index_mid_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:background="@drawable/list_bg">
+    </LinearLayout>
+    <!-- 底部选项卡 -->
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:background="@drawable/list_bg">
+        <LinearLayout
+                android:id="@+id/index_layout_bottom_music"
+                android:layout_height="fill_parent"
+                android:layout_width="78dp"
+                android:orientation="vertical"
+                android:paddingTop="6.0dp"
+                android:paddingLeft="4.0dp"
+                android:layout_weight="1.0">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/index_bottom_music"
+                    android:text="[音乐]"
+                    android:layout_gravity="center"
+                    android:textSize="18dp"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/index_layout_bottom_artist"
+                android:layout_height="fill_parent"
+                android:layout_width="78dp"
+                android:orientation="vertical"
+                android:paddingTop="6.0dp"
+                android:layout_weight="1.0">
+            <TextView
+                    android:id="@+id/index_bottom_artist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="艺术家"
+                    android:layout_gravity="center"
+                    android:textSize="18dp"/>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_height="fill_parent"
+                android:layout_width="78dp"
+                android:id="@+id/index_layout_bottom_favourite"
+                android:orientation="vertical"
+                android:paddingTop="6.0dp"
+                android:layout_weight="1.0">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/index_bottom_favourite"
+                    android:text="最爱"
+                    android:layout_gravity="center"
+                    android:textSize="18dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

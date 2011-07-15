@@ -1,4 +1,4 @@
-package com.erhu.activity;
+package com.erhu.activity.list;
 
 import com.erhu.activity.base.BaseListActivity;
 
